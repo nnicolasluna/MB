@@ -1,0 +1,165 @@
+<div class="h-full">
+	<div>
+		<p>
+			<b>Nombre: </b> {{ currentUser?.fullName }}<br />
+			<b>Usuario: </b> {{ currentUser?.username }}<br />
+			<b>Email: </b> {{ currentUser?.email }}<br />
+			<b>Rol: </b> {{ currentUser?.role?.name }}<br />
+		</p>
+	</div>
+
+	<hr />
+
+	<p class="text-xl font-semibold">Cambiar contraseña</p>
+
+	<form class="flex flex-col gap-8" [formGroup]="form" (submit)="onSubmit()">
+		<app-input-text
+			type="password"
+			label="Contraseña actual"
+			name="oldPassword"
+			[control]="controls['oldPassword']"
+		></app-input-text>
+
+		<app-input-text
+			type="password"
+			label="Nueva contraseña"
+			name="newPassword"
+			[control]="controls['newPassword']"
+		></app-input-text>
+
+		<app-input-text
+			type="password"
+			label="Repetir nueva contraseña"
+			name="repeatPassword"
+			[control]="controls['repeatPassword']"
+		></app-input-text>
+
+		@if (form.errors?.['mismatch']) {
+			<small class="text-red-600">* Las contraseñas deben coincidir</small>
+		}
+
+		<div class="flex pt-6 justify-between">
+			<p-button
+				(onClick)="close()"
+				[loading]="isLoading()"
+				severity="secondary"
+				label="Cerrar"
+				severity="secondary"
+				icon="pi pi-times"
+			/>
+			<p-button
+				[loading]="isLoading()"
+				[disabled]="form.invalid"
+				loadIcon="pi pi-spin pi-spinner"
+				type="submit"
+				label="Guardar"
+				icon="pi pi-save"
+				iconPos="right"
+			/>
+		</div>
+	</form>
+</div>
+
+<!--
+<div class="card">
+  <p-skeleton *ngIf="!showForm" width="100%" height="150px"></p-skeleton>
+  <form *ngIf="showForm" class="form-signin" [formGroup]="changePasswordForm">
+    <div class="grid">
+      <div class="field lg:col-12 md:col-12 sm:col-12">
+        <label>Contraseña Actual: </label>
+        <p-password
+          id="oldPassword"
+          formControlName="oldPassword"
+          placeholder="Contraseña"
+          [toggleMask]="true"
+          [feedback]="false"
+          styleClass="mb-5"
+          [ngClass]="{
+            'border border-danger is-invalid': form.oldPassword.errors && form.oldPassword.dirty
+          }"
+          inputStyleClass="w-full p-3 md:w-30rem"
+          styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+        ></p-password>
+        <div *ngIf="form.oldPassword.errors">
+          <p *ngIf="form.oldPassword.errors.required" class="text-danger">*Campo requerido</p>
+          <p *ngIf="form.oldPassword.errors.pswLength" class="text-danger">Campo debe tener al menos 8 caracteres</p>
+          <p *ngIf="form.oldPassword.errors.pswLowercase" class="text-danger">
+            Campo debe tener al menos 1 letra minuscula
+          </p>
+          <p *ngIf="form.oldPassword.errors.pswUppercase" class="text-danger">
+            Campo debe tener al menos 1 letra mayuscula
+          </p>
+          <p *ngIf="form.oldPassword.errors.pswNumber" class="text-danger">Campo debe tener al menos 1 número</p>
+          <p *ngIf="form.oldPassword.errors.pswSymbol" class="text-danger">
+            Campo debe tener al menos un caracter especial
+          </p>
+        </div>
+      </div>
+      <div class="field lg:col-12 md:col-12 sm:col-12">
+        <label>Contraseña Nueva: </label>
+        <p-password
+          id="newPassword"
+          formControlName="newPassword"
+          placeholder="Contraseña"
+          [toggleMask]="true"
+          [feedback]="false"
+          styleClass="mb-5"
+          [ngClass]="{
+            'border border-danger is-invalid': form.newPassword.errors && form.newPassword.dirty
+          }"
+          inputStyleClass="w-full p-3 md:w-30rem"
+          styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+        ></p-password>
+        <div *ngIf="form.newPassword.errors">
+          <p *ngIf="form.newPassword.errors.required" class="text-danger">*Campo requerido</p>
+          <p *ngIf="form.newPassword.errors.pswLength" class="text-danger">Campo debe tener al menos 8 caracteres</p>
+          <p *ngIf="form.newPassword.errors.pswLowercase" class="text-danger">
+            Campo debe tener al menos 1 letra minuscula
+          </p>
+          <p *ngIf="form.newPassword.errors.pswUppercase" class="text-danger">
+            Campo debe tener al menos 1 letra mayuscula
+          </p>
+          <p *ngIf="form.newPassword.errors.pswNumber" class="text-danger">Campo debe tener al menos 1 número</p>
+          <p *ngIf="form.newPassword.errors.pswSymbol" class="text-danger">
+            Campo debe tener al menos un caracter especial
+          </p>
+        </div>
+      </div>
+      <div class="field lg:col-12 md:col-12 sm:col-12">
+        <label>Repetir Contraseña: </label>
+        <p-password
+          id="repeatPassword"
+          formControlName="repeatPassword"
+          placeholder="Contraseña"
+          [toggleMask]="true"
+          [feedback]="false"
+          styleClass="mb-5"
+          [ngClass]="{
+            'border border-danger is-invalid': form.repeatPassword.errors && form.repeatPassword.dirty
+          }"
+          inputStyleClass="w-full p-3 md:w-30rem"
+          styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+        ></p-password>
+        <div *ngIf="form.repeatPassword.errors">
+          <p *ngIf="form.repeatPassword.errors.required" class="text-danger">*Campo requerido</p>
+          <p *ngIf="form.repeatPassword.errors.pswLength" class="text-danger">Campo debe tener al menos 8 caracteres</p>
+          <p *ngIf="form.repeatPassword.errors.pswLowercase" class="text-danger">
+            Campo debe tener al menos 1 letra minuscula
+          </p>
+          <p *ngIf="form.repeatPassword.errors.pswUppercase" class="text-danger">
+            Campo debe tener al menos 1 letra mayuscula
+          </p>
+          <p *ngIf="form.repeatPassword.errors.pswNumber" class="text-danger">Campo debe tener al menos 1 número</p>
+          <p *ngIf="form.repeatPassword.errors.pswSymbol" class="text-danger">
+            Campo debe tener al menos un caracter especial
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="p-dialog-footer">
+  <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="closeModal()"></button>
+  <button pButton type="button" label="Guardar" (click)="save()"></button>
+</div>
+-->

@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  frontend:
+    image: mesabosques-frontend:latest
+    container_name: mesabosques-frontend
+    restart: unless-stopped
+    ports:
+      - 4208:4200
+    networks:
+      - net-mesabosques
+
+networks:
+  net-mesabosques:
+    driver: bridge

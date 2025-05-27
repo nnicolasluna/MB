@@ -1,0 +1,90 @@
+<div class="flex justify-content-start align-items-start gap-4 w-full">
+	@if (disabled()) {
+		<div class="w-full p-8">
+			@for (file of defaultFiles(); track id) {
+				<div class="text-center">
+					@if (isImage(file.contentType)) {
+						<p-image
+							*ngIf="isImage(file.contentType)"
+							[src]="service.getFileUrl(file.uuid)"
+							alt="NA"
+							height="100"
+							[preview]="true"
+						></p-image>
+						<div class="text-xs font-italic">{{ file.filename }}</div>
+					} @else {
+						<div>
+							<i [class]="fileIcon(file.contentType)" style="font-size: 48px"></i>
+						</div>
+					}
+				</div>
+			}
+		</div>
+	} @else {
+		<p-fileUpload
+			mode="advanced"
+			[accept]="accept()"
+			[fileLimit]="maxFiles"
+			[multiple]="multiple"
+			[maxFileSize]="maxFileSize"
+			(onSelect)="onChange($event)"
+			(onUpload)="onChange($event)"
+			[chooseLabel]="label()"
+			[showCancelButton]="false"
+			[disabled]="false"
+			[showUploadButton]="false"
+			class="file-upload"
+		>
+			<ng-template pTemplate="toolbar">
+				@if (isUploading) {
+					<p-progressSpinner
+						styleClass="w-2rem h-2rem"
+						strokeWidth="4"
+						fill="var(--surface-ground)"
+						animationDuration=".5s"
+					></p-progressSpinner>
+					<span class="ml-2 italic">Cargando archivo.....</span>
+					<p-message severity="success" text="Archivo cargado"></p-message>
+				}
+			</ng-template>
+			<ng-template pTemplate="content">
+				@if (isDragDrop() && !defaultFiles()?.length) {
+					<div class="flex flex-column w-full text-center my-8">
+						<div class="icon" title="Selecciones un archivo o arrastrelo aquí">
+							<i class="pi pi-cloud-upload"></i>
+						</div>
+						<div class="description">
+							<h5>Seleccione {{ multiple() ? 'archivos o arrastrelos ' : 'un archivo o arrastrelo ' }} aquí</h5>
+							<small>Tamaño {{ multiple() ? 'de cada archivo ' : 'del archivo ' }} no debe ser más de 100MB</small>
+						</div>
+					</div>
+				}
+
+				@if (defaultFiles()?.length && preview()) {
+					<div>
+						@for (file of defaultFiles(); track id) {
+							<div class="text-center">
+								@if (!isImage(file.contentType)) {
+									<div>
+										<i [class]="fileIcon(file.contentType)" style="font-size: 48px"></i>
+									</div>
+								} @else {
+									<p-image
+										[src]="service.getFileUrl(file.uuid)"
+										alt="NA"
+										height="150"
+										[preview]="true"
+										appendTo="body"
+									></p-image>
+									<div class="text-xs font-italic">
+										{{ file.filename }}
+									</div>
+								}
+							</div>
+						}
+					</div>
+				}
+			</ng-template>
+		</p-fileUpload>
+	}
+</div>

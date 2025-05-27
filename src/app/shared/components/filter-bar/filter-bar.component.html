@@ -1,0 +1,14 @@
+<div class="flex gap-1 my-1 justify-end">
+	<input
+		name="search"
+		[autocomplete]="false"
+		class="flex-1 max-w-3xs"
+		type="text"
+		[(ngModel)]="search"
+		pInputText
+		placeholder="Buscar"
+		(keyup.enter)="emitSearch()"
+	/>
+
+	<p-button severity="secondary" label="Buscar" icon="pi pi-search" (click)="emitSearch()" />
+</div>

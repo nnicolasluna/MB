@@ -1,0 +1,246 @@
+.active-stadistic {
+	background: white;
+	color: black;
+	padding: 2px 5px;
+}
+
+:host ::ng-deep {
+	.windy-popup {
+		width: 640px !important;
+	}
+
+	.tooltip {
+		z-index: 1;
+		background-color: transparent;
+		border: none !important;
+		font-weight: 700;
+		box-shadow: none !important;
+	}
+
+	.leaflet-top.leaflet-left::-webkit-scrollbar {
+		display: none;
+	}
+
+	.leaflet-control-attribution.leaflet-control {
+		display: none !important;
+	}
+
+	// .leaflet-control-browser-print a {
+	// 	background: url('/geo-icons/print.svg') no-repeat;
+	// }
+	//
+	// .leaflet-draw-draw-polyline {
+	// 	background-image: url('/geo-icons/line.svg') !important;
+	// 	background-size: 20px 20px !important;
+	// 	background-repeat: no-repeat !important;
+	// 	background-position: center !important;
+	// }
+	//
+	// .leaflet-draw-draw-polygon {
+	// 	background-image: url('/geo-icons/route.svg') !important;
+	// 	background-size: 20px 20px !important;
+	// 	background-repeat: no-repeat !important;
+	// 	background-position: center !important;
+	// }
+	//
+	// .leaflet-draw-draw-rectangle {
+	// 	background-image: url('/geo-icons/rectangle.svg') !important;
+	// 	background-size: 20px 20px !important;
+	// 	background-repeat: no-repeat !important;
+	// 	background-position: center !important;
+	// }
+	//
+	// .leaflet-draw-edit-edit {
+	// 	background-image: url('/geo-icons/draw.svg') !important;
+	// 	background-size: 20px 20px !important;
+	// 	background-repeat: no-repeat !important;
+	// 	background-position: center !important;
+	// }
+	//
+	// .leaflet-draw-edit-remove {
+	// 	background-image: url('/geo-icons/trash.svg') !important;
+	// 	background-size: 20px 20px !important;
+	// 	background-repeat: no-repeat !important;
+	// 	background-position: center !important;
+	// }
+	//
+	// .leaflet-control-layers-toggle {
+	// 	background-image: url('/geo-icons/layers.svg') !important;
+	// }
+
+	.toggle-button {
+		display: grid;
+		place-items: center;
+	}
+
+	.leaflet-custom-active .toggle-button {
+		color: var(--primary-color) !important;
+	}
+
+	.position-control {
+		// background-color: rgba(12, 53, 106, 0.55);
+		border-radius: 3px;
+		border-color: #000;
+		border-width: 1px;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+
+	.leaflet-bar a,
+	.leaflet-control-layers {
+		// background-color: rgba(12, 53, 106, 0.55);
+		// color: white;
+	}
+
+	.position-control {
+		// background-color: #fff !important;
+	}
+
+	.layer-data {
+		padding: 5px;
+		min-width: 300px;
+		max-height: 400px;
+		overflow-y: auto;
+	}
+
+	.layer-data__content summary {
+		background-color: var(--primary-color);
+		color: white;
+		padding: 5px 10px;
+	}
+
+	.leaflet-sbs {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	.leaflet-sbs-divider {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 4px;
+		margin-left: -2px;
+		background-color: #fff;
+		pointer-events: none;
+		z-index: 999;
+	}
+
+	.leaflet-sbs-range {
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		height: 0;
+		padding: 0;
+		margin: 0;
+		border: 0;
+		background: rgba(0, 0, 0, 0.25);
+		cursor: pointer;
+		pointer-events: auto;
+		z-index: 999;
+		-webkit-appearance: none;
+	}
+
+	.leaflet-sbs-range {
+		-webkit-appearance: none;
+		display: inline-block !important;
+		vertical-align: middle;
+		height: 0;
+		padding: 0;
+		margin: 0;
+		border: 0;
+		background: rgba(0, 0, 0, 0.25);
+		min-width: 100px;
+		cursor: pointer;
+		pointer-events: none;
+		z-index: 999;
+	}
+	.leaflet-sbs-range::-ms-fill-upper {
+		background: transparent;
+	}
+	.leaflet-sbs-range::-ms-fill-lower {
+		background: rgba(255, 255, 255, 0.25);
+	}
+	/* Browser thingies */
+
+	.leaflet-sbs-range::-moz-range-track {
+		opacity: 0;
+	}
+	.leaflet-sbs-range::-ms-track {
+		opacity: 0;
+	}
+	.leaflet-sbs-range::-ms-tooltip {
+		display: none;
+	}
+	/* For whatever reason, these need to be defined
+ * on their own so dont group them */
+
+	.leaflet-sbs-range::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		margin: 0;
+		padding: 0;
+		background: #fff;
+		height: 40px;
+		width: 40px;
+		border-radius: 20px;
+		cursor: ew-resize;
+		pointer-events: auto;
+		border: 1px solid #ddd;
+		// background-image: url(range-icon.png);
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-size: 40px 40px;
+	}
+	.leaflet-sbs-range::-ms-thumb {
+		margin: 0;
+		padding: 0;
+		background: #fff;
+		height: 40px;
+		width: 40px;
+		border-radius: 20px;
+		cursor: ew-resize;
+		pointer-events: auto;
+		border: 1px solid #ddd;
+		// background-image: url(range-icon.png);
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-size: 40px 40px;
+	}
+	.leaflet-sbs-range::-moz-range-thumb {
+		padding: 0;
+		right: 0;
+		background: #fff;
+		height: 40px;
+		width: 40px;
+		border-radius: 20px;
+		cursor: ew-resize;
+		pointer-events: auto;
+		border: 1px solid #ddd;
+		// background-image: url(range-icon.png);
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-size: 40px 40px;
+	}
+	.leaflet-sbs-range:disabled::-moz-range-thumb {
+		cursor: default;
+	}
+	.leaflet-sbs-range:disabled::-ms-thumb {
+		cursor: default;
+	}
+	.leaflet-sbs-range:disabled::-webkit-slider-thumb {
+		cursor: default;
+	}
+	.leaflet-sbs-range:disabled {
+		cursor: default;
+	}
+	.leaflet-sbs-range:focus {
+		outline: none !important;
+	}
+	.leaflet-sbs-range::-moz-focus-outer {
+		border: 0;
+	}
+}

@@ -1,0 +1,58 @@
+@if (label()) {
+	<label [for]="name()" class="block font-medium mb-2">{{ label() }}</label>
+}
+
+@switch (type()) {
+	@case ('password') {
+		<p-password
+			[inputId]="name()"
+			[formControl]="formControl()"
+			[placeholder]="placeholder()"
+			[toggleMask]="true"
+			[feedback]="false"
+			[ngClass]="{
+				'border-red-600': control()?.invalid && control()?.dirty,
+			}"
+			[feedback]="false"
+			[fluid]="true"
+		></p-password>
+	}
+
+	@case ('textarea') {
+		<textarea
+			pTextarea
+			[id]="name()"
+			[formControl]="formControl()"
+			[placeholder]="placeholder()"
+			[ngClass]="{
+				'border-red-600': control()?.invalid && control()?.dirty,
+			}"
+			(blur)="onBlur($event)"
+			class="w-full"
+			rows="5"
+		></textarea>
+	}
+
+	@default {
+		<input
+			pInputText
+			[type]="type()"
+			[id]="name()"
+			[placeholder]="placeholder()"
+			[readOnly]="readOnly()"
+			(blur)="onBlur($event)"
+			class="w-full"
+			[formControl]="formControl()"
+			[ngClass]="{
+				'border-red-600': control()?.invalid && control()?.dirty,
+			}"
+		/>
+	}
+}
+
+<div class="flex justify-between">
+	<app-input-error [control]="control()"> </app-input-error>
+	@if (maxLength()) {
+		<span [ngClass]="{ 'text-red-600': getLength()! > maxLength()! }">{{ getLength() }}/{{ maxLength() }}</span>
+	}
+</div>

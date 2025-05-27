@@ -1,0 +1,58 @@
+<div class="border p-8 border-gray-300 rounded-2xl">
+	<h2 class="text-center">MONITOREO DE RIESGO DE INCENDIO</h2>
+
+	<p>
+		La <strong>Wildlife Conservation Society (WCS)</strong> ha desarrollado una herramienta en
+		<strong>Google Earth Engine</strong> para el <strong>monitoreo y pronóstico del riesgo de incendios</strong>. Esta
+		herramienta está especialmente diseñada para la <strong>región del Beni</strong>, en Bolivia.
+	</p>
+
+	<p class="font-bold">Pasos para acceder y utilizar la herramienta:</p>
+
+	<ol class="list-decimal list-inside pl-4 flex flex-col gap-2 mb-4">
+		<li>
+			<strong>Registro en Google Earth Engine</strong> <br />
+			Para acceder a la plataforma, el usuario debe registrarse en Google Earth Engine mediante el siguiente enlace:
+			<br />
+			👉
+			<a href="https://earthengine.google.com" target="_blank" class="underline! break-words"> Google Earth Engine</a>
+			<br />
+			<small class="py-2">Es indispensable contar con una cuenta de Gmail.</small> <br />
+			<p>
+				Tras completar el registro, se enviará un correo de confirmación. Una vez aceptado, se podrá acceder a la
+				plataforma.
+			</p>
+		</li>
+
+		<li>
+			<strong>Acceso al script del geovisor</strong>
+
+			<p>
+				Luego del registro, se puede ingresar directamente al script de monitoreo de quemas con el siguiente enlace:
+			</p>
+
+			👉
+			<a
+				class="underline! break-words"
+				href="https://code.earthengine.google.com/105ba77a038f02a91a153be904407431"
+				target="_blank"
+				>https://code.earthengine.google.com/105ba77a038f02a91a153be904407431</a
+			>
+			<p>Este script permite visualizar y analizar el pronóstico del riesgo de incendios para la región del Beni.</p>
+		</li>
+	</ol>
+
+	<div class="flex justify-center">
+		<img src="/img/monitoring_risk_fire_preview.png" alt="Previsualización google earthengine" />
+	</div>
+</div>
+<div class="flex justify-end gap-2 mt-2">
+	<p-button severity="secondary" label="Cerrar" (click)="onClose()"></p-button>
+	<a
+		label="Visitar"
+		severity="success"
+		pButton
+		href="https://code.earthengine.google.com/105ba77a038f02a91a153be904407431"
+		target="_blank"
+	></a>
+</div>

@@ -1,0 +1,251 @@
+<div class="overflow-hidden w-screen h-lvh relative flex z-10">
+	<div
+		style="height: 100vh"
+		class="relative transition-all duration-300"
+		[class.w-full]="!_geovisorState.isShowingSidebar()"
+		[class.w-[calc(100%-450px)]]="_geovisorState.isShowingSidebar()"
+		leaflet
+		leafletDraw
+		[leafletOptions]="mapOptions"
+		(leafletMapReady)="onMapReady($event)"
+		(leafletClick)="onMapClick($event)"
+	></div>
+</div>
+
+<div
+	class="fixed top-0 right-0 h-full bg-white shadow-lg transition-transform duration-300 transform z-30"
+	[class.translate-x-full]="!_geovisorState.isShowingSidebar()"
+	[class.translate-x-0]="_geovisorState.isShowingSidebar()"
+	style="width: 450px; max-width: 95vw !important"
+>
+	<app-geo-sidebar></app-geo-sidebar>
+</div>
+
+<app-geo-menu> </app-geo-menu>
+
+<p-dialog
+	header="Leyendas"
+	[(visible)]="isLegendVisible"
+	[modal]="false"
+	[closeOnEscape]="false"
+	[closable]="false"
+	appendTo="body"
+	position="left"
+	#legendDialog
+>
+	<ng-template #header>
+		<div class="cursor-grab flex gap-2 items-center w-full">
+			<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+				<path
+					d="M480-80 310-250l57-57 73 73v-206H235l73 72-58 58L80-480l169-169 57 57-72 72h206v-206l-73 73-57-57 170-170 170 170-57 57-73-73v206h205l-73-72 58-58 170 170-170 170-57-57 73-73H520v205l72-73 58 58L480-80Z"
+				/>
+			</svg>
+			<h3 class="font-bold text-xs m-0!">Leyendas</h3>
+		</div>
+	</ng-template>
+
+	<div class="w-80 max-h-96 overflow-y-auto">
+		@if (_geovisorState.isHotSpotActive()) {
+			<div>
+				<span class="font-bold text-center w-full block mb-2">Focos de calor - Cantidad</span>
+				<div class="flex gap-2 items-center">
+					<div class="w-3 h-3 bg-red-600"></div>
+					<strong>Alto (Mayor a 100)</strong>
+				</div>
+
+				<div class="flex gap-2 items-center">
+					<div class="w-3 h-3 bg-yellow-600"></div>
+					<strong>Medio (Entre 10 a 100)</strong>
+				</div>
+
+				<div class="flex gap-2 items-center">
+					<div class="w-3 h-3 bg-green-600"></div>
+					<strong>Bajo (Menor a 10)</strong>
+				</div>
+			</div>
+
+			<div>
+				<span class="font-bold text-center w-full block mb-2">Focos de calor - Satelites</span>
+
+				<div class="flex gap-2 items-center">
+					<div class="w-3 h-3 bg-blue-600 rounded-full"></div>
+					<strong>MODIS_C6_1</strong>
+				</div>
+
+				<div class="flex gap-2 items-center">
+					<div class="w-3 h-3 bg-violet-600 rounded-full"></div>
+					<strong>SUOMI_VIIRS_C2</strong>
+				</div>
+
+				<div class="flex gap-2 items-center">
+					<div class="w-3 h-3 bg-orange-600 rounded-full"></div>
+					<strong>J1_VIIRS_C2</strong>
+				</div>
+
+				<div class="flex gap-2 items-center">
+					<div class="w-3 h-3 bg-pink-600 rounded-full"></div>
+					<strong>J2_VIIRS_C2</strong>
+				</div>
+			</div>
+		}
+
+		@for (layer of currentLayers(); track layer.mapDataId) {
+			<div>
+				<span class="font-bold text-center w-full block">{{ layer.mapName }}</span>
+				<p-image [preview]="true" appendTo="body" [src]="imgUrl + layer.style + '&LAYER=' + layer.layer" />
+			</div>
+		}
+	</div>
+</p-dialog>
+
+@if (isLoading()) {
+	<div class="fixed top-0 left-0 right-0 bottom-0 grid place-content-center bg-white z-[99999999]">
+		<h1 class="text-4xl">Cargando...</h1>
+	</div>
+}
+
+<div
+	class="fixed z-[11]! top-0 right-16 bg-gradient-to-r from-white to-[#23b7d1] py-2 px-6 flex rounded-bl-2xl rounded-br-2xl items-center gap-2 transition-[right] duration-300"
+	[class.right-[505px]]="_geovisorState.isShowingSidebar()"
+>
+	<div class="">
+		<img class="w-16" src="img/wcs_logo.webp" />
+	</div>
+	<div>
+		<p-autocomplete
+			[(ngModel)]="searchSite"
+			[suggestions]="searchResults()"
+			(completeMethod)="onSearch($event)"
+			(onSelect)="onSelect($event)"
+			[showClear]="true"
+			class="w-72"
+			optionLabel="name"
+			placeholder="Busqueda"
+			appendTo="body"
+		/>
+	</div>
+</div>
+
+<p-dialog
+	header="Términos de Uso - Límites del Departamento del Beni, Bolivia"
+	[(visible)]="isTermsVisible"
+	[modal]="true"
+	[draggable]="false"
+	[resizable]="false"
+	[closeOnEscape]="false"
+	[closable]="true"
+	styleClass="w-[90vw] max-w-[900px] h-auto z-[9999999] p-4"
+	appendTo="body"
+	position="center"
+	(onHide)="_toggleTermsControl.setVisibility(false)"
+>
+	<p class="text-justify">
+		La
+		<strong
+			>PLATAFORMA GEOESPACIAL PARA EL MONITOREO DE CAMBIO DE USO DE SUELO EN PAMPAS, HUMEDALES Y BOSQUES DEL
+			DEPARTAMENTO DEL BENI CON COMPONENTES DE RIESGO DE INCENDIOS, ALERTA TEMPRANA E IMPACTO SOBRE SITIOS
+			ARQUEOLÓGICOS</strong
+		>, ha sido desarrollada por el Grupo de Trabajo de los Llanos de Moxos, con el objetivo de proporcionar información
+		histórica y actualizada, permitiendo a las instituciones públicas y privadas, así como a la sociedad civil, tomar
+		decisiones informadas y adoptar medidas preventivas frente a las amenazas ambientales.
+	</p>
+	<p class="text-justify!">
+		La plataforma no constituye una fuente de datos oficial respecto a los datos cartográficos que se presentan. Los
+		usuarios serán los responsables por el uso, análisis e interpretación que resulten de estos. Es importante señalar
+		que, si bien se han tomado todas las medidas razonables para garantizar la precisión y actualidad de los datos, los
+		límites presentados pueden no coincidir exactamente con los límites administrativos oficiales definidos por las
+		autoridades gubernamentales competentes.
+	</p>
+	<p>Por tanto:</p>
+
+	<ul class="list-disc list-inside pl-4 flex flex-col gap-2 mb-4">
+		<li class="text-justify">El uso de esta información es responsabilidad exclusiva del usuario.</li>
+		<li class="text-justify">No se garantiza la exactitud legal de los límites geográficos mostrados.</li>
+		<li class="text-justify">
+			Los datos no deben utilizarse como única fuente en procesos jurídicos o administrativos oficiales.
+		</li>
+		<li class="text-justify">
+			Se recomienda validar esta información con fuentes oficiales del Estado Plurinacional de Bolivia en caso de
+			requerimientos legales o técnicos específicos.
+		</li>
+	</ul>
+
+	<p>El uso de esta información implica la aceptación de estos términos.</p>
+</p-dialog>
+
+@if (showInitData()) {
+	<div class="fixed top-0 left-0 h-full bg-white/80 z-30 w-[400px] overflow-y-auto">
+		<div class="flex justify-end">
+			<button
+				class="cursor-pointer bg-white/80 hover:bg-white/100 rounded-full p-2 m-2 shadow-md grid place-content-center"
+				(click)="closeInitialData()"
+			>
+				<i class="pi pi-times"></i>
+			</button>
+		</div>
+
+		<div class="flex flex-col items-center justify-center">
+			<img src="img/wcs_logo.webp" width="250" />
+		</div>
+
+		<p class="block px-4 text-justify">
+			El Grupo de Trabajo para los Llanos de Moxos está constituido por instituciones de la sociedad civil, académicas,
+			financieras, empresas y organizaciones sociales, comprometidas con el conocimiento, el desarrollo sostenible y el
+			bienestar de las poblaciones locales, y con la conservación de los valores naturales, históricos, culturales y
+			económicos del singular paisaje de los Llanos de Moxos en la cuenca Amazónica.
+		</p>
+
+		<p-carousel [value]="carouselImages" [numVisible]="1" [numScroll]="1" [circular]="true" autoplayInterval="3000">
+			<ng-template let-img #item>
+				<img [src]="img" alt="Image" class="w-full h-64 object-cover" />
+			</ng-template>
+		</p-carousel>
+
+		<div class="flex justify-center">
+			<a routerLink="/auth/login" icon="pi pi-user" pButton label="Acceder" class="w-3/4"></a>
+		</div>
+	</div>
+} @else {
+	<button
+		(click)="openInitialData()"
+		class="bg-primary fixed top-10 left-0 px-4 py-2 rounded-e-xl z-15 cursor-pointer text-white"
+	>
+		<i class="pi pi-chevron-right"></i>
+	</button>
+}
+
+<app-timeline></app-timeline>
+
+@if (isArcheologicalSitesVisible()) {
+	<div class="fixed bottom-0 left-0 bg-white/40 z-10 max-w-[80vw] flex gap-4 p-4 overflow-x-auto">
+		@for (a of archeologicalSites.value(); track a.id) {
+			<div
+				class="flex flex-col items-center justify-between bg-white rounded p-4 text-center cursor-poiunter min-w-[200px] shadow-md"
+				[class.border-primary]="a.isAdded"
+				[class.border]="a.isAdded"
+				(click)="onArcheologicalSiteClick(a)"
+			>
+				<p [class.text-primary]="a.isAdded">{{ a.name }}</p>
+				<img [src]="getImageArcheologicalSite(a)" width="100" />
+			</div>
+		}
+	</div>
+}
+
+@if (_geovisorState.isHotSpotTab()) {
+	<div class="fixed bg-white/80 px-8 py-5 border border-black rounded-xl top-10 left-20 z-15">
+		<span class="underline font-bold mb-4 block">Última actualización <br />focos de calor:</span>
+		<span>{{ lastHostSpotUpdate | date: 'dd/MM/yyyy HH:mm' }}</span>
+	</div>
+}
+
+@if (_geovisorState.area() != null) {
+	<div class="fixed bg-white/80 px-8 py-5 border border-black rounded-xl top-10 left-20 z-15">
+		<span class="underline font-bold mb-4 block">Superficie en Hectáreas</span>
+		<span class="text-center block w-full">{{ _geovisorState.area() | number: '1.0-2' : 'es-ES' }} ha </span>
+	</div>
+}
+
+<p-popover (onHide)="sortLayersVisible = false" #sortDialog>
+	<app-sort-layers></app-sort-layers>
+</p-popover>

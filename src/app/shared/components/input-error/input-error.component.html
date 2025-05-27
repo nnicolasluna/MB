@@ -1,0 +1,35 @@
+@if (control() && control()?.errors) {
+	<div class="text-red-600">
+		<div *ngIf="control()?.errors?.['required']"><small>* Campo es requerido</small></div>
+		<div *ngIf="control()?.errors?.['maxlength']">
+			<small>* El campo no puede tener más de {{ control()?.errors?.['maxlength'].requiredLength }} caracteres</small>
+		</div>
+		<div *ngIf="control()?.errors?.['minlength']">
+			<small>* El campo debe tener más de {{ control()?.errors?.['minlength'].requiredLength }} caracteres</small>
+		</div>
+		<div *ngIf="control()?.errors?.['min']">
+			<small>* El campo debe ser mayor a {{ control()?.errors?.['min'].min }}</small>
+		</div>
+		<div *ngIf="control()?.errors?.['max']">
+			<small>* El campo debe ser menor a {{ control()?.errors?.['max'].max }}</small>
+		</div>
+		<div *ngIf="control()?.errors?.['email']">
+			<small>* El campo debe ser un correo electrónico</small>
+		</div>
+		<div *ngIf="control()?.errors?.['pattern']">
+			<small>* {{ getPatternMessage(control()?.errors?.['pattern'].requiredPattern) }}</small>
+		</div>
+
+		<div *ngIf="control()?.errors?.['exists']">
+			<small>* Ya existe un registro con el mismo valor: {{ control()?.value }}</small>
+		</div>
+
+		<div *ngIf="control()?.errors?.['number']">
+			<small>* El valor debe ser un número válido</small>
+		</div>
+
+		<div *ngIf="control()?.errors?.['atLeastOneRequired']">
+			<small>* Al menos debe seleccionar un elemento</small>
+		</div>
+	</div>
+}

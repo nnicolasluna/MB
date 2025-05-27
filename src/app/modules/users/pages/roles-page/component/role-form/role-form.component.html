@@ -1,0 +1,21 @@
+<div class="h-full">
+	<form [formGroup]="form" (submit)="onSubmit()" class="flex flex-col gap-2">
+		<app-input-text label="Nombre" name="name" [control]="controls['name']"></app-input-text>
+
+		<app-input-text
+			type="textarea"
+			[maxLength]="300"
+			label="Descripción"
+			name="description"
+			[control]="controls['description']"
+		></app-input-text>
+
+		<div class="flex pt-6 justify-end">
+			@if (isViewMode()) {
+				<p-button (onClick)="closeForm()" label="Cerrar" icon="pi pi-times" iconPos="right" type="button" />
+			} @else {
+				<p-button [disabled]="form.invalid" label="Guardar" icon="pi pi-save" iconPos="right" type="submit" />
+			}
+		</div>
+	</form>
+</div>

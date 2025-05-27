@@ -1,0 +1,78 @@
+@if (dataLength() != 0) {
+	<div
+		class="fixed flex gap-2 items-center bottom-[10px] left-[85px] max-w-[70vw] overflow-x-auto min-h-8 bg-black/30 rounded-xl p-1 pr-4 z-[11]"
+	>
+		@if (isCompareVisible()) {
+			<p-select
+				[options]="timeLineData()"
+				class="max-w-fit! p-0!"
+				appendTo="body"
+				[ngModel]="null"
+				placeholder="Izquierda"
+				[showClear]="true"
+				(onChange)="onLeftChange($event.value)"
+				(onClear)="onClear('left')"
+			>
+				<ng-template #selectedItem let-selectedOption>
+					<span class="text-primary">
+						{{ selectedOption | date: 'dd/MM/yyyy' : 'UTC' }}
+					</span>
+				</ng-template>
+
+				<ng-template #item let-option>
+					<span class="text-primary">
+						{{ option | date: 'dd/MM/yyyy' : 'UTC' }}
+					</span>
+				</ng-template>
+			</p-select>
+
+			<p-select
+				[options]="timeLineData()"
+				class="max-w-fit! p-0!"
+				appendTo="body"
+				[ngModel]="null"
+				placeholder="Derecha"
+				showClear="true"
+				(onChange)="onRightChange($event.value)"
+				(onClear)="onClear('right')"
+			>
+				<ng-template #selectedItem let-selectedOption>
+					<span class="text-primary">
+						{{ selectedOption | date: 'dd/MM/yyyy' : 'UTC' }}
+					</span>
+				</ng-template>
+
+				<ng-template #item let-option>
+					<span class="text-primary">
+						{{ option | date: 'dd/MM/yyyy' : 'UTC' }}
+					</span>
+				</ng-template>
+			</p-select>
+		} @else {
+			<p-button
+				[text]="true"
+				size="small"
+				styleClass="bg-black/70 text-white"
+				[icon]="getIcon()"
+				[rounded]="true"
+				(click)="playTimeline()"
+				class="p-button-sm"
+			></p-button>
+
+			@for (data of timeLineData(); track data; let idx = $index) {
+				@let isActive = currentIndex() == $index;
+
+				<button
+					class="cursor-pointer m-0! rounded-xl block py-1 px-2"
+					[class.bg-primary]="isActive"
+					[class.bg-white]="!isActive"
+					[class.text-white]="isActive"
+					(click)="onTimelineClick($index)"
+				>
+					{{ data | date: 'dd/MM/yyyy' : 'UTC' }}
+					<i class="pi pi-calendar" [class.text-primary]="!isActive"></i>
+				</button>
+			}
+		}
+	</div>
+}

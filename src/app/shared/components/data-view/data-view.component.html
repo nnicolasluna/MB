@@ -1,0 +1,101 @@
+<p-dataview
+	[lazy]="lazy()"
+	(onLazyLoad)="emitLazyLoad($event)"
+	[paginator]="paginator"
+	[value]="items()"
+	[layout]="layout()"
+	[sortField]="sortField()"
+	[sortOrder]="sortDir() ? 1 : -1"
+	[alwaysShowPaginator]="alwaysShowPaginator()"
+	[totalRecords]="totalRecords()"
+	[rows]="rowsPerPageOptions()[0]"
+	[rowsPerPageOptions]="rowsPerPageOptions()"
+	emptyMessage=" "
+	#dt
+>
+	<ng-template #list let-items>
+		@if (isLoading()) {
+			<div class="w-full h-56 flex items-center justify-center">
+				<app-loader></app-loader>
+			</div>
+		} @else if (items.length == 0) {
+			<div class="w-full h-56 flex items-center justify-center">
+				<p class="text-center text-neutral-500 dark:text-white/50">No hay resultados</p>
+			</div>
+		} @else {
+			<table [class]="'min-w-full border-separate border-spacing-x-1 ' + tableStyles">
+				<thead class="border-b border-neutral-200 font-medium dark:border-white/10">
+					@if (showTableHeader()) {
+						<tr class="text-white">
+							@for (column of tableColumns(); track $index) {
+								<th class="py-2 bg-primary dark:text-black">{{ column.header }}</th>
+							}
+							@if (showActions()) {
+								<th class="py-2 bg-primary dark:text-black">Acciones</th>
+							}
+						</tr>
+					}
+				</thead>
+				<tbody class="">
+					@for (item of items; track $index) {
+						<ng-container
+							[ngTemplateOutlet]="listItemTemplate() || defaultTable"
+							[ngTemplateOutletContext]="{
+								$implicit: item,
+								index: $index,
+							}"
+							[ngTemplateOutletInjector]="injector"
+						>
+						</ng-container>
+
+						<ng-template #defaultTable>
+							<tr>
+								@for (column of tableColumns(); track $index) {
+									<td>{{ getPropValue(item, column) }}</td>
+								}
+								@if (showActions() && actionsTemplate()) {
+									<td class="text-left">
+										<ng-container
+											[ngTemplateOutlet]="actionsTemplate()!"
+											[ngTemplateOutletContext]="{
+												$implicit: item,
+												index: $index,
+											}"
+											[ngTemplateOutletInjector]="injector"
+										>
+										</ng-container>
+									</td>
+								}
+							</tr>
+						</ng-template>
+					}
+				</tbody>
+			</table>
+		}
+	</ng-template>
+	<ng-template let-item #grid let-items>
+		@if (isLoading()) {
+			<div class="w-full h-56 flex items-center justify-center">
+				<app-loader></app-loader>
+			</div>
+		} @else if (items.length == 0) {
+			<div class="w-full h-56 flex items-center justify-center">
+				<p class="text-center text-neutral-500 dark:text-white/50">No hay resultados</p>
+			</div>
+		} @else {
+			<div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+				@for (item of items; track $index) {
+					<ng-container
+						[ngTemplateOutlet]="gridItemTemplate()"
+						[ngTemplateOutletContext]="{
+							$implicit: item,
+							index: $index,
+						}"
+						[ngTemplateOutletInjector]="injector"
+					>
+					</ng-container>
+				}
+			</div>
+		}
+	</ng-template>
+</p-dataview>

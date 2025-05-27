@@ -1,0 +1,13 @@
+export const enum ActionType {
+	VIEW,
+	EDIT,
+	DISABLE,
+	APPROVE,
+	REJECT,
+	ENABLE,
+	DELETE,
+	SEND_EMAIL,
+	DOWNLOAD,
+	PERMISSION,
+	PREVIEW,
+}

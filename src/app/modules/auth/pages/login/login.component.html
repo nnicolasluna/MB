@@ -1,0 +1,50 @@
+<div class="flex">
+	<div class="flex-1 h-screen flex justify-center items-center">
+		<p-card class="w-[90%] sm:w-[600px]" styleClass="bg-surface-0 p-10 rounded-4xl">
+			<ng-template #header>
+				<div class="text-center">
+					<h2 class="text-4xl font-bold text-(--p-primary-color)">INICIAR SESIÓN</h2>
+				</div>
+			</ng-template>
+
+			<form [formGroup]="form" (submit)="loginSubmit()">
+				<div class="flex flex-col gap-2">
+					<app-input-text
+						label="Nombre Usuario / Correo"
+						name="username"
+						[control]="controls['username']"
+					></app-input-text>
+
+					<app-input-text
+						type="password"
+						label="Contraseña"
+						name="password"
+						[control]="controls['password']"
+					></app-input-text>
+
+					<!-- <label for="remember"> -->
+					<!-- 	<p-checkBox [binary]="true" formControlName="remember" inputId="remember"></p-checkBox> -->
+					<!-- 	Recordar mi Contraseña -->
+					<!-- </label> -->
+
+					<p-button
+						label="Acceder"
+						loadingIcon="pi pi-spin pi-spinner"
+						title="Iniciar sesión"
+						styleClass="w-full"
+						[loading]="isLoading()"
+						[disabled]="loginForm.invalid"
+						[buttonProps]="{ type: 'submit' }"
+					></p-button>
+
+					<!-- <div class="flex gap-2"> -->
+					<!-- 	¿Olvidaste tu contraseña? -->
+					<!-- 	<a [routerLink]="['/auth/forgot-password']" class="font-light italic text-xm no-underline cursor-pointer" -->
+					<!-- 		>Olvide mi Contraseña</a -->
+					<!-- 	> -->
+					<!-- </div> -->
+				</div>
+			</form>
+		</p-card>
+	</div>
+</div>

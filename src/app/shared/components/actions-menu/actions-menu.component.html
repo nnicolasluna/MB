@@ -1,0 +1,26 @@
+@if (inline()) {
+	@for (action of actions(); track $index) {
+		<p-button
+			[text]="true"
+			[icon]="action.icon"
+			[styleClass]="action.styleClass"
+			[pTooltip]="action.label"
+			tooltipPosition="left"
+			(onClick)="action?.command({})"
+		>
+		</p-button>
+	}
+} @else {
+	<p-menu #menu [model]="actions()" [popup]="true" />
+	<p-button
+		icon="pi pi-ellipsis-v"
+		styleClass="text-(--p-card-color)"
+		(click)="menu.toggle($event)"
+		[rounded]="true"
+		[text]="true"
+	></p-button>
+}
+
+@if (ctxMenuTemplate()) {
+	<p-contextmenu [target]="ctxMenuTemplate()" (onShow)="onContextMenuShow()" [model]="actions()" />
+}

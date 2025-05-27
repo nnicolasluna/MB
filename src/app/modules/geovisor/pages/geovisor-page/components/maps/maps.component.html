@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-2">
+	<div>
+		<h3>Catálogo de Coberturas</h3>
+		<input pInputText placeholder="Buscar mapa..." type="text" [formControl]="searchField" class="w-full" />
+	</div>
+	<p-dataView
+		[lazy]="true"
+		[lazyLoadOnInit]="true"
+		[value]="maps()"
+		(onLazyLoad)="onMapsLoad($event)"
+		[totalRecords]="totalMaps()"
+		[rows]="6"
+		[paginator]="true"
+	>
+		<ng-template #list let-items>
+			@for (item of items; track item.id) {
+				<app-item-map [item]="item"></app-item-map>
+			}
+		</ng-template>
+	</p-dataView>
+</div>

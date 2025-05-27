@@ -1,0 +1,18 @@
+<div>
+	<p-tabs [(value)]="currentMonitoringTab">
+		<p-tablist>
+			<p-tab [value]="0">Uso de Suelo</p-tab>
+			<p-tab [value]="1">Alertas de Suelo</p-tab>
+		</p-tablist>
+	</p-tabs>
+
+	@switch (currentMonitoringTab()) {
+		@case (0) {
+			<app-geo-monitoring-use></app-geo-monitoring-use>
+		}
+		@case (1) {
+			<app-geo-soil-alert></app-geo-soil-alert>
+		}
+		@default {}
+	}
+</div>

@@ -1,0 +1,56 @@
+<div class="flex justify-center items-center h-lvh w-screen">
+	<p-card header="Confirmar cuenta" class="w-[90%] sm:w-[400px]">
+		@if (form) {
+			<form [formGroup]="form" (submit)="submit()">
+				<div class="flex flex-col gap-2">
+					<app-input-text
+						label="Usuario"
+						[readOnly]="true"
+						name="username"
+						[control]="controls['username']"
+					></app-input-text>
+
+					<app-input-text label="Correo" [readOnly]="true" name="email" [control]="controls['email']"></app-input-text>
+
+					<app-input-text
+						type="password"
+						label="Contraseña"
+						name="password"
+						[control]="controls['password']"
+					></app-input-text>
+
+					<app-input-text
+						type="password"
+						label="Repetir Contraseña"
+						name="repeatPassword"
+						[control]="controls['repeatPassword']"
+					></app-input-text>
+
+					@if (form.errors?.['mismatch']) {
+						<small class="text-red-600">* Las contraseñas deben coincidir</small>
+					}
+
+					<p-button
+						type="submit"
+						styleClass="w-full"
+						label="Confirmar"
+						loadingIcon="pi pi-spin pi-spinner"
+						[loading]="isLoading()"
+						[disabled]="form.invalid"
+					></p-button>
+				</div>
+			</form>
+		}
+	</p-card>
+
+	<div class="fixed right-4 bottom-4 w-12 h-12">
+		<p-button
+			[rounded]="true"
+			[text]="true"
+			icon="pi pi-moon"
+			styleClass="text-black dark:text-white w-12 h-12"
+			(click)="toggleDarkMode()"
+		>
+		</p-button>
+	</div>
+</div>

@@ -1,0 +1,100 @@
+<div class="h-full">
+	<form [formGroup]="form" (submit)="onSubmit()">
+		<div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-h-48">
+			<app-input-text label="Nombres" placeholder="Nombres" name="name" [control]="controls['name']"></app-input-text>
+
+			<app-input-text
+				label="Apellido Paterno"
+				placeholder="Ingrese el apellido paterno"
+				name="firstSurname"
+				[control]="controls['firstSurname']"
+			></app-input-text>
+
+			<app-input-text
+				label="Apellido Materno"
+				placeholder="Ingrese el apellido materno"
+				name="secondSurname"
+				[control]="controls['secondSurname']"
+			></app-input-text>
+
+			<app-input-text
+				label="Dirección"
+				placeholder="Ingrese la dirección"
+				name="address"
+				[control]="controls['address']"
+			></app-input-text>
+
+			<app-input-text label="CI" placeholder="Ingrese CI" name="ci" [control]="controls['ci']"></app-input-text>
+
+			<app-input-text
+				label="Correo Electrónico"
+				placeholder="Ingrese el correo electrónico"
+				name="email"
+				[control]="controls['email']"
+			></app-input-text>
+
+			<app-input-text
+				label="Teléfono"
+				placeholder="Ingrese el teléfono"
+				name="phone"
+				[control]="controls['phone']"
+			></app-input-text>
+
+			<app-input-file
+				accept="image/jpg,image/jpeg"
+				className="w-full"
+				[defaultFiles]="image()"
+				(onUploaded)="onFileUploaded($event)"
+				label="Adjuntar Imagen"
+				[disabled]="isViewMode()"
+			>
+			</app-input-file>
+
+			<div>
+				<label class="block font-medium mb-2" for="idRole">Seleccionar Rol</label>
+				<p-select
+					inputId="idRole"
+					placeholder="Seleccione un rol"
+					[filter]="true"
+					formControlName="idRole"
+					[options]="roles()"
+					appendTo="body"
+					styleClass="w-full"
+					optionLabel="name"
+					optionValue="id"
+				>
+				</p-select>
+				<app-input-error [control]="controls['idRole']"></app-input-error>
+			</div>
+
+			<app-input-text
+				label="Nombre de Usuario"
+				placeholder="Ingrese el usuario"
+				name="username"
+				[control]="controls['username']"
+			></app-input-text>
+
+			<div>
+				<label class="block font-medium mb-2" for="expirationAccount">Usuario válido hasta</label>
+				<p-datepicker
+					placeholder="Seleccionar Fecha"
+					formControlName="expirationAccount"
+					styleClass="w-full"
+					appendTo="body"
+					inputId="expirationAccount"
+					[readonlyInput]="true"
+					[showIcon]="true"
+				/>
+				<app-input-error [control]="controls['expirationAccount']"></app-input-error>
+			</div>
+		</div>
+
+		<div class="flex pt-6 flex-row-reverse">
+			@if (isViewMode()) {
+				<p-button (onClick)="closeForm()" label="Cerrar" icon="pi pi-times" iconPos="right" type="button" />
+			} @else {
+				<p-button [disabled]="form.invalid" label="Guardar" icon="pi pi-save" iconPos="right" type="submit" />
+			}
+		</div>
+	</form>
+</div>

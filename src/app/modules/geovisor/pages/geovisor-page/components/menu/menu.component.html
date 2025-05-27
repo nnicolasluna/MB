@@ -1,0 +1,107 @@
+<div
+	id="circularMenu"
+	class="circular-menu transition-[right] duration-300"
+	[class.active]="isOpen()"
+	[class.second-level-active]="isSecondLevelOpen()"
+	[class.active-side-bar-menu]="isSidebarOpen()"
+>
+	<a
+		class="floating-btn rounded-full bg-white grid place-items-center text-center break-words p-2!"
+		(click)="onCloseAll()"
+	>
+		<img src="img/icons/boton_moxos.png" />
+	</a>
+
+	<menu class="items-wrapper">
+		<button class="menu-item items-center flex flex-col text-center" (click)="onMenuClick(menuEntries.MAPS)">
+			<svg width="40" height="40" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M19.5 13C19.5 14.7239 18.8152 16.3772 17.5962 17.5962C16.3772 18.8152 14.7239 19.5 13 19.5M19.5 13C19.5 11.2761 18.8152 9.62279 17.5962 8.40381C16.3772 7.18482 14.7239 6.5 13 6.5C11.2761 6.5 9.62279 7.18482 8.40381 8.40381C7.18482 9.62279 6.5 11.2761 6.5 13C6.5 14.7239 7.18482 16.3772 8.40381 17.5962C9.62279 18.8152 11.2761 19.5 13 19.5M19.5 13H58.5M13 19.5V58.5M65 19.5C66.7239 19.5 68.3772 18.8152 69.5962 17.5962C70.8152 16.3772 71.5 14.7239 71.5 13C71.5 11.2761 70.8152 9.62279 69.5962 8.40381C68.3772 7.18482 66.7239 6.5 65 6.5C63.2761 6.5 61.6228 7.18482 60.4038 8.40381C59.1848 9.62279 58.5 11.2761 58.5 13M65 19.5C63.2761 19.5 61.6228 18.8152 60.4038 17.5962C59.1848 16.3772 58.5 14.7239 58.5 13M65 19.5V58.5M58.5 65C58.5 66.7239 59.1848 68.3772 60.4038 69.5962C61.6228 70.8152 63.2761 71.5 65 71.5C66.7239 71.5 68.3772 70.8152 69.5962 69.5962C70.8152 68.3772 71.5 66.7239 71.5 65C71.5 63.2761 70.8152 61.6228 69.5962 60.4038C68.3772 59.1848 63.2761 58.5 65 58.5M58.5 65C58.5 63.2761 59.1848 61.6228 60.4038 60.4038C61.6228 59.1848 63.2761 58.5 65 58.5M58.5 65H19.5M19.5 65C19.5 66.7239 18.8152 68.3772 17.5962 69.5962C16.3772 70.8152 14.7239 71.5 13 71.5C11.2761 71.5 9.62279 70.8152 8.40381 69.5962C7.18482 68.3772 6.5 66.7239 6.5 65C6.5 63.2761 7.18482 61.6228 8.40381 60.4038C9.62279 59.1848 11.2761 58.5 13 58.5M19.5 65C19.5 63.2761 18.8152 61.6228 17.5962 60.4038C16.3772 59.1848 14.7239 58.5 13 58.5M53.625 43.875C53.625 45.4285 51.3922 46.5205 46.9267 48.7077L43.3875 50.44C41.262 51.48 40.196 52 39 52C37.804 52 36.738 51.48 34.6125 50.44L31.0732 48.7077C26.6077 46.5205 24.375 45.4285 24.375 43.875M34.6125 27.56L31.0732 29.2922C26.6077 31.4795 24.375 32.5715 24.375 34.125C24.375 35.6785 26.6077 36.7705 31.0732 38.9577L34.6125 40.69C36.738 41.73 37.804 42.25 39 42.25C40.196 42.25 41.262 41.73 43.3875 40.69L46.9267 38.9577C51.3922 36.7705 53.625 35.6785 53.625 34.125C53.625 32.5715 51.3922 31.4795 46.9267 29.2922L43.3875 27.56C41.262 26.52 40.196 26 39 26C37.804 26 36.738 26.52 34.6125 27.56Z"
+					[attr.stroke]="isActive(menuEntries.MAPS) ? '#000000' : '#ffffff'"
+					stroke-width="3.125"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+
+			@if (isOpen()) {
+				<p class="m-0!">Recursos</p>
+				<p class="m-0!">cartográficos</p>
+			}
+		</button>
+
+		<button class="menu-item items-center flex flex-col text-center" (click)="onClickMonitoring()">
+			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 72 72" fill="none">
+				<g clip-path="url(#clip0_128_13029)">
+					<path
+						d="M24.1363 25.1899C20.3172 25.1899 16.6545 26.7071 13.954 29.4076C11.2535 32.1081 9.73633 35.7708 9.73633 39.5899C9.73633 43.4091 11.2535 47.0718 13.954 49.7723C16.6545 52.4728 20.3172 53.9899 24.1363 53.9899C27.9554 53.9899 31.6181 52.4728 34.3187 49.7723C37.0192 47.0718 38.5363 43.4091 38.5363 39.5899C38.5363 35.7708 37.0192 32.1081 34.3187 29.4076C31.6181 26.7071 27.9554 25.1899 24.1363 25.1899ZM28.6032 28.1333C28.9202 28.1358 29.2308 28.222 29.5038 28.3831C29.7767 28.5442 30.0023 28.7745 30.1577 29.0507C30.3131 29.327 30.3928 29.6393 30.3888 29.9563C30.3847 30.2732 30.2971 30.5834 30.1346 30.8556L25.1666 39.4611L30.3845 42.8249C30.7858 43.0835 31.0679 43.491 31.1688 43.9577C31.2696 44.4243 31.181 44.9119 30.9223 45.3132C30.6637 45.7145 30.2562 45.9966 29.7896 46.0975C29.3229 46.1984 28.8353 46.1097 28.434 45.8511L21.774 41.5591C21.3855 41.3087 21.1083 40.9184 20.9997 40.4691C20.8911 40.0198 20.9595 39.5459 21.1908 39.1457L27.0163 29.0556C27.1739 28.7738 27.4043 28.5396 27.6835 28.3774C27.9627 28.2153 28.2804 28.1305 28.6032 28.1333Z"
+						[attr.fill]="isSecondLevelOpen() ? '#000000' : '#ffffff'"
+					/>
+					<path
+						fill-rule="evenodd"
+						clip-rule="evenodd"
+						d="M1.81656 3.60018C1.57879 3.59799 1.34294 3.64294 1.12264 3.73241C0.902342 3.82189 0.701953 3.95413 0.533049 4.1215C0.364146 4.28886 0.230076 4.48803 0.138584 4.7075C0.0470913 4.92698 -1.00614e-05 5.1624 1.61211e-09 5.40018L1.61211e-09 56.009C5.75647e-05 56.352 0.0981535 56.688 0.282734 56.9771C0.467314 57.2663 0.73069 57.4967 1.04184 57.6412L23.8414 68.2324C24.0841 68.3453 24.3491 68.4026 24.6168 68.4002C24.8736 68.3981 25.1269 68.3412 25.3598 68.2331L47.4012 57.994L69.4426 68.2324C69.7168 68.3596 70.0186 68.4157 70.3203 68.3955C70.6219 68.3753 70.9136 68.2795 71.1684 68.1168C71.4232 67.9542 71.633 67.73 71.7783 67.465C71.9237 67.1999 71.9999 66.9025 72 66.6002V15.9914C71.9999 15.6483 71.9018 15.3124 71.7173 15.0232C71.5327 14.734 71.2693 14.5036 70.9582 14.3591L48.1586 3.76794C47.9156 3.65494 47.6505 3.59762 47.3825 3.60018C47.1262 3.60243 46.8734 3.65938 46.6409 3.76722L24.5995 14.0063L2.55816 3.76794C2.32573 3.65985 2.07289 3.60266 1.81656 3.60018ZM48.2047 7.75818L68.4 17.1398V63.7792L48.4718 54.5222L48.2047 7.75818ZM46.0462 8.01306L46.3126 54.5287L25.6651 64.1212L25.6205 56.2941C24.9014 56.3507 24.1814 56.3587 23.4605 56.3179L23.5051 64.1068L3.6 54.8591V8.22114L23.238 17.3435L23.2704 23.0373C23.993 23.0316 24.7152 23.0754 25.4318 23.1683L25.3994 17.6049L46.0462 8.01306Z"
+						[attr.fill]="isSecondLevelOpen() ? '#000000' : '#ffffff'"
+					/>
+					<path
+						d="M57.8346 19.4918V24.2131M57.8346 26.5738V27.7541M57.8346 14.7705L66.0969 30.1148H49.5723L57.8346 14.7705Z"
+						[attr.stroke]="isSecondLevelOpen() ? '#000000' : '#ffffff'"
+						stroke="white"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</g>
+				<defs>
+					<clipPath id="clip0_128_13029">
+						<rect width="72" height="72" fill="white" />
+					</clipPath>
+				</defs>
+			</svg>
+			@if (isOpen()) {
+				<p class="m-0!">Monitoreo</p>
+			}
+		</button>
+	</menu>
+
+	<menu class="second-level-items-wrapper" *ngIf="isSecondLevelOpen() && isOpen()">
+		<button
+			class="second-level-item items-center flex flex-col text-center w-24 cursor-pointer"
+			(click)="onMenuClick(menuEntries.MONITORING_SOIL_DEGRADATION)"
+		>
+			<div class="rounded-full p-2" [class.bg-[#288291]]="isActive(menuEntries.MONITORING_SOIL_DEGRADATION)">
+				<img src="/img/icons/monitoring_soil_degradation.svg" [width]="40" [height]="40" alt="Degradación de Suelo" />
+			</div>
+			<p class="m-0!">Degradación de Suelo</p>
+		</button>
+
+		<button
+			class="second-level-item items-center flex flex-col text-center w-24 cursor-pointer"
+			(click)="onMenuClick(menuEntries.MONITORING_WATER)"
+		>
+			<div class="rounded-full p-2" [class.bg-[#288291]]="isActive(menuEntries.MONITORING_WATER)">
+				<img src="/img/icons/monitoring_water.svg" [width]="40" [height]="40" alt="Monitoreo de Agua" />
+			</div>
+			<p class="m-0!">Monitoreo de Agua</p>
+		</button>
+
+		<button
+			class="second-level-item items-center flex flex-col text-center w-24 cursor-pointer"
+			(click)="onMenuClick(menuEntries.MONITORING_FIRE)"
+		>
+			<div class="rounded-full p-2" [class.bg-[#288291]]="isActive(menuEntries.MONITORING_FIRE)">
+				<img src="/img/icons/monitoring_fire.svg" [width]="40" [height]="40" alt="Monitoreo de Fuego" />
+			</div>
+			<p class="m-0!">Monitoreo de Fuego</p>
+		</button>
+
+		<button
+			class="second-level-item items-center flex flex-col text-center w-24 cursor-pointer"
+			(click)="onMenuClick(menuEntries.MONITORING_LAND_USE)"
+		>
+			<div class="rounded-full p-2" [class.bg-[#288291]]="isActive(menuEntries.MONITORING_LAND_USE)">
+				<img src="/img/icons/monitoring_land_use.svg" [width]="40" [height]="40" alt="Cambio de Uso de Suelo" />
+			</div>
+			<p class="m-0!">Cambio Uso de Suelo</p>
+		</button>
+	</menu>
+</div>

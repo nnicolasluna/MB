@@ -1,0 +1,22 @@
+<div>
+	<p-tabs [(value)]="currentMonitoringTab">
+		<p-tablist>
+			<p-tab [value]="0">Focos de Calor</p-tab>
+			<p-tab [value]="1">Alertas de Riesgo <br />de Incendio</p-tab>
+			<p-tab [value]="2">Cicatrices <br />de Quemas</p-tab>
+		</p-tablist>
+	</p-tabs>
+
+	@switch (currentMonitoringTab()) {
+		@case (0) {
+			<app-geo-hot-spots></app-geo-hot-spots>
+		}
+		@case (1) {
+			<app-geo-monitoring-fire></app-geo-monitoring-fire>
+		}
+		@case (2) {
+			<app-geo-monitoring-burn #burn></app-geo-monitoring-burn>
+		}
+		@default {}
+	}
+</div>
