@@ -1,7 +1,7 @@
 export const environment = {
 	production: false,
-	apiHost: 'https://dev.l.zdev.app',
+	apiHost: 'http://localhost:3000',
 	apiPrefix: 'api',
-	urlGeoserver: 'https://geoserver.l.zdev.app/geoserver/',
-	workspaceGeoserver: 'wcs',
+	urlGeoserver: 'http://localhost:8080/geoserver/',
+	workspaceGeoserver: 'mesabosques',
 };
