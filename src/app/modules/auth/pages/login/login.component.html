@@ -1,5 +1,5 @@
 <div class="flex">
-	<div class="flex-1 h-screen flex justify-center items-center">
+	<div class="flex-1 h-screen flex justify-center items-center bg-[url('/img/login_background.webp')]">
 		<p-card class="w-[90%] sm:w-[600px]" styleClass="bg-surface-0 p-10 rounded-4xl">
 			<ng-template #header>
 				<div class="text-center">
@@ -37,12 +37,22 @@
 						[buttonProps]="{ type: 'submit' }"
 					></p-button>
 
-					<!-- <div class="flex gap-2"> -->
-					<!-- 	¿Olvidaste tu contraseña? -->
-					<!-- 	<a [routerLink]="['/auth/forgot-password']" class="font-light italic text-xm no-underline cursor-pointer" -->
-					<!-- 		>Olvide mi Contraseña</a -->
-					<!-- 	> -->
-					<!-- </div> -->
+					<div class="flex gap-2">
+						¿Olvidaste tu contraseña?
+						<a [routerLink]="['/auth/forgot-password']" class="font-light italic text-xm no-underline cursor-pointer"
+							>Olvide mi Contraseña</a
+						>
+					</div>
+				</div>
+
+				<div class="flex gap-2 mt-6">
+					<img src="img/logo_maya.png" />
+					<img src="img/logo_abt.png" />
+					<img src="img/logo_dgf.png" />
+					<img src="img/logo_sernap.png" />
+					<img src="img/logo_mnhn.png" />
+					<img src="img/logo_fonabosque.png" />
+					<img src="img/logo_apmt.png" />
 				</div>
 			</form>
 		</p-card>
