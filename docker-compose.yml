@@ -6,7 +6,7 @@ services:
     container_name: mesabosques-frontend
     restart: unless-stopped
     ports:
-      - 4208:4200
+      - 4209:4200
     networks:
       - net-mesabosques
 
