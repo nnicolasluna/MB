@@ -27,18 +27,6 @@ export const routes: Routes = [
 				path: 'users',
 				loadChildren: (): Promise<Routes> => import('./modules/users/users.routes').then((m) => m.routes),
 			},
-			{
-				path: 'coverages',
-				loadChildren: (): Promise<Routes> => import('./modules/map-data/mapData.routes').then((m) => m.routes),
-			},
-			{
-				path: 'monitoring',
-				loadChildren: (): Promise<Routes> => import('./modules/monitoring/monitoring.routes').then((m) => m.routes),
-			},
 		],
 	},
-	// {
-	// 	path: 'geovisualizador',
-	// 	loadChildren: (): Promise<Routes> => import('./modules/geovisor/geovisor.routes').then((m) => m.routes),
-	// },
 ];
