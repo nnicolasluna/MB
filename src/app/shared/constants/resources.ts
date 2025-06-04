@@ -1,5 +1,6 @@
 export const enum ResourceTypes {
 	MENU_USERS = 'MENU_USERS',
+	MENU_MEETS = 'MENU_MEETS',
 	USERS = 'USERS',
 	ROLES = 'ROLES',
 	SYSTEM_PERMISSIONS = 'SYSTEM_PERMISSIONS',

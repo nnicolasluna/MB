@@ -3,7 +3,7 @@ import Aura from '@primeng/themes/aura';
 
 //INFO: More information: https://primeng.org/theming
 
-const customPalette = palette('#06561a');
+const customPalette = palette('#1F5223');
 const darkSurface = palette('#282F3A');
 
 export const themePreset = definePreset(Aura, {
@@ -58,9 +58,10 @@ export const themePreset = definePreset(Aura, {
 				light: {
 					tab: {
 						background: 'var(--p-surface-200)',
-						activeBackground: '{primary.700}',
-						color: 'var(--p-surface-700)',
-						activeColor: 'var(--p-surface-200)',
+						activeBackground: '{primary.200}',
+						color: '#000000',
+						activeColor: '#000000',
+						fontWeight: 'normal',
 					},
 				},
 				dark: {

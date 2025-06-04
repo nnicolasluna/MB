@@ -6,56 +6,46 @@
 		</div>
 
 		<div class="min-w-max flex gap-1">
-			<p-button
-				styleClass="h-full"
-				label="Agregar Usuario"
-				icon="pi pi-plus"
-				(click)="showDialogForm('Agregar Usuario')"
-			/>
+			<p-button styleClass="h-full" label="Agregar Usuario" icon="pi pi-plus"
+				(click)="showDialogForm('Agregar Usuario')" />
 
-			<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh" (click)="onReload()" />
+			<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
+				(click)="onReload()" />
 		</div>
 	</div>
 
-	<app-filter-bar (onSearch)="onSearch($event)"> </app-filter-bar>
+	<div class="flex justify-between items-center flex-wrap gap-3 bg-gray-100 my-2 rounded-sm">
+		<div class="text-normal pl-10">Lista de Usuarios</div>
+		<app-filter-bar class="pr-5" (onSearch)="onSearch($event)"></app-filter-bar>
+	</div>
 
-	<div class="my-2">
+
+	<div>
 		<p-tabs [scrollable]="true" [value]="0" (valueChange)="onChangeTabs($event)">
 			<p-tablist>
-				<p-tab [value]="0">APROBADOS</p-tab>
-				<p-tab [value]="1">POR REVISAR</p-tab>
-				<p-tab [value]="2">RECHAZADOS</p-tab>
-				<p-tab [value]="3">DESHABILITADOS </p-tab>
+				<p-tab [value]="0"><i class="pi pi-list"></i>Usuarios Aprobados</p-tab>
+				<p-tab [value]="1"><i class="pi pi-check"></i>Usuarios por Revisar</p-tab>
+				<p-tab [value]="2"><i class="pi pi-user"></i>Usuarios rechazados</p-tab>
+				<p-tab [value]="3"><i class="pi pi-times"></i>Usuarios Deshabilitados </p-tab>
 			</p-tablist>
 		</p-tabs>
 	</div>
 
-	<p-table
-		[value]="items()"
-		[resizableColumns]="true"
-		[paginator]="true"
-		[rows]="6"
-		[totalRecords]="totalRecords()"
-		[showCurrentPageReport]="true"
-		currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
-		[rowsPerPageOptions]="rowsPerPageOptions"
-		responsiveLayout="scroll"
-		[lazy]="true"
-		(onLazyLoad)="onLazyLoad($event)"
-		[lazyLoadOnInit]="true"
-	>
+	<p-table [value]="items()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
+		[showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
+		[rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
+		(onLazyLoad)="onLazyLoad($event)" [lazyLoadOnInit]="true">
 		<ng-template pTemplate="caption" dataKey="id">
-			<div class="flex justify-content-between flex-column sm:flex-row">Lista de Usuarios</div>
 		</ng-template>
 		<ng-template pTemplate="header">
 			<tr>
 				@for (item of tableColumns; track item.header) {
-					<th class="bg-primary text-white" [pSortableColumn]="item.sortField ?? item.field">
-						{{ item.header }}
-						@if (item.sort) {
-							<p-sortIcon [field]="item.sortField ?? item.field"></p-sortIcon>
-						}
-					</th>
+				<th class="bg-primary text-white" [pSortableColumn]="item.sortField ?? item.field">
+					{{ item.header }}
+					@if (item.sort) {
+					<p-sortIcon [field]="item.sortField ?? item.field"></p-sortIcon>
+					}
+				</th>
 				}
 				<th class="bg-primary text-white">Acción</th>
 			</tr>
@@ -65,13 +55,8 @@
 				<td>
 					<div class="flex flex-col items-center">
 						@if (data.image) {
-							<p-image
-								width="150"
-								height="150"
-								[src]="attachmentService.getFileUrl(data.image?.uuid)"
-								[preview]="true"
-								alt="foto del usuario"
-							></p-image>
+						<p-image width="150" height="150" [src]="attachmentService.getFileUrl(data.image?.uuid)"
+							[preview]="true" alt="foto del usuario"></p-image>
 						}
 						<span>
 							{{ data.fullName }}
@@ -84,7 +69,8 @@
 				<td>{{ data.role?.name }}</td>
 				<td>{{ data.reviwedVerificationCode ? 'Si' : 'No' }}</td>
 				<td>
-					<app-user-actions (onActionClick)="onActionClick($event)" [inline]="true" [item]="data"></app-user-actions>
+					<app-user-actions (onActionClick)="onActionClick($event)" [inline]="true"
+						[item]="data"></app-user-actions>
 				</td>
 			</tr>
 		</ng-template>
