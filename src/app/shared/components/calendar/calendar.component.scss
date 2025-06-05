@@ -1,0 +1,140 @@
+.main {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	min-height: 700px;
+	overflow-x: auto;
+	font-size: 1rem;
+}
+
+.reuniones {
+	display: flex;
+	flex-direction: column;
+	&__head {
+		height: 5%;
+	}
+}
+
+.reunion-label {
+	flex: 1;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+	text-align: center;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 20px;
+	color: black;
+}
+
+.reunion-ordinaria {
+	background-color: #9747ff;
+}
+
+.reunion-extraordinaria {
+	background-color: #b3b3b3;
+}
+
+.calendario {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1px;
+	flex: 1;
+	background-color: #eee;
+}
+
+.mes {
+	display: flex;
+	flex-direction: column;
+	border: none;
+	height: 100%;
+}
+
+.mes-titulo {
+	background-color: #111;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 3px;
+	height: 5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.reunion-row {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	flex: 1;
+	height: 50%;
+	min-width: 200px;
+}
+
+.reunion-cell {
+	border: 1px solid white;
+	border-radius: 4px;
+	min-height: 30px;
+	border: none;
+	border-right: 1px solid white;
+	position: relative;
+}
+.inner-container {
+	position: absolute;
+	overflow: visible;
+
+	z-index: 1;
+}
+.reunion-box {
+	border-radius: 4px;
+	padding: 6px;
+	margin: 4px 0;
+	min-width: 300px;
+	color: #222;
+	font-weight: bold;
+	margin-top: 5px;
+	span {
+		padding-left: 3px;
+	}
+}
+.contenedor {
+	position: relative;
+
+	height: 30px;
+	&__btn {
+		background-color: #0f703c;
+		color: white;
+		border-radius: 5px;
+		padding: 5px 20px;
+		font-weight: normal;
+		font-size: 12px;
+		position: absolute;
+		right: 0;
+	}
+}
+
+.estado-realizado {
+	background-color: #28a745;
+	border: none;
+}
+
+.estado-progreso {
+	background-color: #ffe8a3;
+	border: none;
+}
+
+.estado-otro {
+	background-color: #62e0d9;
+	border: none;
+}
+.miniCard {
+	padding: 12px;
+	font-size: 0.9rem;
+	&__text {
+		font-weight: normal;
+		text-align: justify;
+	}
+	&__date {
+		font-weight: bold;
+	}
+}

@@ -5,8 +5,7 @@ import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { PrimeIcons } from 'primeng/api';
 import { PermissionDirective } from '@shared/directives';
 import { USER_MENU_ENTRIES } from '@modules/users/constants';
-import { MEETS_MENU_ENTRIES } from '@modules/users/constants/medulo-menu-meets';
-
+import { MEETS_MENU_ENTRIES } from '@modules/meets/constants/medulo-menu-meets';
 
 @Component({
 	selector: 'app-menu',

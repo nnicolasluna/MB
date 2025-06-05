@@ -1,0 +1,75 @@
+<div class="main">
+	<div class="reuniones">
+		<div class="reuniones__head"></div>
+		<div class="reunion-label reunion-ordinaria">REUNIONES ORDINARIAS</div>
+		<div class="reunion-label reunion-extraordinaria">REUNIONES EXTRAORDINARIAS</div>
+	</div>
+
+	<div class="calendario">
+		<div class="mes" *ngFor="let mes of meses; let mesIndex = index">
+			<div class="mes-titulo">{{ mes }}</div>
+			<div class="reunion-row">
+				<div class="reunion-cell" *ngFor="let semana of semanas; let semanaIndex = index">
+					<div class="inner-container">
+						<ng-container *ngFor="let reunion of getReunionesPorMesYSemana(mesIndex, semanaIndex, false)">
+							<div
+								class="reunion-box"
+								[ngClass]="{
+									'estado-realizado': reunion.ESTADO === 'REALIZADO',
+									'estado-progreso': reunion.ESTADO === 'EN PROGRESO',
+									'estado-otro': reunion.ESTADO !== 'REALIZADO' && reunion.ESTADO !== 'EN PROGRESO'
+								}"
+							>
+								<div class="miniCard">
+									<div class="miniCard__content">
+										<div class="miniCard__date">Fecha:{{ reunion.Fecha }}</div>
+										Objetivo:
+										<div class="miniCard__text">
+											{{ reunion.Objetivo }}
+										</div>
+										<div>Estado: {{ reunion.ESTADO }}</div>
+									</div>
+									<img src="" alt="" />
+								</div>
+								<div class="contenedor">
+									<button class="contenedor__btn"><i class="pi pi-file-plus"></i><span>LLenar Acta</span></button>
+								</div>
+							</div>
+						</ng-container>
+					</div>
+				</div>
+			</div>
+			<div class="reunion-row">
+				<div class="reunion-cell" *ngFor="let semana of semanas; let semanaIndex = index">
+					<div *ngFor="let reunion of getReunionesPorMesYSemana(mesIndex, semanaIndex, true)">
+						<div class="inner-container">
+							<div
+								class="reunion-box"
+								[ngClass]="{
+									'estado-realizado': reunion.ESTADO === 'REALIZADO',
+									'estado-progreso': reunion.ESTADO === 'EN PROGRESO',
+									'estado-otro': reunion.ESTADO !== 'REALIZADO' && reunion.ESTADO !== 'EN PROGRESO'
+								}"
+							>
+								<div class="miniCard">
+									<div class="miniCard__content">
+										<div class="miniCard__date">Fecha:{{ reunion.Fecha }}</div>
+										Objetivo:
+										<div class="miniCard__text">
+											{{ reunion.Objetivo }}
+										</div>
+										<div>Estado: {{ reunion.ESTADO }}</div>
+									</div>
+									<img src="" alt="" />
+								</div>
+								<div class="contenedor">
+									<button class="contenedor__btn"><i class="pi pi-file-plus"></i><span>LLenar Acta</span></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

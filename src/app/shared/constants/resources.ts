@@ -17,4 +17,6 @@ export const enum ResourceTypes {
 	GEOVISOR = 'GEOVISOR',
 
 	ATTACHMENTS = 'ATTACHMENTS',
+
+	SESSIONS = 'SESSIONS',
 }

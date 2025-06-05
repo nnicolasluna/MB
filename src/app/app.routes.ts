@@ -16,8 +16,8 @@ export const routes: Routes = [
 	{
 		path: '',
 		component: MainLayout,
-		canActivate: [authenticationGuard],
-		canActivateChild: [authenticationGuard, systemPermissionGuard],
+		/* canActivate: [authenticationGuard],
+		canActivateChild: [authenticationGuard, systemPermissionGuard], */
 		children: [
 			{
 				path: 'home',
@@ -26,6 +26,10 @@ export const routes: Routes = [
 			{
 				path: 'users',
 				loadChildren: (): Promise<Routes> => import('./modules/users/users.routes').then((m) => m.routes),
+			},
+			{
+				path: 'meets',
+				loadChildren: (): Promise<Routes> => import('./modules/meets/meets.routes').then((m) => m.routes),
 			},
 		],
 	},
