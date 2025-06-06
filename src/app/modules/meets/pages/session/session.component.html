@@ -1,11 +1,10 @@
 <div class="h-full w-full">
-	<!-- Header portion -->
 	<div class="flex justify-between gap-1 flex-col py-5">
 		<div class="overflow-x-auto">
-			<p-breadcrumb class="max-w-full" />
+			<p-breadcrumb class="max-w-full" [model]="breadCrumbs" />
 		</div>
 		<div class="min-w-max flex gap-1">
-			<p-button styleClass="h-full" label="Agregar Usuario" icon="pi pi-plus" />
+			<p-button styleClass="h-full" label="Agregar" icon="pi pi-plus" (click)="showDialogForm('Crear Reunion')" />
 
 			<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh" />
 		</div>

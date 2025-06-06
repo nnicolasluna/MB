@@ -19,4 +19,5 @@ export const enum ResourceTypes {
 	ATTACHMENTS = 'ATTACHMENTS',
 
 	SESSIONS = 'SESSIONS',
+	AGENDA = 'AGENDA',
 }

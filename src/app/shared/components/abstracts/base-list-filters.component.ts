@@ -47,7 +47,7 @@ export abstract class BaseListFiltersComponent<T> implements OnDestroy {
 		this.list();
 	}
 
-	protected onDestroy(): void {}
+	protected onDestroy(): void { }
 
 	ngOnDestroy(): void {
 		this.onDestroy();
@@ -85,6 +85,7 @@ export abstract class BaseListFiltersComponent<T> implements OnDestroy {
 	protected requiredColumns: string[] = [];
 
 	protected showDialogForm(header: string, data?: any, dialog = this.formDialog) {
+		console.log(header)
 		if (!dialog) return;
 		this.modalConfig.data = data ?? {};
 		this.modalConfig.data.columns = this.requiredColumns;

@@ -11,11 +11,19 @@ export const MEETS_MENU_ENTRIES: ExtendedMenuItem = {
 	items: [
 		{
 			label: 'Administración de Sesiones',
-			resource: ResourceTypes.USERS,
+			resource: ResourceTypes.SESSIONS,
 			class: 'text-sm',
 			permission: 'canView',
 			icon: PrimeIcons.USERS,
 			routerLink: ['/meets/session'],
+		},
+		{
+			label: 'Administración de Agenda',
+			resource: ResourceTypes.AGENDA,
+			class: 'text-sm',
+			permission: 'canView',
+			icon: PrimeIcons.USERS,
+			routerLink: ['/meets/agenda'],
 		},
 	],
 };

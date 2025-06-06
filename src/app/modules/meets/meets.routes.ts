@@ -10,4 +10,12 @@ export const routes: Routes = [
 		},
 		loadComponent: () => import('./pages/session/session.component').then((m) => m.SessionComponent),
 	},
+	{
+		path: 'agenda',
+		data: {
+			moduleCode: ResourceTypes.AGENDA,
+			permission: 'canView',
+		},
+		loadComponent: () => import('./pages/agenda/agenda.component').then((m) => m.AgendaComponent),
+	},
 ];
