@@ -4,12 +4,17 @@
 			<p-breadcrumb class="max-w-full" [model]="breadCrumbs" />
 		</div>
 
-		<div class="min-w-max flex gap-1">
-			<p-button styleClass="h-full" label="Agregar Rol" icon="pi pi-plus"
-				(click)="showDialogForm('Agregar Rol')" />
+		<div class="flex justify-between">
+			<div class="min-w-max flex gap-1">
+				<p-button styleClass="h-full" label="Agregar Agenda" icon="pi pi-plus"
+					(click)="showDialogForm('Agregar Agenda')" />
 
-			<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
-				(click)="onReload()" />
+				<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
+					(click)="onReload()" />
+
+			</div>
+			<p-calendar view="year" dateFormat="yy" [(ngModel)]="selectedYear" inputId="yearpicker"
+				showIcon></p-calendar>
 		</div>
 	</div>
 
@@ -20,7 +25,7 @@
 		[rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
 		(onLazyLoad)="onLazyLoad($event)" [lazyLoadOnInit]="true">
 		<ng-template pTemplate="caption" dataKey="id">
-			<div class="flex justify-content-between flex-column sm:flex-row">Lista de Roles</div>
+			<div class="flex justify-center flex-column sm:flex-row">Agenda Gestión</div>
 		</ng-template>
 		<ng-template pTemplate="header">
 			<tr>

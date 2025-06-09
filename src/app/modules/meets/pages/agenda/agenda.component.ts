@@ -8,26 +8,35 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ROLE_TABLE_COLUMNS } from '@modules/users/constants';
-import { SessionService } from '@modules/meets/services/session.service';
-import { SessionModel } from '@modules/meets/interfaces/session.interface';
-import { SessionComponent } from '../session/session.component';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
+import { AgendaService } from '@modules/meets/services/agenda.service';
+import { AgendaFormComponent } from './components/agenda-form/agenda-form.component';
 
 @Component({
   selector: 'app-agenda',
   imports: [
     BreadcrumbModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    CalendarModule,
+    FormsModule,
   ],
   templateUrl: './agenda.component.html',
   styleUrl: './agenda.component.scss'
 })
-export class AgendaComponent extends BaseListFiltersComponent<SessionModel> {
+export class AgendaComponent extends BaseListFiltersComponent<AgendaModel> {
+  selectedYear: Date | undefined;
   override tableColumns: ColumnTableModel[] = ROLE_TABLE_COLUMNS;
   override filters: RoleParams = new RoleParams();
-  override service: BaseCRUDHttpService<SessionModel> = inject(SessionService);
-  override formDialog: Type<any> = SessionComponent;
+  override service: BaseCRUDHttpService<AgendaModel> = inject(AgendaService);
+  override formDialog: Type<any> = AgendaFormComponent;
   override onActionClick(): void { }
-
-
+  constructor() {
+    super();
+    this.addBreadcrub({ label: 'Session', routerLink: '/meets/session' });
+  }
+  ngOnInit(): void {
+    this.selectedYear = new Date(2025, 0, 1);
+  }
 }

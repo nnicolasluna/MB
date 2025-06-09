@@ -1,0 +1,21 @@
+<div class="h-full">
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-h-48">
+            <app-input-text label="Nombre Agenda" placeholder="Nombre de la Agebda" name="name"
+                [control]="controls['name']"></app-input-text>
+            <div>
+                <label class="block font-medium mb-2" for="expirationAccount">Fecha</label>
+                <p-datepicker placeholder="Selecciona Periodo" formControlName="periodo" styleClass="w-full"
+                    appendTo="body" inputId="periodo" [readonlyInput]="true" [showIcon]="true" selectionMode="range" />
+            </div>
+
+        </div>
+        <div class="flex pt-6 flex-row-reverse">
+            @if (isViewMode()) {
+            <p-button (onClick)="closeForm()" label="Cerrar" icon="pi pi-times" iconPos="right" type="button" />
+            } @else {
+            <p-button [disabled]="form.invalid" label="Guardar" icon="pi pi-save" iconPos="right" type="submit" />
+            }
+        </div>
+    </form>
+</div>
