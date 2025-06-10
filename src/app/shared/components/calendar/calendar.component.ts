@@ -1,6 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { Nullable } from 'primeng/ts-helpers';
+interface Reunion {
+	Fecha: string;
+	Objetivo: string;
+	ESTADO: string;
+	reunionExtraOrdinaria: boolean;
+}
 @Component({
 	selector: 'app-calendar',
 	imports: [CommonModule],
@@ -8,7 +14,7 @@ import { CommonModule } from '@angular/common';
 	styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent {
-	//@Input() data: any;
+	@Input() data: Reunion[] = [];
 	meses = [
 		'Enero',
 		'Febrero',
@@ -26,7 +32,7 @@ export class CalendarComponent {
 
 	semanas = Array(4);
 
-	data = [
+	/* data = [
 		{
 			Fecha: '15/02/2025',
 			Objetivo: 'Revisar los avances del plan de reforestación en la zona norte.',
@@ -57,10 +63,10 @@ export class CalendarComponent {
 			ESTADO: 'EN PROGRESO',
 			reunionExtraOrdinaria: false,
 		},
-	];
+	]; */
 
 	getReunionesPorMesYSemana(mesIndex: number, semanaIndex: number, esExtraordinaria: boolean) {
-		return this.data.filter((reunion) => {
+		return this.data.filter((reunion: Reunion) => {
 			const partesFecha = reunion.Fecha.split('/');
 			const dia = parseInt(partesFecha[0], 10);
 			const mes = parseInt(partesFecha[1], 10) - 1;

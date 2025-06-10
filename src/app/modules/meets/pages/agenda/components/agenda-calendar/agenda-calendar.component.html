@@ -1,0 +1,15 @@
+<div class="h-full w-full">
+    <div class="flex justify-between gap-1 flex-col py-5">
+        <div class="overflow-x-auto">
+            <p-breadcrumb class="max-w-full" />
+        </div>
+        <div class="min-w-max flex justify-between">
+            <div class="text-lg font-bold">{{title}}</div>
+            <div class="flex gap-1">
+                <p-button styleClass="h-full" label="Agregar" icon="pi pi-plus" (click)="('Crear Reunion')" />
+                <p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh" />
+            </div>
+        </div>
+    </div>
+    <app-calendar></app-calendar>
+</div>

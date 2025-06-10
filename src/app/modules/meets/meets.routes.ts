@@ -18,4 +18,13 @@ export const routes: Routes = [
 		},
 		loadComponent: () => import('./pages/agenda/agenda.component').then((m) => m.AgendaComponent),
 	},
+	{
+		path: 'calendar/:name',
+		data: {
+			moduleCode: ResourceTypes.AGENDA,
+			permission: 'canView',
+		},
+		loadComponent: () => import('./pages/agenda/components/agenda-calendar/agenda-calendar.component').then((m) => m.AgendaCalendarComponent),
+	},
 ];
+

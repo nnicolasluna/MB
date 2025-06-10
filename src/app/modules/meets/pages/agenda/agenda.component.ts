@@ -7,11 +7,12 @@ import { BaseCRUDHttpService } from '@shared/services';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { ROLE_TABLE_COLUMNS } from '@modules/users/constants';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { AgendaService } from '@modules/meets/services/agenda.service';
 import { AgendaFormComponent } from './components/agenda-form/agenda-form.component';
+import { AGENDA_TABLE_COLUMNS } from '@modules/meets/constants/agenda';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agenda',
@@ -26,17 +27,21 @@ import { AgendaFormComponent } from './components/agenda-form/agenda-form.compon
   styleUrl: './agenda.component.scss'
 })
 export class AgendaComponent extends BaseListFiltersComponent<AgendaModel> {
+
   selectedYear: Date | undefined;
-  override tableColumns: ColumnTableModel[] = ROLE_TABLE_COLUMNS;
+  override tableColumns: ColumnTableModel[] = AGENDA_TABLE_COLUMNS;
   override filters: RoleParams = new RoleParams();
   override service: BaseCRUDHttpService<AgendaModel> = inject(AgendaService);
   override formDialog: Type<any> = AgendaFormComponent;
   override onActionClick(): void { }
-  constructor() {
+  constructor(private router: Router) {
     super();
     this.addBreadcrub({ label: 'Session', routerLink: '/meets/session' });
   }
   ngOnInit(): void {
     this.selectedYear = new Date(2025, 0, 1);
+  }
+  verAgenda(name: string) {
+    this.router.navigate(['/meets/calendar', name]);
   }
 }

@@ -43,10 +43,9 @@
 		<ng-template pTemplate="body" let-data>
 			<tr>
 				<td>{{ data.name }}</td>
-				<td>{{ data.description }}</td>
+				<td>{{ data.periodo }}</td>
 				<td>
-					<!-- 					<app-role-actions (onActionClick)="onActionClick($event)" [inline]="true" [item]="data"></app-role-actions>
- -->
+					<p-button class="action" (onClick)="verAgenda(data.name)" icon="pi pi-eye" />
 				</td>
 			</tr>
 		</ng-template>

@@ -25,7 +25,7 @@ export class AgendaFormComponent extends BaseFormComponent<AgendaModel> {
   override buildForm(): void {
     this._form = this._fb.group({
       name: [this.currentItem().name, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-
+      periodo: [this.currentItem().periodo, [Validators.required]],
     })
   }
 }
