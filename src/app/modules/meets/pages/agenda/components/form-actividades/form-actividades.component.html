@@ -1,0 +1,11 @@
+<div class="h-full">
+    <p-button (click)="agregarFormulario()">Agregar Tarea</p-button>
+    <div *ngFor="let formulario of formulariosNombres; let i = index">
+        <app-form-tareas></app-form-tareas>
+        <p-button (click)="eliminarFormulario(i)">Eliminar</p-button>
+        <hr>
+    </div>
+
+</div>
+<app-input-text label="Nombre Agenda" placeholder="Nombre de la Agenda" name="name"
+    [control]="controls['name']"></app-input-text>

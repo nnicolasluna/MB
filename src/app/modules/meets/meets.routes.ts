@@ -26,5 +26,13 @@ export const routes: Routes = [
 		},
 		loadComponent: () => import('./pages/agenda/components/agenda-calendar/agenda-calendar.component').then((m) => m.AgendaCalendarComponent),
 	},
+	{
+		path: 'activities',
+		data: {
+			moduleCode: ResourceTypes.AGENDA,
+			permission: 'canView',
+		},
+		loadComponent: () => import('./pages/agenda/components/form-actividades/form-actividades.component').then((m) => m.FormActividadesComponent),
+	},
 ];
 
