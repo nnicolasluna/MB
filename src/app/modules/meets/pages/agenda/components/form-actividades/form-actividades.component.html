@@ -1,11 +1,13 @@
-<div class="h-full">
-    <p-button (click)="agregarFormulario()">Agregar Tarea</p-button>
-    <div *ngFor="let formulario of formulariosNombres; let i = index">
-        <app-form-tareas></app-form-tareas>
-        <p-button (click)="eliminarFormulario(i)">Eliminar</p-button>
-        <hr>
-    </div>
-
+<div class="h-full flex flex-col gap-4">
+	<div class="flex justify-between items-center">
+		<div class="flex-1">
+			<label class="block font-medium mb-2" for="idRole"> Actividad</label>
+			<input class="w-200" type="text" placeholder="Ingrese Actividad" pInputText id="Ingrese Actividad" />
+		</div>
+		<p-button (click)="agregarFormulario()"><i class="pi pi-plus"></i>Agregar Tarea</p-button>
+	</div>
+	<div class="flex flex-row gap-4 items-center" *ngFor="let formulario of formulariosNombres; let i = index">
+		<p-button (click)="eliminarFormulario(i)" severity="danger"><i class="pi pi-trash"></i></p-button>
+		<app-form-tareas></app-form-tareas>
+	</div>
 </div>
-<app-input-text label="Nombre Agenda" placeholder="Nombre de la Agenda" name="name"
-    [control]="controls['name']"></app-input-text>

@@ -1,6 +1,42 @@
-<div>
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" [(ngModel)]="nombre">
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido" [(ngModel)]="apellido">
+<div class="w-full flex flex-row gap-4">
+	<div>
+		<label class="block font-medium mb-2" for="nombre">Tarea:</label>
+		<input type="text" pInputText id="Ingrese Tarea" placeholder="Ingrese Tarea" />
+	</div>
+	<div>
+		<label class="block font-medium mb-2" for="nombre">Fecha:</label>
+		<p-datepicker
+			placeholder="Seleccione Fecha"
+			class="w-full"
+			[readonlyInput]="true"
+			[appendTo]="'body'"
+			[showIcon]="true"
+		/>
+	</div>
+	<div>
+		<label class="block font-medium mb-2" for="nombre">Resulado Esperado:</label>
+		<input type="text" pInputText id="Ingrese Tarea" placeholder="Resultado" />
+	</div>
+	<div>
+		<label class="block font-medium mb-2" for="nombre">Grupo:</label>
+		<p-select
+			[checkmark]="true"
+			optionLabel="name"
+			[filter]="true"
+			[showClear]="true"
+			placeholder="Seleccione Grupo"
+			class="w-full md:w-56"
+		/>
+	</div>
+	<div>
+		<label class="block font-medium mb-2" for="nombre">Responsable:</label>
+		<p-select
+			[checkmark]="true"
+			optionLabel="name"
+			[filter]="true"
+			[showClear]="true"
+			placeholder="Seleccione Responsable"
+			class="w-full md:w-56"
+		/>
+	</div>
 </div>
