@@ -7,7 +7,7 @@
 		<div class="w-full">
 			<label class="block font-medium mb-2" for="idRole"> Tipo de Actividad </label>
 			<p-select [checkmark]="true" optionLabel="name" [showClear]="true" placeholder="Tipo de Actividad"
-				[appendTo]="'body'" class="w-full"></p-select>
+				[appendTo]="'body'" [options]="TypeActivity" class="w-full"></p-select>
 		</div>
 		<p-button (click)="agregarFormulario()" class="w-1/2 min-w-40 md:w-auto h-full"><i
 				class="pi pi-plus"></i>Agregar

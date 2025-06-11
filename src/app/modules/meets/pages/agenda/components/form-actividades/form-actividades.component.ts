@@ -14,6 +14,8 @@ import { SelectModule } from 'primeng/select';
 	styleUrl: './form-actividades.component.scss',
 })
 export class FormActividadesComponent {
+	TypeActivity: any;
+
 	formulariosNombres: any[] = [];
 	protected _form!: FormGroup;
 	public get controls() {
@@ -26,5 +28,11 @@ export class FormActividadesComponent {
 
 	eliminarFormulario(index: number): void {
 		this.formulariosNombres.splice(index, 1);
+	}
+	ngOnInit() {
+		this.TypeActivity = [
+			{ name: 'Ordinaria' },
+			{ name: 'Extraordinaria' }
+		];
 	}
 }
