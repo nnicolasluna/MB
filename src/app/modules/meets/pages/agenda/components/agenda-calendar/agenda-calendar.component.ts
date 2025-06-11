@@ -23,13 +23,16 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(ActivityService);
 	override formDialog: Type<any> = FormActividadesComponent;
-	override onActionClick(): void {}
+	override onActionClick(): void { }
 	constructor(private route: ActivatedRoute) {
 		super();
+		this.addBreadcrub({ label: 'Reuniones y Convocatorias', routerLink: '' });
+		this.addBreadcrub({ label: 'Administración de Agenda', routerLink: '/meets/agenda' });
 	}
 	ngOnInit(): void {
 		this.route.paramMap.subscribe((params) => {
 			this.title = params.get('name');
+			this.addBreadcrub({ label: this.title, routerLink: '/meets/agenda/calendar' });
 		});
 	}
 }

@@ -1,13 +1,21 @@
 <div class="h-full flex flex-col gap-4">
-	<div class="flex justify-between items-center">
-		<div class="flex-1">
+	<div class="flex flex-col md:flex-row gap-2 items-end md:justify-center flex-shrink-0">
+		<div class="w-full">
 			<label class="block font-medium mb-2" for="idRole"> Actividad</label>
-			<input class="w-200" type="text" placeholder="Ingrese Actividad" pInputText id="Ingrese Actividad" />
+			<input class="w-full" type="text" placeholder="Ingrese Actividad" pInputText id="Ingrese Actividad" />
 		</div>
-		<p-button (click)="agregarFormulario()"><i class="pi pi-plus"></i>Agregar Tarea</p-button>
+		<div class="w-full">
+			<label class="block font-medium mb-2" for="idRole"> Tipo de Actividad </label>
+			<p-select [checkmark]="true" optionLabel="name" [showClear]="true" placeholder="Tipo de Actividad"
+				[appendTo]="'body'" class="w-full"></p-select>
+		</div>
+		<p-button (click)="agregarFormulario()" class="w-1/2 min-w-40 md:w-auto h-full"><i
+				class="pi pi-plus"></i>Agregar
+			Tarea</p-button>
 	</div>
-	<div class="flex flex-row gap-4 items-center" *ngFor="let formulario of formulariosNombres; let i = index">
+	<div class="flex-1 w-full flex flex-row gap-4 items-center" style="min-height:0;"
+		*ngFor="let formulario of formulariosNombres; let i = index">
 		<p-button (click)="eliminarFormulario(i)" severity="danger"><i class="pi pi-trash"></i></p-button>
-		<app-form-tareas></app-form-tareas>
+		<app-form-tareas class="w-full"></app-form-tareas>
 	</div>
 </div>

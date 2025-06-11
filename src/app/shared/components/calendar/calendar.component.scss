@@ -11,6 +11,9 @@
 .reuniones {
 	display: flex;
 	flex-direction: column;
+	min-width: 40px;
+	width: 100%;
+
 	&__head {
 		height: 5%;
 	}
@@ -80,12 +83,14 @@
 	border-right: 1px solid white;
 	position: relative;
 }
+
 .inner-container {
 	position: absolute;
 	overflow: visible;
 
 	z-index: 1;
 }
+
 .reunion-box {
 	border-radius: 4px;
 	padding: 6px;
@@ -95,14 +100,17 @@
 	color: #222;
 	font-weight: bold;
 	margin-top: 5px;
+
 	span {
 		padding-left: 3px;
 	}
 }
+
 .contenedor {
 	position: relative;
 
 	height: 30px;
+
 	&__btn {
 		background-color: #0f703c;
 		color: white;
@@ -130,13 +138,16 @@
 	background-color: #62e0d9;
 	border: none;
 }
+
 .miniCard {
 	padding: 10px;
 	font-size: 0.8rem;
+
 	&__text {
 		font-weight: normal;
 		text-align: justify;
 	}
+
 	&__date {
 		font-weight: bold;
 	}

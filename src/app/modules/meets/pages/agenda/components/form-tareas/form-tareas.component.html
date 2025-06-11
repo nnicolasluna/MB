@@ -1,42 +1,33 @@
-<div class="w-full flex flex-row gap-4">
-	<div>
-		<label class="block font-medium mb-2" for="nombre">Tarea:</label>
-		<input type="text" pInputText id="Ingrese Tarea" placeholder="Ingrese Tarea" />
+<div class="w-full flex flex-col gap-4 p-4 bg-white rounded-lg shadow-md">
+	<div class="w-full flex flex-col md:flex-row gap-4">
+		<div class="w-full md:w-1/2">
+			<label class="block font-medium mb-2" for="tarea">Tarea:</label>
+			<input type="text" pInputText id="tarea" placeholder="Ingrese Tarea" class="w-full" />
+		</div>
+
+		<div class="w-full md:w-1/2">
+			<label class="block font-medium mb-2" for="fecha">Fechas:</label>
+			<p-datepicker placeholder="Seleccione Fechas" selectionMode="multiple" [readonlyInput]="true"
+				[appendTo]="'body'" [showIcon]="true" styleClass="w-full"></p-datepicker>
+		</div>
 	</div>
-	<div>
-		<label class="block font-medium mb-2" for="nombre">Fecha:</label>
-		<p-datepicker
-			placeholder="Seleccione Fecha"
-			class="w-full"
-			[readonlyInput]="true"
-			[appendTo]="'body'"
-			[showIcon]="true"
-		/>
+	<div class="w-full flex flex-col md:flex-row gap-4">
+		<div class="w-full md:w-1/2">
+			<label class="block font-medium mb-2" for="resultado">Resultado Esperado:</label>
+			<input type="text" pInputText id="resultado" placeholder="Resultado" class="w-full" />
+		</div>
+		<div class="w-full md:w-1/2">
+			<label class="block font-medium mb-2" for="responsable">Responsable:</label>
+			<p-select [checkmark]="true" optionLabel="name" [filter]="true" [showClear]="true"
+				placeholder="Seleccione Responsable" class="w-full" [appendTo]="'body'"></p-select>
+		</div>
 	</div>
-	<div>
-		<label class="block font-medium mb-2" for="nombre">Resulado Esperado:</label>
-		<input type="text" pInputText id="Ingrese Tarea" placeholder="Resultado" />
-	</div>
-	<div>
-		<label class="block font-medium mb-2" for="nombre">Grupo:</label>
-		<p-select
-			[checkmark]="true"
-			optionLabel="name"
-			[filter]="true"
-			[showClear]="true"
-			placeholder="Seleccione Grupo"
-			class="w-full md:w-56"
-		/>
-	</div>
-	<div>
-		<label class="block font-medium mb-2" for="nombre">Responsable:</label>
-		<p-select
-			[checkmark]="true"
-			optionLabel="name"
-			[filter]="true"
-			[showClear]="true"
-			placeholder="Seleccione Responsable"
-			class="w-full md:w-56"
-		/>
+	<div class="w-full flex flex-col md:flex-row gap-4">
+		<div class="w-full md:w-1/2">
+			<label class="block font-medium mb-2" for="responsable">Participantes:</label>
+			<p-multiselect [filter]="true" placeholder="Selecione Integrantes" class="w-full"
+				[appendTo]="'body'"></p-multiselect>
+		</div>
+		<div class="w-full md:w-1/2"></div>
 	</div>
 </div>

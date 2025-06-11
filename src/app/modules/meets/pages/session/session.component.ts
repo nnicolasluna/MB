@@ -26,7 +26,8 @@ export class SessionComponent extends BaseListFiltersComponent<SessionModel> {
 	override service = inject(SessionService)
 	constructor() {
 		super();
-		this.addBreadcrub({ label: 'Sesiones', routerLink: '/meets/session' });
+		this.addBreadcrub({ label: 'Reuniones y Convocatorias', routerLink: '' });
+		this.addBreadcrub({ label: 'Administración de Sesiones', routerLink: '/meets/session' });
 	}
 	override onActionClick({ data, action }: ActionClickEvent) { }
 }

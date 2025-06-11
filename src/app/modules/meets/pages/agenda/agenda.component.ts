@@ -36,7 +36,8 @@ export class AgendaComponent extends BaseListFiltersComponent<AgendaModel> {
   override onActionClick(): void { }
   constructor(private router: Router) {
     super();
-    this.addBreadcrub({ label: 'Session', routerLink: '/meets/session' });
+    this.addBreadcrub({ label: 'Reuniones y Convocatorias', routerLink: '' });
+    this.addBreadcrub({ label: 'Administración de Agenda', routerLink: '/meets/agenda' });
   }
   ngOnInit(): void {
     this.selectedYear = new Date(2025, 0, 1);
