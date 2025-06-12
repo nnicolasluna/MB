@@ -1,38 +1,40 @@
-<div class="w-full flex flex-col gap-4 p-4 bg-white rounded-lg shadow-md">
-	<div class="w-full flex flex-col md:flex-row gap-4">
-		<div class="w-full md:w-1/2">
-			<label class="block font-medium mb-2" for="tarea">Tarea:</label>
-			<input type="text" pInputText id="tarea" placeholder="Ingrese Tarea" class="w-full" />
-		</div>
+<div class="h-full my-4 p-4 bg-white rounded-lg shadow-md">
+	<form [formGroup]="_form">
+		<div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-h-48">
 
-		<div class="w-full md:w-1/2">
-			<label class="block font-medium mb-2" for="fecha">Fechas:</label>
-			<p-datepicker placeholder="Seleccione Fechas" selectionMode="multiple" [readonlyInput]="true"
-				[appendTo]="'body'" [showIcon]="true" styleClass="w-full"></p-datepicker>
+			<app-input-text label="Tarea" placeholder="Ingrese Tarea" name="tarea"
+				[control]="controls['tarea']"></app-input-text>
+			<div>
+				<label class="block font-medium mb-2">Fechas:</label>
+				<p-datepicker formControlName="fechas" selectionMode="multiple" appendTo="body" [showIcon]="true"
+					styleClass="w-full" placeholder="Seleccionar Fecha">
+				</p-datepicker>
+				<app-input-error [control]="controls['fechas']"></app-input-error>
+			</div>
+			<app-input-text label="Resultado Esperado" placeholder="Ingrese resultado" name="resultado"
+				[control]="controls['resultado']"></app-input-text>
+			<div>
+				<label class="block font-medium mb-2" for="idRole">Grupo:</label>
+				<p-select formControlName="grupo" [checkmark]="true" optionLabel="name" [showClear]="true"
+					[options]="[]" class="w-full" [appendTo]="'body'" placeholder="Seleccione grupo">
+				</p-select>
+				<app-input-error [control]="controls['grupo']"></app-input-error>
+			</div>
+			<div>
+				<label class="block font-medium mb-2" for="idRole">Responsable:</label>
+				<p-select formControlName="responsable" [checkmark]="true" optionLabel="name" [filter]="true"
+					[showClear]="true" [options]="Users()" class="w-full" [appendTo]="'body'"
+					placeholder="Seleccione respondable">
+				</p-select>
+				<app-input-error [control]="controls['responsable']"></app-input-error>
+			</div>
+			<div>
+				<label class="block font-medium mb-2" for="idRole">Participantes:</label>
+				<p-multiselect formControlName="participantes" [filter]="true" optionLabel="name" [options]="Users()"
+					placeholder="Seleccione integrantes" class="w-full" [appendTo]="'body'">
+				</p-multiselect>
+				<app-input-error [control]="controls['participantes']"></app-input-error>
+			</div>
 		</div>
-	</div>
-	<div class="w-full flex flex-col md:flex-row gap-4">
-		<div class="w-full md:w-1/2">
-			<label class="block font-medium mb-2" for="resultado">Resultado Esperado:</label>
-			<input type="text" pInputText id="resultado" placeholder="Resultado" class="w-full" />
-		</div>
-		<div class="w-full md:w-1/2">
-			<label class="block font-medium mb-2" for="resultado">Grupo:</label>
-			<p-select [checkmark]="true" optionLabel="name" [filter]="true" [showClear]="true"
-				placeholder="Seleccione el Grupo Responsable" [options]="" class="w-full"
-				[appendTo]="'body'"></p-select>
-		</div>
-	</div>
-	<div class="w-full flex flex-col md:flex-row gap-4">
-		<div class="w-full md:w-1/2">
-			<label class="block font-medium mb-2" for="responsable">Responsable:</label>
-			<p-select [checkmark]="true" optionLabel="name" [filter]="true" [showClear]="true"
-				placeholder="Seleccione Responsable" [options]="Users()" class="w-full" [appendTo]="'body'"></p-select>
-		</div>
-		<div class="w-full md:w-1/2">
-			<label class="block font-medium mb-2" for="responsable">Participantes:</label>
-			<p-multiselect [filter]="true" optionLabel="name" [options]="Users()" placeholder="Selecione Integrantes"
-				class="w-full" [appendTo]="'body'"></p-multiselect>
-		</div>
-	</div>
+	</form>
 </div>
