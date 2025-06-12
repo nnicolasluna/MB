@@ -17,17 +17,22 @@
 			<input type="text" pInputText id="resultado" placeholder="Resultado" class="w-full" />
 		</div>
 		<div class="w-full md:w-1/2">
+			<label class="block font-medium mb-2" for="resultado">Grupo:</label>
+			<p-select [checkmark]="true" optionLabel="name" [filter]="true" [showClear]="true"
+				placeholder="Seleccione el Grupo Responsable" [options]="" class="w-full"
+				[appendTo]="'body'"></p-select>
+		</div>
+	</div>
+	<div class="w-full flex flex-col md:flex-row gap-4">
+		<div class="w-full md:w-1/2">
 			<label class="block font-medium mb-2" for="responsable">Responsable:</label>
 			<p-select [checkmark]="true" optionLabel="name" [filter]="true" [showClear]="true"
 				placeholder="Seleccione Responsable" [options]="Users()" class="w-full" [appendTo]="'body'"></p-select>
 		</div>
-	</div>
-	<div class="w-full flex flex-col md:flex-row gap-4">
 		<div class="w-full md:w-1/2">
 			<label class="block font-medium mb-2" for="responsable">Participantes:</label>
 			<p-multiselect [filter]="true" optionLabel="name" [options]="Users()" placeholder="Selecione Integrantes"
 				class="w-full" [appendTo]="'body'"></p-multiselect>
 		</div>
-		<div class="w-full md:w-1/2"></div>
 	</div>
 </div>
