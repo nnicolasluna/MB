@@ -14,6 +14,10 @@ export const routes: Routes = [
 		redirectTo: 'auth/login',
 	},
 	{
+		path: 'WebPortal',
+		loadChildren: (): Promise<Routes> => import('./webportal/portal.routes').then((m) => m.routes),
+	},
+	{
 		path: '',
 		component: MainLayout,
 		/* canActivate: [authenticationGuard],

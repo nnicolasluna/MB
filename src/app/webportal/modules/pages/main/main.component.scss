@@ -1,0 +1,13 @@
+.map {
+    position: fixed;
+    top: 1;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* z-index: -1; */
+}
+
+app-top-bar {
+    position: relative;
+    z-index: 1;
+}
