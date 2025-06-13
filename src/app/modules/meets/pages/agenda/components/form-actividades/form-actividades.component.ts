@@ -13,7 +13,17 @@ import { InputErrorComponent, InputTextComponent } from '@shared/components';
 
 @Component({
 	selector: 'app-form-actividades',
-	imports: [InputErrorComponent, ReactiveFormsModule, InputTextComponent, FormsModule, CommonModule, ButtonModule, FormTareasComponent, InputTextModule, SelectModule],
+	imports: [
+		InputErrorComponent,
+		ReactiveFormsModule,
+		InputTextComponent,
+		FormsModule,
+		CommonModule,
+		ButtonModule,
+		FormTareasComponent,
+		InputTextModule,
+		SelectModule,
+	],
 	templateUrl: './form-actividades.component.html',
 	styleUrl: './form-actividades.component.scss',
 })
@@ -21,20 +31,18 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	@ViewChildren(FormTareasComponent) formularios!: QueryList<FormTareasComponent>;
 	TypeActivity: any;
 	datosTareas: any[] = [];
+	ValidadorTareas: any[] = [];
 	formulariosNombres: any[] = [];
 	override _service = inject(UserService);
 	constructor(private cdr: ChangeDetectorRef) {
 		super();
-		this.TypeActivity = [
-			{ name: 'Ordinaria' },
-			{ name: 'Extraordinaria' }
-		];
+		this.TypeActivity = [{ name: 'Ordinaria' }, { name: 'Extraordinaria' }];
 	}
 	override buildForm(): void {
 		this._form = this._fb.group({
 			actividad: ['', Validators.required],
 			TipoActividad: ['', Validators.required],
-		})
+		});
 	}
 	agregarFormulario(): void {
 		this.formulariosNombres.push({});
@@ -52,16 +60,24 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	} */
 	enviarDatos() {
 		const datosActividad = this.form.value;
-		this.datosTareas = this.formularios.map(f => f.getDatos());
+		this.ValidadorTareas = this.formularios.map((f) => f.getDatos().valid);
+		this.cdr.detectChanges();
+		this.datosTareas = this.formularios.map((f) => f.getDatos().value);
 		const payload = {
 			actividad: datosActividad,
-			tareas: this.datosTareas
+			tareas: this.datosTareas,
 		};
-		if (this.datosTareas.length > 0) {
+		console.log('Datos de la actividad2:', this.ValidadorTareas);
+		console.log('Datos de la actividad1:', this.form.invalid);
+		if (this.datosTareas.length > 0 && this.ValidadorTareas[0]) {
 			console.log('Datos enviados:', payload);
 		} else {
-			console.error('Formulario inválido o sin tareas');
+			const formulariosArray = this.formularios.toArray();
+			formulariosArray.forEach((f) => f.marcarCamposComoTocados());
+			this._form.markAllAsTouched();
 		}
-
+	}
+	get formularioInvalido(): boolean {
+		return this._form.invalid || this.ValidadorTareas.some((v) => !v);
 	}
 }

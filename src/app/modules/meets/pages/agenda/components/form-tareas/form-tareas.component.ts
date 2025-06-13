@@ -14,7 +14,17 @@ import { InputErrorComponent, InputTextComponent } from '@shared/components';
 
 @Component({
 	selector: 'app-form-tareas',
-	imports: [InputTextComponent, InputErrorComponent, FormsModule, DatePickerModule, InputTextModule, SelectModule, MultiSelectModule, CommonModule, ReactiveFormsModule],
+	imports: [
+		InputTextComponent,
+		InputErrorComponent,
+		FormsModule,
+		DatePickerModule,
+		InputTextModule,
+		SelectModule,
+		MultiSelectModule,
+		CommonModule,
+		ReactiveFormsModule,
+	],
 	templateUrl: './form-tareas.component.html',
 	styleUrl: './form-tareas.component.scss',
 })
@@ -23,7 +33,7 @@ export class FormTareasComponent {
 	_form!: FormGroup;
 	_fb = inject(FormBuilder);
 	constructor() {
-		this.buildForm()
+		this.buildForm();
 	}
 	buildForm(): void {
 		this._form = this._fb.group({
@@ -32,22 +42,23 @@ export class FormTareasComponent {
 			resultado: ['', Validators.required],
 			grupo: [null, Validators.required],
 			responsable: [null, Validators.required],
-			participantes: [[]]
-		})
-
+			participantes: [[]],
+		});
 	}
 	getDatos() {
-		return this._form.value;
+		return this._form;
 	}
 	private _userService = inject(UserService);
-	public Users = toSignal(this._userService.getAll(new UserParams().setShowAll(true).setSortField('name'))
-		.pipe(
-			map(res => res?.items ?? [],
-			),
-			catchError(() => of([])),
+	public Users = toSignal(
+		this._userService.getAll(new UserParams().setShowAll(true).setSortField('name')).pipe(
+			map((res) => res?.items ?? []),
+			catchError(() => of([]))
 		)
-	)
+	);
 	get controls() {
 		return this._form.controls;
+	}
+	marcarCamposComoTocados(): void {
+		this._form.markAllAsTouched();
 	}
 }

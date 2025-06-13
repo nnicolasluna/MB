@@ -6,6 +6,7 @@ import { PrimeIcons } from 'primeng/api';
 import { PermissionDirective } from '@shared/directives';
 import { USER_MENU_ENTRIES } from '@modules/users/constants';
 import { MEETS_MENU_ENTRIES } from '@modules/meets/constants/medulo-menu-meets';
+import { DOCS_MENU_ENTRIES } from '@modules/docs/constants/medulo-menu-docs';
 
 @Component({
 	selector: 'app-menu',
@@ -33,6 +34,11 @@ export class MenuComponent {
 				label: '',
 				isPublic: true,
 				items: [MEETS_MENU_ENTRIES],
+			},
+			{
+				label: '',
+				isPublic: true,
+				items: [DOCS_MENU_ENTRIES],
 			},
 		];
 	}

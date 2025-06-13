@@ -31,6 +31,10 @@ export const routes: Routes = [
 				path: 'meets',
 				loadChildren: (): Promise<Routes> => import('./modules/meets/meets.routes').then((m) => m.routes),
 			},
+			{
+				path: 'docs',
+				loadChildren: (): Promise<Routes> => import('./modules/docs/docs.routes').then((m) => m.routes),
+			},
 		],
 	},
 ];
