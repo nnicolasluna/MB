@@ -1,0 +1,23 @@
+<div class="h-full">
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-h-48">
+            <app-input-text label="Titulo:" placeholder="Ingrese Titulo" name="titulo"
+                [control]="controls['titulo']"></app-input-text>
+            <div>
+                <label class="block font-medium mb-2" for="idRole">Visualización:</label>
+                <p-select inputId="visualizacion" placeholder="Seleccione tipo de visualización"
+                    formControlName="visualizacion" [options]="" appendTo="body" styleClass="w-full" optionLabel="name"
+                    optionValue="id">
+                </p-select>
+                <app-input-error [control]="controls['visualizacion']"></app-input-error>
+            </div>
+        </div>
+        <div class="flex pt-6 flex-row-reverse">
+            @if (isViewMode()) {
+            <p-button (onClick)="closeForm()" label="Cerrar" icon="pi pi-times" iconPos="right" type="button" />
+            } @else {
+            <p-button [disabled]="form.invalid" label="Guardar" icon="pi pi-save" iconPos="right" type="submit" />
+            }
+        </div>
+    </form>
+</div>

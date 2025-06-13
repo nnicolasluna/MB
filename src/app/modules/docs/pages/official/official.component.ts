@@ -16,6 +16,8 @@ import { HttpStatusCode } from '@angular/common/http';
 import { ActionType } from '@shared/constants';
 import { TableModule } from 'primeng/table';
 import { RoleFormComponent } from '@modules/users/pages/roles-page/component/role-form/role-form.component';
+import { OfficialCreateFormComponent } from './components/official-create-form/official-create-form.component';
+import { DocsService } from '@modules/docs/services/docs.service';
 @Component({
 	selector: 'app-official',
 	imports: [
@@ -34,12 +36,12 @@ import { RoleFormComponent } from '@modules/users/pages/roles-page/component/rol
 export class OfficialComponent extends BaseListFiltersComponent<Role> {
 	override tableColumns: ColumnTableModel[] = ROLE_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
-	override service: BaseCRUDHttpService<Role> = inject(RoleService);
-	override formDialog: Type<any> = RoleFormComponent;
+	override service: BaseCRUDHttpService<any> = inject(DocsService);
+	override formDialog: Type<any> = OfficialCreateFormComponent;
 	constructor() {
 		super();
 		this.addBreadcrub({ label: 'Repositorio de Información y Documentos', routerLink: '' });
 		this.addBreadcrub({ label: 'Documentos Oficiales', routerLink: '/docs/official' });
 	}
-	override onActionClick({ data, action }: ActionClickEvent) {}
+	override onActionClick({ data, action }: ActionClickEvent) { }
 }
