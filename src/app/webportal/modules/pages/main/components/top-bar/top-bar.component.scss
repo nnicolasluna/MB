@@ -1,11 +1,12 @@
 .menu-item {
-    max-height: 100px;
-    max-width: 150px;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-
+.active,
 .menu-item:hover {
-    background-color: #06561A;
+	background-color: #06561a;
 }

@@ -12,7 +12,7 @@ export const DOCS_MENU_ENTRIES: ExtendedMenuItem = {
 		{
 			label: 'Documentos por Grupo de Trabajo',
 			resource: ResourceTypes.AGENDA,
-			class: 'text-sm',
+			class: 'text-sm ',
 			permission: 'canView',
 			icon: PrimeIcons.USERS,
 			routerLink: ['/meets/agenda'],
