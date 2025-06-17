@@ -19,6 +19,38 @@ import { AGENDA_TABLE_COLUMNS } from '@modules/meets/constants/agenda';
 })
 export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 	title: any;
+	data = [
+		{
+			Fecha: '15/02/2025',
+			Objetivo: 'Revisar los avances del plan de reforestación en la zona norte.',
+			ESTADO: 'EN PROGRESO',
+			reunionExtraOrdinaria: false,
+		},
+		{
+			Fecha: '15/02/2025',
+			Objetivo: 'Discutir estrategias para la prevención de incendios forestales.',
+			ESTADO: 'EN PROGRESO',
+			reunionExtraOrdinaria: false,
+		},
+		{
+			Fecha: '10/06/2025',
+			Objetivo: 'Evaluar el impacto de las nuevas regulaciones ambientales.',
+			ESTADO: 'PENDIENTE',
+			reunionExtraOrdinaria: false,
+		},
+		{
+			Fecha: '05/08/2025',
+			Objetivo: 'Presentar informe sobre la calidad del agua en reservas naturales.',
+			ESTADO: 'REALIZADO',
+			reunionExtraOrdinaria: true,
+		},
+		{
+			Fecha: '20/09/2025',
+			Objetivo: 'Definir los lineamientos para la próxima campaña de concientización ambiental.',
+			ESTADO: 'EN PROGRESO',
+			reunionExtraOrdinaria: false,
+		},
+	];
 	override tableColumns: ColumnTableModel[] = AGENDA_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(ActivityService);

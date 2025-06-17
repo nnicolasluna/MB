@@ -20,8 +20,8 @@ export const routes: Routes = [
 	{
 		path: '',
 		component: MainLayout,
-		/* canActivate: [authenticationGuard],
-		canActivateChild: [authenticationGuard, systemPermissionGuard], */
+		canActivate: [authenticationGuard],
+		canActivateChild: [authenticationGuard, systemPermissionGuard],
 		children: [
 			{
 				path: 'home',

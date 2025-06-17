@@ -1,16 +1,8 @@
 <ul class="layout-menu">
 	<ng-container *ngFor="let item of model; let i = index">
-		<li
-			appPermission
-			[resource]="item.resource"
-			[permission]="item.permission"
-			[isPublic]="item.isPublic ?? false"
-			app-layout-menu-item
-			*ngIf="!item.separator"
-			[item]="item"
-			[index]="i"
-			[root]="true"
-		></li>
+		<li appPermission [resource]="item.resource" [permission]="item.permission" [isPublic]="item.isPublic ?? false"
+			app-layout-menu-item *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"
+			(click)="item.label === 'profile' && showProfile()">{{item.label}}</li>
 		<li *ngIf="item.separator" class="menu-separator"></li>
 	</ng-container>
 </ul>

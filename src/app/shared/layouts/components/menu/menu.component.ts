@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ExtendedMenuItem } from '../../interfaces/menu-item.interface';
 import { CommonModule } from '@angular/common';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
@@ -7,6 +7,8 @@ import { PermissionDirective } from '@shared/directives';
 import { USER_MENU_ENTRIES } from '@modules/users/constants';
 import { MEETS_MENU_ENTRIES } from '@modules/meets/constants/medulo-menu-meets';
 import { DOCS_MENU_ENTRIES } from '@modules/docs/constants/medulo-menu-docs';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
 	selector: 'app-menu',
@@ -24,6 +26,11 @@ export class MenuComponent {
 				label: '',
 				isPublic: true,
 				items: [{ label: 'Inicio', class: 'flex justify-center', icon: PrimeIcons.HOME, routerLink: ['/home'] }],
+
+			},
+			{
+				isPublic: true,
+				separator: true,
 			},
 			{
 				label: '',
@@ -40,6 +47,39 @@ export class MenuComponent {
 				isPublic: true,
 				items: [DOCS_MENU_ENTRIES],
 			},
+			{
+				isPublic: true,
+				separator: true,
+			},
+			{
+				label: 'profile',
+				isPublic: true,
+				items: [{ label: 'Configuración de Perfil', class: 'text-sm flex justify-center', icon: PrimeIcons.USER, }],
+			},
 		];
+	}
+	private _cdr = inject(ChangeDetectorRef);
+	private _ds = inject(DialogService);
+	private _dialogRef!: DynamicDialogRef;
+
+	private _modalConfig: DynamicDialogConfig = {
+		header: 'Perfil',
+		modal: true,
+		closable: true,
+		maximizable: true,
+		contentStyle: { overflow: 'auto' },
+		width: '65vw',
+		breakpoints: {
+			'960px': '75vw',
+			'640px': '90vw',
+		},
+	};
+
+	public showProfile() {
+		this._dialogRef = this._ds.open(ProfileComponent, this._modalConfig);
+		this._dialogRef.onClose.subscribe(() => {
+			this._dialogRef?.destroy();
+			this._cdr.detectChanges();
+		});
 	}
 }

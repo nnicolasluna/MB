@@ -1,0 +1,33 @@
+.topbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    height: 4rem;
+    z-index: 997;
+    left: 0;
+    top: 0;
+}
+
+.logos {
+    display: flex;
+    align-items: center;
+    width: auto;
+    gap: 5px;
+    width: 30%;
+}
+
+.logos img {
+    height: 40px;
+    /* Ajusta según necesidad */
+    object-fit: contain;
+    width: auto;
+}
+
+.contenedor_verde {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 90px 100%);
+
+    span {
+        margin-left: 100px;
+    }
+}
