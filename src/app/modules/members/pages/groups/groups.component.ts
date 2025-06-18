@@ -14,11 +14,13 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { GroupCreateFormComponent } from './components/group-create-form/group-create-form.component';
+import { GroupModel } from '@modules/members/interfaces/user.interface';
+import { GroupService } from '@modules/members/services/group.service';
 
 @Component({
-  selector: 'app-groups',
-  imports: [
-    FormsModule,
+	selector: 'app-groups',
+	imports: [
+		FormsModule,
 		FilterBarComponent,
 		TableModule,
 		BreadcrumbModule,
@@ -26,14 +28,14 @@ import { GroupCreateFormComponent } from './components/group-create-form/group-c
 		ButtonModule,
 		SelectButtonModule,
 		CardModule,
-  ],
-  templateUrl: './groups.component.html',
-  styleUrl: './groups.component.scss'
+	],
+	templateUrl: './groups.component.html',
+	styleUrl: './groups.component.scss'
 })
-export class GroupsComponent extends BaseListFiltersComponent<Role>{
-override tableColumns: ColumnTableModel[] = ROLE_TABLE_COLUMNS;
+export class GroupsComponent extends BaseListFiltersComponent<GroupModel> {
+	override tableColumns: ColumnTableModel[] = ROLE_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
-	override service: BaseCRUDHttpService<any> = inject(DocsService);
+	override service: BaseCRUDHttpService<any> = inject(GroupService);
 	override formDialog: Type<any> = GroupCreateFormComponent;
 	constructor() {
 		super();

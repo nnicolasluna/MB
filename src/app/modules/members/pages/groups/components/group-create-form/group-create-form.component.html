@@ -5,16 +5,8 @@
                 [control]="controls['nombre']"></app-input-text>
             <div>
                 <label class="block font-medium mb-2" for="idRole">Periodo:</label>
-                <p-datepicker
-					placeholder="Seleccionar Fecha"
-					formControlName="expirationAccount"
-					styleClass="w-full"
-					appendTo="body"
-					inputId="periodo"
-					[readonlyInput]="true"
-					[showIcon]="true"
-                    selectionMode="range"
-				/>
+                <p-datepicker placeholder="Seleccionar Fecha" formControlName="periodo" styleClass="w-full"
+                    appendTo="body" inputId="periodo" [readonlyInput]="true" [showIcon]="true" selectionMode="range" />
                 <app-input-error [control]="controls['periodo']"></app-input-error>
             </div>
         </div>

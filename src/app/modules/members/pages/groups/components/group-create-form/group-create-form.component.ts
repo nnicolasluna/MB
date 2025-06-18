@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { GroupModel } from '@modules/members/interfaces/user.interface';
+import { GroupService } from '@modules/members/services/group.service';
 import { UserModel } from '@modules/users/interfaces';
 import { UserService } from '@modules/users/services/user.service';
 import { InputErrorComponent, InputTextComponent } from '@shared/components';
@@ -14,8 +16,8 @@ import { SelectModule } from 'primeng/select';
 	templateUrl: './group-create-form.component.html',
 	styleUrl: './group-create-form.component.scss',
 })
-export class GroupCreateFormComponent extends BaseFormComponent<UserModel> {
-	override _service = inject(UserService);
+export class GroupCreateFormComponent extends BaseFormComponent<GroupModel> {
+	override _service = inject(GroupService);
 
 	override buildForm(): void {
 		this._form = this._fb.group({
