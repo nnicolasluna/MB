@@ -9,6 +9,8 @@ import { MEETS_MENU_ENTRIES } from '@modules/meets/constants/medulo-menu-meets';
 import { DOCS_MENU_ENTRIES } from '@modules/docs/constants/medulo-menu-docs';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProfileComponent } from '../profile/profile.component';
+import { AuthService } from '@modules/auth/services/auth.service';
+import { MEMBERS_MENU_ENTRIES } from '@modules/members/constants/modulo-menu-members';
 
 @Component({
 	selector: 'app-menu',
@@ -26,7 +28,6 @@ export class MenuComponent {
 				label: '',
 				isPublic: true,
 				items: [{ label: 'Inicio', class: 'flex justify-center', icon: PrimeIcons.HOME, routerLink: ['/home'] }],
-
 			},
 			{
 				isPublic: true,
@@ -48,13 +49,23 @@ export class MenuComponent {
 				items: [DOCS_MENU_ENTRIES],
 			},
 			{
+				label: '',
+				isPublic: true,
+				items: [MEMBERS_MENU_ENTRIES],
+			},
+			{
 				isPublic: true,
 				separator: true,
 			},
 			{
 				label: 'profile',
 				isPublic: true,
-				items: [{ label: 'Configuración de Perfil', class: 'text-sm flex justify-center', icon: PrimeIcons.USER, }],
+				items: [{ label: 'Configuración de Perfil', class: 'text-sm flex justify-center', icon: PrimeIcons.USER }],
+			},
+			{
+				label: 'logout',
+				isPublic: true,
+				items: [{ label: 'Log Out', class: 'text-sm flex justify-center', icon: PrimeIcons.SIGN_OUT }],
 			},
 		];
 	}
@@ -81,5 +92,11 @@ export class MenuComponent {
 			this._dialogRef?.destroy();
 			this._cdr.detectChanges();
 		});
+	}
+
+	private _authService = inject(AuthService);
+
+	public logout() {
+		this._authService.logout();
 	}
 }
