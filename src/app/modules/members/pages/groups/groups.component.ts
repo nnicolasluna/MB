@@ -16,6 +16,7 @@ import { TableModule } from 'primeng/table';
 import { GroupCreateFormComponent } from './components/group-create-form/group-create-form.component';
 import { GroupModel } from '@modules/members/interfaces/user.interface';
 import { GroupService } from '@modules/members/services/group.service';
+import { GROUP_TABLE_COLUMNS } from '@modules/members/constants/group';
 
 @Component({
 	selector: 'app-groups',
@@ -33,7 +34,7 @@ import { GroupService } from '@modules/members/services/group.service';
 	styleUrl: './groups.component.scss'
 })
 export class GroupsComponent extends BaseListFiltersComponent<GroupModel> {
-	override tableColumns: ColumnTableModel[] = ROLE_TABLE_COLUMNS;
+	override tableColumns: ColumnTableModel[] = GROUP_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(GroupService);
 	override formDialog: Type<any> = GroupCreateFormComponent;
