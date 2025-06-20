@@ -11,8 +11,11 @@ import { CommonModule } from '@angular/common';
 export class TopBarComponent {
 	menuItems = [
 		{ label: 'INICIO', route: 'inicio' },
-		{ label: 'RESEÑA INSTITUCIONAL', route: '/resena' },
-		{ label: 'COORDINACIÓN Y MIEMBROS', route: '/coordinacion' },
+		{ label: 'RESEÑA INSTITUCIONAL', route: 'resena' },
+		{ label: 'COORDINACIÓN Y MIEMBROS', route: 'coordinacion' },
 		{ label: 'REUNIONES Y AGENDA', route: '/reuniones' },
+		{ label: 'REPOSITORIO DOCUMENTAL', route: '/reuniones' },
+		{ label: 'LINEA DE TIEMPO', route: 'lineatiempo' },
+		{ label: 'SISTEMAS DE INFORMACION', route: 'sisinfo' }
 	];
 }

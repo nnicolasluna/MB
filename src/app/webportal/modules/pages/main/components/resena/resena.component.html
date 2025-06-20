@@ -1,0 +1,23 @@
+<div class="resena">
+    <div class="content">
+        <strong>¿Quiénes Somos?</strong>
+        <p>La MBC es un espacio de información, coordinación, articulación y consulta interinstitucional, que integra
+            múltiples actores y niveles. Su objetivo es contribuir a la implementación de políticas y estrategias
+            orientadas
+            a la gestión integral y sustentable de los bosques, las tierras forestales y los sistemas de vida asociados,
+            en
+            el marco de las acciones de mitigación y adaptación al cambio climático.</p>
+        <div class="card">
+            <p-galleria [value]="images" [responsiveOptions]="responsiveOptions"
+                [containerStyle]="{ 'max-width': '500px' }" [numVisible]="5" [showThumbnails]="true"
+                [showItemNavigators]="true">
+                <ng-template #item let-item>
+                    <img [src]="item.itemImageSrc" style="width: 100%" />
+                </ng-template>
+                <ng-template #thumbnail let-item>
+                    <img [src]="item.thumbnailImageSrc" style="height: 40%; width: 40%;" />
+                </ng-template>
+            </p-galleria>
+        </div>
+    </div>
+</div>
