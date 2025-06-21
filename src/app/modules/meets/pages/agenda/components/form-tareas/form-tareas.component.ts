@@ -11,6 +11,7 @@ import { map, catchError, of, pipe } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { BaseFormComponent } from '@shared/components/abstracts/base-form.component';
 import { InputErrorComponent, InputTextComponent } from '@shared/components';
+import { GroupService } from '@modules/members/services/group.service';
 
 @Component({
 	selector: 'app-form-tareas',
@@ -30,6 +31,7 @@ import { InputErrorComponent, InputTextComponent } from '@shared/components';
 })
 export class FormTareasComponent {
 	_service = inject(UserService);
+	GroupService = inject(GroupService)
 	_form!: FormGroup;
 	_fb = inject(FormBuilder);
 	constructor() {
@@ -51,6 +53,12 @@ export class FormTareasComponent {
 	private _userService = inject(UserService);
 	public Users = toSignal(
 		this._userService.getAll(new UserParams().setShowAll(true).setSortField('name')).pipe(
+			map((res) => res?.items ?? []),
+			catchError(() => of([]))
+		)
+	);
+	public Groups = toSignal(
+		this.GroupService.getAll(new UserParams().setShowAll(true).setSortField('name')).pipe(
 			map((res) => res?.items ?? []),
 			catchError(() => of([]))
 		)

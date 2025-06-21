@@ -10,6 +10,11 @@ import { BaseFormComponent } from '@shared/components/abstracts/base-form.compon
 import { UserModel } from '@modules/users/interfaces';
 import { UserService } from '@modules/users/services/user.service';
 import { InputErrorComponent, InputTextComponent } from '@shared/components';
+import { BaseCRUDHttpService, ToastService } from '@shared/services';
+import { GroupService } from '@modules/members/services/group.service';
+import { AgendaService } from '@modules/meets/services/agenda.service';
+import { ActivityService } from '@modules/meets/services/activity.service';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
 	selector: 'app-form-actividades',
@@ -33,8 +38,11 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	datosTareas: any[] = [];
 	ValidadorTareas: any[] = [];
 	formulariosNombres: any[] = [];
-	override _service = inject(UserService);
-	constructor(private cdr: ChangeDetectorRef) {
+	ts = inject(ToastService);
+	ref = inject(DynamicDialogRef);
+	//override _service = inject(UserService);
+	override _service: BaseCRUDHttpService<any> = inject(AgendaService);
+	constructor(private actividadService: ActivityService) {
 		super();
 		this.TypeActivity = [{ name: 'Ordinaria' }, { name: 'Extraordinaria' }];
 	}
@@ -61,16 +69,25 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	enviarDatos() {
 		const datosActividad = this.form.value;
 		this.ValidadorTareas = this.formularios.map((f) => f.getDatos().valid);
-		this.cdr.detectChanges();
 		this.datosTareas = this.formularios.map((f) => f.getDatos().value);
 		const payload = {
 			actividad: datosActividad,
 			tareas: this.datosTareas,
 		};
-		console.log('Datos de la actividad2:', this.ValidadorTareas);
-		console.log('Datos de la actividad1:', this.form.invalid);
+
 		if (this.datosTareas.length > 0 && this.ValidadorTareas[0]) {
-			console.log('Datos enviados:', payload);
+
+			this.actividadService.create(payload).subscribe({
+				next: (response) => {
+					this.ts.success('Guardado con éxito');
+					this.ref.close(payload);
+					console.log(response,'gaaaa');
+				},
+				error: (error) => {
+					console.error('Error al guardar actividad y tareas:', error);
+					this.ts.error('Error al guardar');
+				},
+			});
 		} else {
 			const formulariosArray = this.formularios.toArray();
 			formulariosArray.forEach((f) => f.marcarCamposComoTocados());

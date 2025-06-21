@@ -1,0 +1,10 @@
+<div class="card">
+    <p-timeline [value]="events" layout="horizontal">
+        <ng-template #opposite let-event>
+            <small class="text-surface-500 dark:text-surface-400">{{ event.date }}</small>
+        </ng-template>
+        <ng-template #content let-event>
+            {{ event.status }}
+        </ng-template>
+    </p-timeline>
+</div>

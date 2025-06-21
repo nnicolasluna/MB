@@ -13,43 +13,43 @@ export class CoordinacionComponent {
   autoridades = [
     {
       "nombre": "Fondo Nacional de Desarrollo Forestal",
-      "sigla": "",
+      "sigla": "assets/sistema/fonab.png",
       "cargo": "Director General Ejecutivo",
       "persona": "Delfín Reque Zurita"
     },
     {
       "nombre": "Dirección General de Gestión y Desarrollo Forestal",
-      "sigla": "",
+      "sigla": "assets/sistema/dgf.jpg",
       "cargo": "Director General de Gestión y Desarrollo Forestal",
       "persona": "Filomon Hinojosa Torrico"
     },
     {
       "nombre": "Autoridad de Fiscalización y Control Social de Bosques y Tierra",
-      "sigla": "",
+      "sigla": "assets/sistema/abt.png",
       "cargo": "Director Ejecutivo",
       "persona": "Luis Roberto Flores Orellana"
     },
     {
       "nombre": "Viceministerio de Medio Ambiente, Biodiversidad, Cambios Climáticos y de Gestión y Desarrollo Forestal",
-      "sigla": "",
+      "sigla": "assets/sistema/mmya.png",
       "cargo": "Viceministro de Medio Ambiente, Biodiversidad, Cambios Climáticos y de Gestión y Desarrollo Forestal",
       "persona": "Franz Alvaro Quispe Olivera"
     },
     {
       "nombre": "Autoridad Plurinacional de la Madre Tierra",
-      "sigla": "",
+      "sigla": "assets/sistema/madre.png",
       "cargo": "Directora Ejecutiva",
       "persona": "Angelica Ponce Chambi"
     },
     {
       "nombre": "Servicio Nacional de Áreas Protegidas",
-      "sigla": "",
+      "sigla": "assets/sistema/sernav.png",
       "cargo": "Director General Ejecutivo",
       "persona": "Jair Gonzales Delgadillo"
     },
     {
       "nombre": "Museo Nacional de Historia Natural",
-      "sigla": "",
+      "sigla": "assets/sistema/mnhn.png",
       "cargo": "Director General Ejecutivo",
       "persona": "Hugo Aranibar Rojas"
     }

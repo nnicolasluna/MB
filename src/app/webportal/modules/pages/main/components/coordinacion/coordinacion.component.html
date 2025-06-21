@@ -11,18 +11,17 @@
                                     <p-card [style]="{ width: '15rem', overflow: 'hidden' }"
                                         *ngFor="let institucion of autoridades">
                                         <ng-template #header>
-                                            <div>
+                                            <div class=card__header>
                                                 {{institucion.nombre }}
                                             </div>
                                         </ng-template>
-
-                                        <img alt="Imagen Institución" class="w-full"
-                                            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-
-                                        <p>{{ institucion.nombre }}</p>
-                                        <ng-template #subtitle>{{ institucion.cargo }}</ng-template>
-
-                                        <p>{{ institucion.persona }}</p>
+                                        <div class="card__body">
+                                            <img alt="Imagen Institución" class="cardImga" [src]='institucion.sigla' />
+                                            <div class="card__text">
+                                                <strong>{{ institucion.cargo }}</strong>
+                                                {{ institucion.persona }}
+                                            </div>
+                                        </div>
                                     </p-card>
                                 </div>
 
@@ -37,9 +36,8 @@
                 <p-step-panel [value]="2">
                     <ng-template #content let-activateCallback="activateCallback">
                         <div class="flex flex-col h-48">
-                            <div
-                                class="dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
-                                Content II
+                            <div>
+                                <img alt="Imagen Institución" class="cardImga" src='assets/webportal/coordinacion/diagramacoodinacion.png' class="w-full"/>
                             </div>
                         </div>
                         <div class="flex pt-6 justify-between">

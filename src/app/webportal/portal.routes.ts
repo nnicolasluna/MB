@@ -26,6 +26,11 @@ export const routes: Routes = [
 				loadComponent: () =>
 					import('./modules/pages/main/components/coordinacion/coordinacion.component').then((m) => m.CoordinacionComponent),
 			},
+			{
+				path: 'timeline',
+				loadComponent: () =>
+					import('./modules/pages/main/components/timeline/timeline.component').then((m) => m.TimelineComponent),
+			},
 		],
 	},
 ];
