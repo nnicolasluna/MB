@@ -17,6 +17,7 @@ import { GroupCreateFormComponent } from './components/group-create-form/group-c
 import { GroupModel } from '@modules/members/interfaces/user.interface';
 import { GroupService } from '@modules/members/services/group.service';
 import { GROUP_TABLE_COLUMNS } from '@modules/members/constants/group';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-groups',
@@ -38,10 +39,13 @@ export class GroupsComponent extends BaseListFiltersComponent<GroupModel> {
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(GroupService);
 	override formDialog: Type<any> = GroupCreateFormComponent;
-	constructor() {
+	constructor(private router: Router) {
 		super();
 		this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
 		this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
 	}
 	override onActionClick({ data, action }: ActionClickEvent) { }
+	agregarReunion(nombre: string){
+		this.router.navigate(['members/work-meetings', nombre]);
+	}
 }

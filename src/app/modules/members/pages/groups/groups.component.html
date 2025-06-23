@@ -40,7 +40,9 @@
 				<td>{{ data.nombre }}</td>
 				<td>{{ data.periodo_inicio }}</td>
 				<td>{{ data.periodo_fin }}</td>
-				<td></td>
+				<td>
+					<p-button class="action" (onClick)="agregarReunion(data.nombre)" icon="pi pi-eye" />
+				</td>
 			</tr>
 		</ng-template>
 	</p-table>

@@ -10,4 +10,12 @@ export const routes: Routes = [
 		},
 		loadComponent: () => import('./pages/groups/groups.component').then((m) => m.GroupsComponent),
 	},
+	{
+		path: 'work-meetings/:name',
+		data: {
+			moduleCode: ResourceTypes.SESSIONS,
+			permission: 'canView',
+		},
+		loadComponent: () => import('./pages/workmeetings/workmeetings.component').then((m) => m.WorkmeetingsComponent),
+	},
 ];
