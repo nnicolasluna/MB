@@ -1,19 +1,21 @@
 <div class="h-full">
     <form [formGroup]="form" (submit)="onSubmit()">
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-h-48">
-            <app-input-text label="Nombre:" placeholder="Ingrese nombre" name="nombre"
-                [control]="controls['nombre']"></app-input-text>
+            <app-input-text label="Nombre:" placeholder="Ingrese nombre" name="nombreReunion"
+                [control]="controls['nombreReunion']"></app-input-text>
             <div>
                 <label class="block font-medium mb-2" for="idRole">Fecha de la reunión:</label>
-                <p-datepicker placeholder="Seleccionar Fecha" formControlName="periodo" styleClass="w-full"
-                    appendTo="body" inputId="periodo" [readonlyInput]="true" [showIcon]="true"/>
-                <app-input-error [control]="controls['periodo']"></app-input-error>
+                <p-datepicker placeholder="Seleccionar Fecha" formControlName="fechaReunion" styleClass="w-full"
+                    appendTo="body" inputId="fechaReunion" [readonlyInput]="true" [showIcon]="true" [showTime]="true"
+                    [hourFormat]="'12'" />
+                <app-input-error [control]="controls['fechaReunion']"></app-input-error>
             </div>
             <div>
                 <label class="block font-medium mb-2" for="idRole">Fecha de la siguiente reunión:</label>
-                <p-datepicker placeholder="Seleccionar Fecha" formControlName="periodo" styleClass="w-full"
-                    appendTo="body" inputId="periodo" [readonlyInput]="true" [showIcon]="true"/>
-                <app-input-error [control]="controls['periodo']"></app-input-error>
+                <p-datepicker placeholder="Seleccionar Fecha" formControlName="fechaSegundaReunion" styleClass="w-full"
+                    appendTo="body" inputId="fechaSegundaReunion" [readonlyInput]="true" [showIcon]="true"
+                    [showTime]="true" [hourFormat]="'12'" />
+                <app-input-error [control]="controls['fechaSegundaReunion']"></app-input-error>
             </div>
         </div>
         <div class="flex pt-6 flex-row-reverse">

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Nullable } from 'primeng/ts-helpers';
 interface Reunion {
@@ -15,6 +15,8 @@ interface Reunion {
 })
 export class CalendarComponent {
 	@Input() data: Reunion[] = [];
+	processedData: any[] = [];
+
 	meses = [
 		'Enero',
 		'Febrero',
@@ -31,39 +33,6 @@ export class CalendarComponent {
 	];
 
 	semanas = Array(4);
-
-	/* data = [
-		{
-			Fecha: '15/02/2025',
-			Objetivo: 'Revisar los avances del plan de reforestación en la zona norte.',
-			ESTADO: 'EN PROGRESO',
-			reunionExtraOrdinaria: false,
-		},
-		{
-			Fecha: '15/02/2025',
-			Objetivo: 'Discutir estrategias para la prevención de incendios forestales.',
-			ESTADO: 'EN PROGRESO',
-			reunionExtraOrdinaria: false,
-		},
-		{
-			Fecha: '10/06/2025',
-			Objetivo: 'Evaluar el impacto de las nuevas regulaciones ambientales.',
-			ESTADO: 'PENDIENTE',
-			reunionExtraOrdinaria: false,
-		},
-		{
-			Fecha: '05/08/2025',
-			Objetivo: 'Presentar informe sobre la calidad del agua en reservas naturales.',
-			ESTADO: 'REALIZADO',
-			reunionExtraOrdinaria: true,
-		},
-		{
-			Fecha: '20/09/2025',
-			Objetivo: 'Definir los lineamientos para la próxima campaña de concientización ambiental.',
-			ESTADO: 'EN PROGRESO',
-			reunionExtraOrdinaria: false,
-		},
-	]; */
 
 	getReunionesPorMesYSemana(mesIndex: number, semanaIndex: number, esExtraordinaria: boolean) {
 		return this.data.filter((reunion: Reunion) => {

@@ -5,6 +5,7 @@ import { InputErrorComponent, InputTextComponent } from '@shared/components';
 import { BaseFormComponent } from '@shared/components/abstracts/base-form.component';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
 
 @Component({
@@ -15,13 +16,17 @@ import { SelectModule } from 'primeng/select';
 })
 export class WorkFormComponent extends BaseFormComponent<any> {
 	override _service = inject(WorkService);
-
+	id_group: any;
+	constructor(public config: DynamicDialogConfig) {
+		super()
+		this.id_group = config.data?.id_group;
+	}
 	override buildForm(): void {
 		this._form = this._fb.group({
 			nombreReunion: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 			fechaReunion: [, [Validators.required]],
 			fechaSegundaReunion: [, [Validators.required]],
-			grupoId: [,],
+			grupoId: [Number(this.id_group)],
 		});
 	}
 }

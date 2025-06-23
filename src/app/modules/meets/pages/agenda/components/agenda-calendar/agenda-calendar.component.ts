@@ -4,53 +4,24 @@ import { ActivityService } from '@modules/meets/services/activity.service';
 import { RoleParams } from '@modules/users/interfaces';
 import { BaseListFiltersComponent } from '@shared/components';
 import { CalendarComponent } from '@shared/components/calendar/calendar.component';
-import { ColumnTableModel } from '@shared/interfaces';
+import { BaseParams, ColumnTableModel } from '@shared/interfaces';
 import { BaseCRUDHttpService } from '@shared/services';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { FormActividadesComponent } from '../form-actividades/form-actividades.component';
 import { AGENDA_TABLE_COLUMNS } from '@modules/meets/constants/agenda';
-
+import { BehaviorSubject } from 'rxjs';
+import { CommonModule } from '@angular/common';
 @Component({
 	selector: 'app-agenda-calendar',
-	imports: [BreadcrumbModule, CalendarComponent, ButtonModule],
+	imports: [BreadcrumbModule, CalendarComponent, ButtonModule, CommonModule],
 	templateUrl: './agenda-calendar.component.html',
 	styleUrl: './agenda-calendar.component.scss',
 })
 export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 	title: any;
-	data = [
-		{
-			Fecha: '15/02/2025',
-			Objetivo: 'Revisar los avances del plan de reforestación en la zona norte.',
-			ESTADO: 'EN PROGRESO',
-			reunionExtraOrdinaria: false,
-		},
-		{
-			Fecha: '15/02/2025',
-			Objetivo: 'Discutir estrategias para la prevención de incendios forestales.',
-			ESTADO: 'EN PROGRESO',
-			reunionExtraOrdinaria: false,
-		},
-		{
-			Fecha: '10/06/2025',
-			Objetivo: 'Evaluar el impacto de las nuevas regulaciones ambientales.',
-			ESTADO: 'PENDIENTE',
-			reunionExtraOrdinaria: false,
-		},
-		{
-			Fecha: '05/08/2025',
-			Objetivo: 'Presentar informe sobre la calidad del agua en reservas naturales.',
-			ESTADO: 'REALIZADO',
-			reunionExtraOrdinaria: true,
-		},
-		{
-			Fecha: '20/09/2025',
-			Objetivo: 'Definir los lineamientos para la próxima campaña de concientización ambiental.',
-			ESTADO: 'EN PROGRESO',
-			reunionExtraOrdinaria: false,
-		},
-	];
+	activities: any;
+	data$ = new BehaviorSubject<any>([]);
 	override tableColumns: ColumnTableModel[] = AGENDA_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(ActivityService);
@@ -60,11 +31,104 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 		super();
 		this.addBreadcrub({ label: 'Reuniones y Convocatorias', routerLink: '' });
 		this.addBreadcrub({ label: 'Administración de Agenda', routerLink: '/meets/agenda' });
+		this.getActivities();
 	}
 	ngOnInit(): void {
+
 		this.route.paramMap.subscribe((params) => {
 			this.title = params.get('name');
 			this.addBreadcrub({ label: this.title, routerLink: '/meets/agenda/calendar' });
 		});
+	}
+	/* getActivities(): void {
+		this.service.getAll(this.filters).subscribe({
+			next: (response) => {
+				this.activities = response;
+				this.data = (response.items as any[]).flatMap((item: any) =>
+					item.Tarea.flatMap((tarea: any) =>
+						tarea.FechaProgramada.map((fecha: any) => ({
+							Fecha: new Date(fecha.fechaHora).toLocaleDateString('es-BO'),
+							Objetivo: tarea.nombre,
+							ESTADO: 'EN PROGRESO',
+							reunionExtraOrdinaria: item.tipo !== 'Ordinaria',
+						}))
+					)
+				);
+			},
+			error: (error) => {
+				console.error(error);
+			}
+		});
+	} */
+	/* getActivities(): void {
+		this.service.getAll(this.filters).subscribe({
+			next: (response) => {
+				this.activities = response;
+				const processedData = (response.items as any[]).flatMap((item: any) =>
+					item.Tarea.flatMap((tarea: any) =>
+						tarea.FechaProgramada.map((fecha: any) => ({
+							
+							Fecha: new Date(fecha.fechaHora).toLocaleDateString('es-BO'),
+							Objetivo: tarea.nombre,
+							ESTADO: 'EN PROGRESO',
+							reunionExtraOrdinaria: item.tipo !== 'Ordinaria',
+						}))
+					)
+				);
+				this.data$.next(processedData);
+				console.log(this.data$)
+			},
+			error: (error) => {
+				console.error(error);
+			}
+		});
+	} */
+	getActivities(): void {
+		this.service.getAll(this.filters).subscribe({
+			next: (response) => {
+				this.activities = response;
+
+				const today = new Date();
+
+				const processedData = (response.items as any[]).flatMap((item: any) =>
+					item.Tarea.flatMap((tarea: any) =>
+						tarea.FechaProgramada.map((fecha: any) => {
+							const fechaDate = new Date(fecha.fechaHora);
+
+							// Diferencia en meses entre fechaDate y hoy
+							const diffMonths = (today.getFullYear() - fechaDate.getFullYear()) * 12 + (today.getMonth() - fechaDate.getMonth());
+
+							let estado = '';
+
+							if (tarea.acta && tarea.acta.trim() !== '') {
+								estado = 'REALIZADO';
+							} else if ((!tarea.acta || tarea.acta.trim() === '') && fechaDate < today) {
+								estado = 'SIN REALIZAR';
+							} else if (diffMonths <= 3) {
+								estado = 'POR REALIZAR';
+							} else {
+								estado = 'NO REALIZADO';
+							}
+
+							return {
+								Fecha: fechaDate.toLocaleDateString('es-BO'),
+								Objetivo: tarea.nombre,
+								ESTADO: estado,
+								reunionExtraOrdinaria: item.tipo !== 'Ordinaria',
+							};
+						})
+					)
+				);
+
+				this.data$.next(processedData);
+				console.log(this.data$);
+			},
+			error: (error) => {
+				console.error(error);
+			}
+		});
+	}
+	reloadpage(): void {
+		window.location.reload();
 	}
 }

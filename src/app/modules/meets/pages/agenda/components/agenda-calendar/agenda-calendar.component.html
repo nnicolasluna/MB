@@ -8,9 +8,10 @@
 			<div class="flex gap-1">
 				<p-button styleClass="h-full" label="Agregar" icon="pi pi-plus"
 					(click)="showDialogForm('Crear Actividad')" />
-				<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh" />
+				<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
+					(click)="reloadpage()" />
 			</div>
 		</div>
 	</div>
-	<app-calendar [data]="data"></app-calendar>
+	<app-calendar [data]="data$ | async"></app-calendar>
 </div>

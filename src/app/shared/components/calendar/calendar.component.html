@@ -12,14 +12,12 @@
 				<div class="reunion-cell" *ngFor="let semana of semanas; let semanaIndex = index">
 					<div class="inner-container">
 						<ng-container *ngFor="let reunion of getReunionesPorMesYSemana(mesIndex, semanaIndex, false)">
-							<div
-								class="reunion-box"
-								[ngClass]="{
+							<div class="reunion-box" [ngClass]="{
 									'estado-realizado': reunion.ESTADO === 'REALIZADO',
+									'estado-sinrealizar': reunion.ESTADO === 'SIN REALIZAR',
 									'estado-progreso': reunion.ESTADO === 'EN PROGRESO',
 									'estado-otro': reunion.ESTADO !== 'REALIZADO' && reunion.ESTADO !== 'EN PROGRESO'
-								}"
-							>
+								}">
 								<div class="miniCard">
 									<div class="miniCard__content">
 										<div class="miniCard__date">Fecha:{{ reunion.Fecha }}</div>
@@ -32,7 +30,8 @@
 									<img src="" alt="" />
 								</div>
 								<div class="contenedor">
-									<button class="contenedor__btn"><i class="pi pi-file-plus"></i><span>LLenar Acta</span></button>
+									<button class="contenedor__btn"><i class="pi pi-file-plus"></i><span>LLenar
+											Acta</span></button>
 								</div>
 							</div>
 						</ng-container>
@@ -41,16 +40,14 @@
 			</div>
 			<div class="reunion-row">
 				<div class="reunion-cell" *ngFor="let semana of semanas; let semanaIndex = index">
-					<div *ngFor="let reunion of getReunionesPorMesYSemana(mesIndex, semanaIndex, true)">
-						<div class="inner-container">
-							<div
-								class="reunion-box"
-								[ngClass]="{
+					<div class="inner-container">
+						<div *ngFor="let reunion of getReunionesPorMesYSemana(mesIndex, semanaIndex, true)">
+							<div class="reunion-box" [ngClass]="{
 									'estado-realizado': reunion.ESTADO === 'REALIZADO',
-									'estado-progreso': reunion.ESTADO === 'EN PROGRESO',
-									'estado-otro': reunion.ESTADO !== 'REALIZADO' && reunion.ESTADO !== 'EN PROGRESO'
-								}"
-							>
+									'estado-progreso': reunion.ESTADO === 'POR REALIZAR',
+									'estado-sinrealizar': reunion.ESTADO === 'SIN REALIZAR',
+									'estado-otro': reunion.ESTADO !== 'REALIZADO' && reunion.ESTADO !== 'POR REALIZAR'
+								}">
 								<div class="miniCard">
 									<div class="miniCard__content">
 										<div class="miniCard__date">Fecha:{{ reunion.Fecha }}</div>
@@ -63,7 +60,9 @@
 									<img src="" alt="" />
 								</div>
 								<div class="contenedor">
-									<button class="contenedor__btn"><i class="pi pi-file-plus"></i><span>LLenar Acta</span></button>
+									<button *ngIf="reunion.ESTADO!=='REALIZADO'" class="contenedor__btn"><i
+											class="pi pi-file-plus"></i><span>LLenar
+											Acta</span></button>
 								</div>
 							</div>
 						</div>
