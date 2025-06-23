@@ -35,6 +35,7 @@ import { WorkFormComponent } from './components/work-form/work-form.component';
 })
 export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> {
 	title: any;
+	id_group: any;
 	override tableColumns: ColumnTableModel[] = WORK_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(WorkService);
@@ -43,6 +44,7 @@ export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> 
 		super();
 		this.route.paramMap.subscribe((params) => {
 			this.title = params.get('name');
+			this.id_group = params.get('id');
 			this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
 			this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
 			this.addBreadcrub({ label: this.title, routerLink: '' });

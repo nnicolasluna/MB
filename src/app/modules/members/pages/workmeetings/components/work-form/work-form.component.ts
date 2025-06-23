@@ -18,8 +18,10 @@ export class WorkFormComponent extends BaseFormComponent<any> {
 
 	override buildForm(): void {
 		this._form = this._fb.group({
-			nombre: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-			periodo: [, [Validators.required]],
+			nombreReunion: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+			fechaReunion: [, [Validators.required]],
+			fechaSegundaReunion: [, [Validators.required]],
+			grupoId: [,],
 		});
 	}
 }

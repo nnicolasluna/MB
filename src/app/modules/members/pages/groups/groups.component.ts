@@ -32,7 +32,7 @@ import { Router } from '@angular/router';
 		CardModule,
 	],
 	templateUrl: './groups.component.html',
-	styleUrl: './groups.component.scss'
+	styleUrl: './groups.component.scss',
 })
 export class GroupsComponent extends BaseListFiltersComponent<GroupModel> {
 	override tableColumns: ColumnTableModel[] = GROUP_TABLE_COLUMNS;
@@ -44,8 +44,8 @@ export class GroupsComponent extends BaseListFiltersComponent<GroupModel> {
 		this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
 		this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
 	}
-	override onActionClick({ data, action }: ActionClickEvent) { }
-	agregarReunion(nombre: string){
-		this.router.navigate(['members/work-meetings', nombre]);
+	override onActionClick({ data, action }: ActionClickEvent) {}
+	agregarReunion(nombre: string, id: number) {
+		this.router.navigate(['members/work-meetings', nombre, id]);
 	}
 }

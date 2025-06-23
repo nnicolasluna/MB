@@ -11,7 +11,7 @@ export const routes: Routes = [
 		loadComponent: () => import('./pages/groups/groups.component').then((m) => m.GroupsComponent),
 	},
 	{
-		path: 'work-meetings/:name',
+		path: 'work-meetings/:name/:id',
 		data: {
 			moduleCode: ResourceTypes.SESSIONS,
 			permission: 'canView',
