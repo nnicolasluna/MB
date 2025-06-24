@@ -1,42 +1,49 @@
 strong {
-    width: 100%;
-    background-color: #15403DC4;
-    color: white;
+	width: 100%;
+	background-color: #15403dc4;
+	color: white;
+	text-align: center;
+	font-size: 2rem;
+	padding: 10px;
 }
 
 .resena {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    background-image: url('../../../../../../../assets/webportal/resena/fondoresena.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	background-image: url('../../../../../../../assets/webportal/resena/fondoresena.jpg');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 .card {
-    height: 100px;
-    width: auto;
-    background-color: transparent;
+	height: 100px;
+	width: auto;
+	background-color: transparent;
 }
 
 p {
-    color: #15403D;
-    padding: 5px 10px;
+	color: #15403d;
+	padding: 20px;
+	font-size: 1.3rem;
+	width: 50%;
+    text-align: justify;
 }
 
 .content {
-    position: fixed;
-    top: 20%;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	position: fixed;
+	top: 10%;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.content strong {
+/* .content strong {
     width: 100%;
     padding: 10px;
     font-size: 1.5rem;
 }
+ */

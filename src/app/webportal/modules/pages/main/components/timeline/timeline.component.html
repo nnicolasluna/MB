@@ -1,10 +1,44 @@
-<div class="card">
-    <p-timeline [value]="events" layout="horizontal">
-        <ng-template #opposite let-event>
-            <small class="text-surface-500 dark:text-surface-400">{{ event.date }}</small>
-        </ng-template>
-        <ng-template #content let-event>
-            {{ event.status }}
-        </ng-template>
-    </p-timeline>
+<div class="resena">
+    <div class="timeline-scroll">
+        <div class="header">
+            <div class="header__title">Línea de Tiempo <i class="pi pi-calendar"></i>Gestión 2024</div>
+            <div class="logos">
+                <img src="assets/sistema/mmya.png" alt="Logo 1" />
+                <img src="assets/sistema/abt.png" alt="Logo 2" />
+                <img src="assets/sistema/dgf.jpg" alt="Logo 3" />
+                <img src="assets/sistema/sernav.png" alt="Logo 4" />
+                <img src="assets/sistema/mnhn.png" alt="Logo 5" />
+                <img src="assets/sistema/fonab.png" alt="Logo 5" />
+                <img src="assets/sistema/madretierra.png" alt="Logo 5" />
+            </div>
+        </div>
+        <div class="card">
+            <p-timeline [value]="events" align="alternate">
+                <ng-template #marker let-event>
+                    <span class="flex w-8 h-8 items-center justify-center text-white rounded-full z-10 shadow-sm"
+                        [style]="{ 'background-color': event.color }">
+                        <img [src]="event.icon" style="width: 50%;">
+                    </span>
+                </ng-template>
+                <ng-template #content let-event>
+                    <div class="contenedor">
+                        <div class="contenedor__header">
+                            <strong [style]="{ 'color': event.color }">{{event.status}}</strong>
+                            {{event.date}}
+                        </div>
+                        <div class="contenedor__body">
+                            <ul>
+                                <li *ngFor="let item of event.content">
+                                    {{ item }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #opposite let-event>
+                    <span>&nbsp;</span>
+                </ng-template>
+            </p-timeline>
+        </div>
+    </div>
 </div>

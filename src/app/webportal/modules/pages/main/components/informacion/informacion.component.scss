@@ -1,122 +1,124 @@
 strong {
-    width: 100%;
-    background-color: #2A2B29;
-    color: white;
-    text-align: center;
+	width: 100%;
+	background-color: #2a2b29;
+	color: white;
+	text-align: center;
 }
 
 .resena {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    background-image: url('../../../../../../../assets/webportal/informacion/fondoInformacion.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	background-image: url('../../../../../../../assets/webportal/informacion/fondoInformacion.jpg');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 .card {
-    height: auto;
-    width: 100%;
-    background-color: transparent;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    overflow-y: auto;
-    max-height: 500px;
-    min-width: 500px;
+	height: auto;
+	width: 100%;
+	background-color: transparent;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	overflow-y: auto;
+	max-height: 500px;
+	min-width: 500px;
 
-    img {
-        width: auto;
-        height: 300px;
-    }
+	img {
+		width: auto;
+		height: 300px;
+	}
 }
 
-
 .content {
-    position: fixed;
-    top: 20%;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	position: fixed;
+	top: 15%;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .content strong {
-    width: 100%;
-    padding: 10px;
-    font-size: 1.5rem;
+	width: 100%;
+	padding: 10px;
+	font-size: 1.5rem;
 }
 
 .logos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	padding: 10px;
 }
 
 .logos img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: white;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: white;
 }
 
 .descripcion {
-    background-color: #06561ACC;
-    color: white;
-    padding: 10px;
-    text-align: justify;
-
+	background-color: #06561acc;
+	color: white;
+	padding: 10px;
+	text-align: justify;
+	i {
+		padding: 2px;
+		color: #a8ff05;
+	}
 }
 
 .imagen_direccion {
-    color: #FFE100;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
+	color: #ffe100;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
 
-    align-items: center;
+	align-items: center;
 }
 
 .titulo_descripcion {
-    width: 50%;
-    text-align: center;
-    gap: 2px;
-    display: flex;
-    flex-direction: column;
+	width: 50%;
+	text-align: center;
+	gap: 2px;
+	display: flex;
+	flex-direction: column;
 }
 
 .direccion {
-    background-color: #06561ACC;
-    align-items: center;
-    font-size: 1.2rem;
-    padding: 5px;
-    width: fit-content;
+	background-color: #06561acc;
+	align-items: center;
+	font-size: 1.2rem;
+	padding: 5px;
+	width: fit-content;
 }
 
 a {
-    text-decoration: none;
-    cursor: pointer;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 @media (max-width: 991px) {
-    .card {
-        flex-direction: column;
-        width: 100%;
+	.card {
+		flex-direction: column;
+		width: 100%;
 
-        img {
-            width: 100%;
-        }
-    }
+		img {
+			width: 100%;
+		}
+	}
 
-    .imagen_direccion {
-        width: 100%;
-    }
+	.imagen_direccion {
+		width: 100%;
+	}
 
-    .titulo_descripcion {
-        width: 100%;
-    }
+	.titulo_descripcion {
+		width: 100%;
+	}
 }

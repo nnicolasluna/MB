@@ -6,48 +6,89 @@
                     <ng-template #content let-activateCallback="activateCallback">
                         <div class="flex flex-col h-48">
                             <div class="steper_content">
-                                <!-- <div></div> -->
-                                <div class="conteiner_cards">
-                                    <p-card [style]="{ width: '15rem', overflow: 'hidden' }"
-                                        *ngFor="let institucion of autoridades">
-                                        <ng-template #header>
-                                            <div class=card__header>
-                                                {{institucion.nombre }}
+                                <strong class="title">COORDINACIÓN EJECUTIVA</strong>
+                                <div class="conteiner_body">
+                                    <div class="conteiner_cards">
+                                        <p-card [style]="{ width: '15rem', overflow: 'hidden' }"
+                                            *ngFor="let institucion of autoridades">
+                                            <ng-template #header>
+                                                <div class=card__header>
+                                                    {{institucion.nombre }}
+                                                </div>
+                                            </ng-template>
+                                            <div class="card__body">
+                                                <img alt="Imagen Institución" class="cardImga"
+                                                    [src]='institucion.sigla' />
+                                                <div class="card__text">
+                                                    <strong>{{ institucion.cargo }}</strong>
+                                                    {{ institucion.persona }}
+                                                </div>
                                             </div>
-                                        </ng-template>
-                                        <div class="card__body">
-                                            <img alt="Imagen Institución" class="cardImga" [src]='institucion.sigla' />
-                                            <div class="card__text">
-                                                <strong>{{ institucion.cargo }}</strong>
-                                                {{ institucion.persona }}
+                                        </p-card>
+                                    </div>
+
+                                    <div class="participantes">
+                                        <div class="Instituciones">
+                                            <div class="imagenlogo">
+                                                <img src="assets/webportal/coordinacion/instituciopnes.png" alt="">
+                                                <strong>7</strong>
                                             </div>
+                                            <strong>Instituciones</strong>
                                         </div>
-                                    </p-card>
+                                        <div class="Instituciones">
+                                            <div class="imagenlogo">
+                                                <img src="assets/webportal/coordinacion/autoridades.png" alt="">
+                                                <strong>7</strong>
+                                            </div>
+                                            <strong>Autoridades</strong>
+                                        </div>
+                                    </div>
+                                    <div class="flex pt-6 justify-end">
+                                        <button class="button" iconPos="right" (click)="activateCallback(2)"><i
+                                                class="pi pi-arrow-right"></i></button>
+                                    </div>
                                 </div>
 
                             </div>
-                            <div class="flex pt-6 justify-end">
-                                <p-button icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
-                            </div>
+
                         </div>
                     </ng-template>
                 </p-step-panel>
 
                 <p-step-panel [value]="2">
                     <ng-template #content let-activateCallback="activateCallback">
-                        <div class="flex flex-col h-48">
-                            <div>
-                                <img alt="Imagen Institución" class="cardImga" src='assets/webportal/coordinacion/diagramacoodinacion.png' class="w-full"/>
+                        <div class="flex flex-col h-30">
+                               <strong class="title">GRUPOS INTERNOS</strong>
+                            <div class="diagrama_participantes">
+                                <img alt="Imagen Institución" class="diagrama"
+                                    src='assets/webportal/coordinacion/img.png' />
+                                <div class="participantes">
+                                    <div class="Instituciones">
+                                        <div class="imagenlogo">
+                                            <img src="assets/webportal/coordinacion/instituciopnes.png" alt="">
+                                            <strong>7</strong>
+                                        </div>
+                                        <strong>Instituciones</strong>
+                                    </div>
+                                    <div class="Instituciones">
+                                        <div class="imagenlogo">
+                                            <img src="assets/webportal/coordinacion/autoridades.png" alt="">
+                                            <strong>7</strong>
+                                        </div>
+                                        <strong>Autoridades</strong>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="flex pt-6 justify-between">
-                            <p-button severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
-                            <p-button icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" />
+                            <button class="button" severity="secondary" icon="pi pi-arrow-left"
+                                (click)="activateCallback(1)"><i class="pi pi-arrow-left"></i></button>
+                            <!-- <p-button icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" /> -->
                         </div>
                     </ng-template>
                 </p-step-panel>
 
-                <p-step-panel [value]="3">
+                <!--  <p-step-panel [value]="3">
                     <ng-template #content let-activateCallback="activateCallback">
                         <div class="flex flex-col h-48">
                             <div
@@ -59,7 +100,7 @@
                             <p-button icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(2)" />
                         </div>
                     </ng-template>
-                </p-step-panel>
+                </p-step-panel> -->
             </p-step-panels>
         </p-stepper>
     </div>

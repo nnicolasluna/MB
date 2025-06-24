@@ -16,14 +16,57 @@ export class TimelineComponent {
 	constructor() {
 		this.events = [
 			{
-				status: 'Ordered',
-				date: '15/10/2020 10:30',
-				icon: 'pi pi-shopping-cart',
-				color: '#9C27B0',
+				status: '1ra reunion ',
+				date: '2 octubre',
+				content: [
+					'Financiamiento climático y proyectos.',
+					'Implementación de las NDC con énfasis en las metas de bosques.',
+					'Desarrollo normativo.',
+					'Estrategia de reducción de la deforestación e incendios.',
+					'Monitoreo MRV relacionado con bosques y sistemas de vida.',
+				],
+				icon: 'assets/webportal/linea/hoja.png',
+				color: '#11CA9D',
 			},
-			{ status: 'Processing', date: '15/10/2020 14:00', icon: 'pi pi-cog', color: '#673AB7' },
-			{ status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
-			{ status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' },
+			{
+				status: '2da reunion ',
+				date: '4 noviembre',
+				content: [
+					'Financiamiento climático y proyectos.',
+					'Implementación de las NDC con énfasis en las metas de bosques.',
+					'Desarrollo normativo.',
+					'Estrategia de reducción de la deforestación e incendios.',
+					'Monitoreo MRV relacionado con bosques y sistemas de vida.',
+				],
+				icon: 'assets/webportal/linea/segunda.png',
+				color: '#FFDD28',
+			},
+			{
+				status: '3ra reunion ',
+				date: '15 diciembre',
+				content: [
+					'Financiamiento climático y proyectos.',
+					'Implementación de las NDC con énfasis en las metas de bosques.',
+					'Desarrollo normativo.',
+					'Estrategia de reducción de la deforestación e incendios.',
+					'Monitoreo MRV relacionado con bosques y sistemas de vida.',
+				],
+				icon: 'assets/webportal/linea/tercera.png',
+				color: '#44C350',
+			},
+			{
+				status: '4ta reunion',
+				date: '25 diciembre',
+				content: [
+					'Financiamiento climático y proyectos.',
+					'Implementación de las NDC con énfasis en las metas de bosques.',
+					'Desarrollo normativo.',
+					'Estrategia de reducción de la deforestación e incendios.',
+					'Monitoreo MRV relacionado con bosques y sistemas de vida.',
+				],
+				icon: 'assets/webportal/linea/cuarto.png',
+				color: '#FF9110',
+			},
 		];
 	}
 }

@@ -2,7 +2,7 @@
 	display: flex;
 	width: 100%;
 	height: 100vh;
-	background-image: url('../../../../../../../assets/webportal/coordinacion/fondocoordinacion.jpg');
+	background-image: url('../../../../../../../assets/webportal/coordinacion/bosque.jpeg');
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -21,12 +21,24 @@
 .conteiner_cards {
 	display: flex;
 	flex-direction: row;
-	gap: 5px;
-	width: 100%;
-    justify-content: center;
-    align-items: center;
+	gap: 15px;
+	width: 80%;
+	justify-content: center;
+	align-items: center;
+	max-height: 500px;
+	height: 100%;
+	cursor: pointer;
 }
+.conteiner_body {
+	position: fixed;
+	top: 20%;
+	display: flex;
+	flex-direction: column;
 
+	align-items: center;
+	gap: 15px;
+	width: 100%;
+}
 .steper_content {
 	width: 100%;
 }
@@ -36,27 +48,109 @@ p-stepper {
 }
 
 .card {
-    &__body{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-    }
+	&__body {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		max-height: 300px;
+	}
 	&__header {
 		background-color: #06561a;
-        color: white;
-        padding: 5px 10px;
-        text-align: center;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		min-height: 100px;
+		font-size: 1.1rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-weight: bold;
+		font-size: 1.2rem;
 	}
-    &__text{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-    }
+	&__text {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		height: 150px;
+		font-size: 1rem;
+		strong {
+			font-size: 1.1rem;
+		}
+	}
 }
-.cardImga{
-    width: 55%;
-    height: 100px;
+.cardImga {
+	width: auto;
+	height: 100px;
+	border-radius: 20%;
+	padding: 10px;
+}
+p-card {
+	height: 100%;
+	border-radius: 10%;
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+p-card:hover {
+	transform: scale(1.1); /* Escala la card al 105% de su tamaño original */
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+	z-index: 1; /* Opcional: para asegurar que la card que hace hover esté por encima de sus vecinas */
+}
+.title {
+	position: fixed;
+	top: 10%;
+	text-align: center;
+	width: 100%;
+	background-color: #15403dc4;
+	color: white;
+	font-size: 2rem;
+	padding: 10px;
 }
 
+.button {
+	background-color: white;
+	border-radius: 50%;
+	color: black;
+	padding: 15px;
+}
+.Instituciones {
+	color: white;
+
+	font-size: 1.2rem;
+	gap: 3px;
+	img {
+		height: 70px;
+		width: auto;
+	}
+}
+.imagenlogo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	strong {
+		font-size: 5rem;
+	}
+}
+.participantes {
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	width: 80%;
+	border-top: solid 2px white;
+	justify-content: center;
+}
+.diagrama {
+	width: 60%;
+	height: auto;
+}
+.diagrama_participantes {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+
+}
