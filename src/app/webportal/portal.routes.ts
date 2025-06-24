@@ -31,6 +31,11 @@ export const routes: Routes = [
 				loadComponent: () =>
 					import('./modules/pages/main/components/timeline/timeline.component').then((m) => m.TimelineComponent),
 			},
+			{
+				path: 'informacion',
+				loadComponent: () =>
+					import('./modules/pages/main/components/informacion/informacion.component').then((m) => m.InformacionComponent),
+			},
 		],
 	},
 ];

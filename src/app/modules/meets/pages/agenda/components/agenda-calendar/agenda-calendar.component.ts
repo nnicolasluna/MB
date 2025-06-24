@@ -96,7 +96,7 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 							const fechaDate = new Date(fecha.fechaHora);
 
 							// Diferencia en meses entre fechaDate y hoy
-							const diffMonths = (today.getFullYear() - fechaDate.getFullYear()) * 12 + (today.getMonth() - fechaDate.getMonth());
+							const diffMonths = (today.getMonth() - fechaDate.getMonth());
 
 							let estado = '';
 
@@ -106,10 +106,13 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 								estado = 'SIN REALIZAR';
 							} else if (diffMonths <= 3) {
 								estado = 'POR REALIZAR';
-							} else {
+							} else if (diffMonths > -3) {
 								estado = 'NO REALIZADO';
 							}
-
+							else {
+								estado = 'NO REALIZADO';
+							}
+							console.log(today.getMonth(), fechaDate.getMonth(), diffMonths)
 							return {
 								Fecha: fechaDate.toLocaleDateString('es-BO'),
 								Objetivo: tarea.nombre,

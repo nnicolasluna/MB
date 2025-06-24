@@ -31,10 +31,11 @@
 	background-color: rgba(0, 0, 0, 0.3);
 	color: white;
 	padding: 20px;
-	top: 25%;
-	right: 20%;
+	top: 20%;
+	right: 15%;
 	border-radius: 10px;
 }
+
 .bosques-card h1 {
 	color: #675b17;
 	text-align: center;
@@ -48,21 +49,25 @@
 	text-transform: uppercase;
 	line-height: 1.1;
 }
+
 table {
 	font-weight: bold;
 	font-size: 1.01rem;
 }
+
 table td {
 	padding: 10px;
 }
+
 i {
 	cursor: pointer;
 }
+
 .card-container {
 	position: fixed;
 	z-index: 2;
 	top: 25%;
-	right: 20%;
+	right: 15%;
 	background-color: #fff;
 	border-radius: 15px;
 	width: 350px;
@@ -70,7 +75,8 @@ i {
 	flex-direction: column;
 	padding: 10px;
 }
-.card-title{
+
+.card-title {
 	display: flex;
 	flex-direction: row;
 	gap: 5px;
@@ -80,12 +86,14 @@ i {
 	padding: 10px;
 	font-size: 1.5rem;
 }
-.card-container p{
+
+.card-container p {
 	text-align: justify;
 	font-size: 0.9rem;
 	padding: 10px;
 }
-.card-footer{
+
+.card-footer {
 	text-align: center;
 	padding: 10px;
 	font-size: 1.2rem;

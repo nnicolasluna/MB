@@ -1,17 +1,22 @@
 <div
-	class="w-full text-white flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-green-900 to-white fixed z-1 top-0">
+	class="w-full text-white flex flex-col md:flex-row items-center justify-between bg-gradient-to-l from-green-950 to-white fixed z-1 top-0">
+
+	<div class="flex items-center gap-2 px-4 py-2">
+		<!-- <div class="bg-green-600 rounded-full p-2">
+			<i class="pi pi-user text-white"></i>
+		</div> -->
+		<img src="assets/webportal/topbar-img/logo_mesadebosques.png" class="h-8 md:h-12 w-auto" />
+		<div *ngFor="let item of menuItems" class="menu-item p-2 cursor-pointer" [routerLink]="item.route"
+			routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+			{{ item.label }}
+		</div>
+	</div>
 	<div class="flex items-center gap-2 px-4 py-2">
 		<i class="pi pi-envelope"></i>
 		<span class="text-sm">contact&#64;gob.bo</span>
 	</div>
-	<div class="flex items-center gap-2 px-4 py-2">
-		<div class="bg-green-600 rounded-full p-2">
-			<i class="pi pi-user text-white"></i>
-		</div>
-		<img src="assets/webportal/topbar-img/logo_mesadebosques.png" class="h-8 md:h-12 w-auto" />
-	</div>
 </div>
-<div class="w-full text-white flex flex-col md:flex-row items-center justify-between px-4 py-2 fixed z-1 top-15">
+<!-- <div class="w-full text-white flex flex-col md:flex-row items-center justify-between px-4 py-2 fixed z-1 top-15">
 	<div class="flex items-center gap-2 mb-2 md:mb-0">
 		<img src="assets/webportal/topbar-img/logo_mesadebosques.png" alt="Logo árbol" class="h-8 md:h-12 w-auto" />
 		<span class="text-lg md:text-xl font-bold text-center md:text-left">Mesa de Bosques, Sistemas de Vida y Crisis
@@ -28,4 +33,4 @@
 			{{ item.label }}
 		</div>
 	</div>
-</div>
+</div> -->

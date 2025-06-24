@@ -76,7 +76,6 @@ export class InicioComponent implements AfterViewInit {
 			color: '#738843',
 		},
 	];
-
 	ngAfterViewInit(): void {
 		this.iniciarMapa();
 	}
@@ -121,7 +120,6 @@ export class InicioComponent implements AfterViewInit {
 		});
 	}
 	verDetalles(data: string) {
-		console.log(data);
 		this.mostrarTable = false;
 		this.bosqueSeleccionado = this.bosquesData.find((bosque) => bosque.nombre === data.toUpperCase());
 		if (this.bosqueSeleccionado) {

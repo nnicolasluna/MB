@@ -16,6 +16,6 @@ export class TopBarComponent {
 		{ label: 'REUNIONES Y AGENDA', route: '/reuniones' },
 		{ label: 'REPOSITORIO DOCUMENTAL', route: '/reuniones' },
 		{ label: 'LINEA DE TIEMPO', route: 'timeline' },
-		{ label: 'SISTEMAS DE INFORMACION', route: 'sisinfo' }
+		{ label: 'SISTEMAS DE INFORMACION', route: 'informacion' }
 	];
 }

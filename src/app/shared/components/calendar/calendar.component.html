@@ -15,8 +15,8 @@
 							<div class="reunion-box" [ngClass]="{
 									'estado-realizado': reunion.ESTADO === 'REALIZADO',
 									'estado-sinrealizar': reunion.ESTADO === 'SIN REALIZAR',
-									'estado-progreso': reunion.ESTADO === 'EN PROGRESO',
-									'estado-otro': reunion.ESTADO !== 'REALIZADO' && reunion.ESTADO !== 'EN PROGRESO'
+									'estado-progreso': reunion.ESTADO === 'POR REALIZAR',
+									'estado-otro': reunion.ESTADO === 'NO REALIZADO'
 								}">
 								<div class="miniCard">
 									<div class="miniCard__content">
@@ -46,7 +46,7 @@
 									'estado-realizado': reunion.ESTADO === 'REALIZADO',
 									'estado-progreso': reunion.ESTADO === 'POR REALIZAR',
 									'estado-sinrealizar': reunion.ESTADO === 'SIN REALIZAR',
-									'estado-otro': reunion.ESTADO !== 'REALIZADO' && reunion.ESTADO !== 'POR REALIZAR'
+									'estado-otro': reunion.ESTADO === 'NO REALIZADO'
 								}">
 								<div class="miniCard">
 									<div class="miniCard__content">

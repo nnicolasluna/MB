@@ -1,0 +1,36 @@
+<div class="resena">
+
+    <div class="content">
+        <div class="logos">
+            <img src="assets/sistema/madre.png"
+                (click)="mostrarInfo('Autoridad Plurinacional de la Madre Tierra SMTCC')"
+                style="border: solid 2px brown;" alt="Logo 5" />
+            <img src="assets/sistema/abt.png" (click)="mostrarInfo('ABT Digital')" style="border: solid 2px yellow;"
+                alt="Logo 2" />
+            <img src="assets/sistema/dgf.jpg"
+                (click)="mostrarInfo('Sistema de Información y Monitoreo de Bosques (SIMB)')"
+                style="border: solid 2px orange;" alt="Logo 3" />
+            <img src="assets/sistema/sernav.png" style="border: solid 2px purple;" alt="Logo 4" />
+            <img src="assets/sistema/mnhn.png" style="border: solid 2px black;" alt="Logo 5" />
+            <img src="assets/sistema/fonab.png" style="border: solid 2px rosybrown;" alt="Logo 5" />
+
+            <img src="assets/sistema/mmya.png" style="border: solid 2px blue;" alt="Logo 1" />
+        </div>
+        <strong>Sistema de Información y Monitoreo de Bosques</strong>
+        <div class="card">
+            <div class="imagen_direccion">
+                <img [src]="Seleccionado.imagen" alt="">
+                <a [href]='Seleccionado.direccion' class="direccion"><i class="pi pi-link"></i>
+                    {{Seleccionado.direccion}}</a>
+            </div>
+            <div class="titulo_descripcion">
+                <strong>{{Seleccionado.titulo}}</strong>
+                <div class="descripcion">
+                    <p>{{Seleccionado.descripcion1}}</p>
+                    <p>{{Seleccionado.descripcion2}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

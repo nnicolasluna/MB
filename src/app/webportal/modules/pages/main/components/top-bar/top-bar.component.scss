@@ -1,12 +1,16 @@
 .menu-item {
-	width: 150px;
+	width: 110px;
 	height: 50px;
 	text-align: center;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: #06561a;
+
 }
-.active,
-.menu-item:hover {
-	background-color: #06561a;
+
+.active {
+	/* background-color: #06561a; */
+	text-decoration: underline;
+	color: black;
 }
