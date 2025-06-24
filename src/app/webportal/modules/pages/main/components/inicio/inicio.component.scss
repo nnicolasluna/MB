@@ -1,8 +1,94 @@
-.map {
+/* .map {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100vw;
 	height: 100vh;
 	z-index: -1;
+}
+ */
+
+.main-container {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	overflow: hidden;
+}
+
+.map {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.bosques-card {
+	position: fixed;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: white;
+	padding: 20px;
+	top: 25%;
+	right: 20%;
+	border-radius: 10px;
+}
+.bosques-card h1 {
+	color: #675b17;
+	text-align: center;
+	font-family: 'Impact', 'Arial Black', sans-serif;
+	font-size: 3rem;
+	color: #675b17;
+	text-shadow: 2px 2px 0 #ffffff, -2px -2px 0 #ffffff, 2px -2px 0 #ffffff, -2px 2px 0 #ffffff,
+		4px 4px 5px rgba(0, 0, 0, 0.5);
+	letter-spacing: 2px;
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 1.1;
+}
+table {
+	font-weight: bold;
+	font-size: 1.01rem;
+}
+table td {
+	padding: 10px;
+}
+i {
+	cursor: pointer;
+}
+.card-container {
+	position: fixed;
+	z-index: 2;
+	top: 25%;
+	right: 20%;
+	background-color: #fff;
+	border-radius: 15px;
+	width: 350px;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+.card-title{
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	justify-content: center;
+	color: red;
+	padding: 10px;
+	font-size: 1.5rem;
+}
+.card-container p{
+	text-align: justify;
+	font-size: 0.9rem;
+	padding: 10px;
+}
+.card-footer{
+	text-align: center;
+	padding: 10px;
+	font-size: 1.2rem;
+	color: white;
+	font-weight: bold;
 }

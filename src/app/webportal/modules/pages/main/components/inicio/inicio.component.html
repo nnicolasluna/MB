@@ -1,3 +1,93 @@
-<div>
+<div class="main-container">
 	<div id="map" class="map"></div>
+
+	<div *ngIf="mostrarTable" class="bosques-card">
+		<h1>BOSQUES DE BOLIVIA</h1>
+
+		<table style=" width: 410px; font-family: Arial;">
+			<tr>
+				<td rowspan="10"
+					style="background-color: #14AE5C; color: white; writing-mode: vertical-lr; text-align: center; font-weight: bold; font-size: 18px;">
+					TIPO DE BOSQUES
+				</td>
+				<td style="padding: 8px;">
+					<i class="pi pi-eye" (click)="verDetalles('Bosque Amazónico')"
+						style="color: white; background-color: #A57200; border-radius: 50%; padding: 5px;"></i> Bosque
+					Amazónico
+				</td>
+				<td style="text-align: right; padding: 8px;">21.304.850,91</td>
+			</tr>
+			<tr>
+				<td><i class="pi pi-eye" (click)="verDetalles('Bosque Andino')"
+						style="color: white; background-color: #A7A803; border-radius: 50%; padding: 5px;"></i> Bosque
+					Andino</td>
+				<td style="text-align: right;">45.879,26</td>
+			</tr>
+			<tr>
+				<td><i class="pi pi-eye" (click)="verDetalles('Bosque Chaqueño')"
+						style="color: white; background-color: #B5D73B; border-radius: 50%; padding: 5px;"></i> Bosque
+					Chaqueño</td>
+				<td style="text-align: right;">9.439.001,80</td>
+			</tr>
+			<tr>
+				<td><i class="pi pi-eye" (click)="verDetalles('Bosque Chiquitano')"
+						style="color: white; background-color: #2DCE10; border-radius: 50%; padding: 5px;"></i> Bosque
+					Chiquitano</td>
+				<td style="text-align: right;">8.956.863,90</td>
+			</tr>
+			<tr>
+				<td><i class="pi pi-eye" (click)="verDetalles('BOSQUES DE LLANURAS INUNDABLES')"
+						style="color: white; background-color: #74F899; border-radius: 50%; padding: 5px;"></i> Bosque
+					de
+					Llanuras Inundables</td>
+				<td style="text-align: right;">3.986.524,90</td>
+			</tr>
+			<tr>
+				<td><i class="pi pi-eye" (click)="verDetalles('BOSQUE YUNGAS')"
+						style="color: white; background-color: #12954F; border-radius: 50%; padding: 5px;"></i> Bosque
+					de
+					Yungas</td>
+				<td style="text-align: right;">5.503.765,50</td>
+			</tr>
+			<tr>
+				<td><i class="pi pi-eye" (click)="verDetalles('BOSQUE PANTANAL')"
+						style="color: white; background-color: #CDF57B; border-radius: 50%; padding: 5px;"></i> Bosque
+					del
+					Pantanal</td>
+				<td style="text-align: right;">1.553.367,80</td>
+			</tr>
+			<tr>
+				<td><i class="pi pi-eye" (click)="verDetalles('Bosque Secos Interandino')"
+						style="color: white; background-color: #738843; border-radius: 50%; padding: 5px;"></i> Bosque
+					Seco Interandino</td>
+				<td style="text-align: right;">933.162,13</td>
+			</tr>
+			<tr>
+				<td><i class="pi pi-eye" (click)="verDetalles('Bosque Tucumano Boliviano')"
+						style="color: white; background-color: green; border-radius: 50%; padding: 5px;"></i> Bosque
+					Tucumano Boliviano</td>
+				<td style="text-align: right;">3.148.936,65</td>
+			</tr>
+			<tr style="background-color: #06561A; color: white; font-weight: bold;">
+				<td style="text-align: left;">SUPERFICIE TOTAL</td>
+				<td style="text-align: right;">54.872.353,17</td>
+			</tr>
+		</table>
+
+
+	</div>
+	<div *ngIf="!mostrarTable" class="card-container">
+		<div class="card-content">
+			<div class="card-title" [ngStyle]="{'color': bosqueSeleccionado?.color}">
+				{{bosqueSeleccionado.nombre}}
+				<i class="pi pi-circle-on"></i>
+			</div>
+			<p>
+				{{bosqueSeleccionado.descripcion}}
+			</p>
+		</div>
+		<div class="card-footer" [ngStyle]="{'background-color': bosqueSeleccionado?.color}">
+			<span>{{bosqueSeleccionado.superficie_ha| number:'1.2-2' }}</span>
+		</div>
+	</div>
 </div>
