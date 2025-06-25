@@ -112,7 +112,6 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 							else {
 								estado = 'NO REALIZADO';
 							}
-							console.log(today.getMonth(), fechaDate.getMonth(), diffMonths)
 							return {
 								Fecha: fechaDate.toLocaleDateString('es-BO'),
 								Objetivo: tarea.nombre,
@@ -124,7 +123,6 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 				);
 
 				this.data$.next(processedData);
-				console.log(this.data$);
 			},
 			error: (error) => {
 				console.error(error);

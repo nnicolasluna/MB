@@ -85,7 +85,6 @@ export abstract class BaseListFiltersComponent<T> implements OnDestroy {
 	protected requiredColumns: string[] = [];
 
 	protected showDialogForm(header: string, data?: any, dialog = this.formDialog) {
-		console.log(header)
 		if (!dialog) return;
 		this.modalConfig.data = data ?? {};
 		this.modalConfig.data.columns = this.requiredColumns;

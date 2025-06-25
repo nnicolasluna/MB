@@ -1,6 +1,6 @@
 <div class="h-full">
 	<form [formGroup]="form" (submit)="enviarDatos()">
-		<div class="grid grid-cols-1 gap-4 md:grid-cols-3 items-center p-4 bg-white rounded-lg shadow-md">
+		<div class="grid grid-cols-1 gap-4 md:grid-cols-2 items-center p-4 bg-white rounded-lg shadow-md">
 			<div class="col-span-1 md:col-span-1">
 				<app-input-text
 					label="Actividad:"
@@ -23,6 +23,21 @@
 					></p-select>
 					<app-input-error [control]="controls['TipoActividad']"></app-input-error>
 				</div>
+			</div>
+			<div class="col-span-1 md:col-span-1">
+				<label class="block font-medium mb-2" for="idRole">Grupo:</label>
+				<p-select
+					formControlName="grupo"
+					[checkmark]="true"
+					optionLabel="nombre"
+					[showClear]="true"
+					[options]="Groups()"
+					class="w-full"
+					[appendTo]="'body'"
+					placeholder="Seleccione grupo"
+				>
+				</p-select>
+				<app-input-error [control]="controls['grupo']"></app-input-error>
 			</div>
 			<div class="col-span-1 flex md:justify-end">
 				<p-button (click)="agregarFormulario()" class=""><i class="pi pi-plus"></i>Agregar Tarea</p-button>

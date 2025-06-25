@@ -26,21 +26,7 @@
 				name="resultado"
 				[control]="controls['resultado']"
 			></app-input-text>
-			<div>
-				<label class="block font-medium mb-2" for="idRole">Grupo:</label>
-				<p-select
-					formControlName="grupo"
-					[checkmark]="true"
-					optionLabel="nombre"
-					[showClear]="true"
-					[options]="Groups()"
-					class="w-full"
-					[appendTo]="'body'"
-					placeholder="Seleccione grupo"
-				>
-				</p-select>
-				<app-input-error [control]="controls['grupo']"></app-input-error>
-			</div>
+			<!--  -->
 			<div>
 				<label class="block font-medium mb-2" for="idRole">Responsable:</label>
 				<p-select
@@ -57,20 +43,7 @@
 				</p-select>
 				<app-input-error [control]="controls['responsable']"></app-input-error>
 			</div>
-			<div>
-				<label class="block font-medium mb-2" for="idRole">Participantes:</label>
-				<p-multiselect
-					formControlName="participantes"
-					[filter]="true"
-					optionLabel="name"
-					[options]="Users()"
-					placeholder="Seleccione integrantes"
-					class="w-full"
-					[appendTo]="'body'"
-				>
-				</p-multiselect>
-				<app-input-error [control]="controls['participantes']"></app-input-error>
-			</div>
+			
 		</div>
 	</form>
 </div>

@@ -7,7 +7,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { BaseFormComponent } from '@shared/components/abstracts/base-form.component';
-import { UserModel } from '@modules/users/interfaces';
+import { UserModel, UserParams } from '@modules/users/interfaces';
 import { UserService } from '@modules/users/services/user.service';
 import { InputErrorComponent, InputTextComponent } from '@shared/components';
 import { BaseCRUDHttpService, ToastService } from '@shared/services';
@@ -15,6 +15,8 @@ import { GroupService } from '@modules/members/services/group.service';
 import { AgendaService } from '@modules/meets/services/agenda.service';
 import { ActivityService } from '@modules/meets/services/activity.service';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map, catchError, of } from 'rxjs';
 
 @Component({
 	selector: 'app-form-actividades',
@@ -40,6 +42,7 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	formulariosNombres: any[] = [];
 	ts = inject(ToastService);
 	ref = inject(DynamicDialogRef);
+	GroupService = inject(GroupService);
 	//override _service = inject(UserService);
 	override _service: BaseCRUDHttpService<any> = inject(AgendaService);
 	constructor(private actividadService: ActivityService) {
@@ -50,6 +53,7 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 		this._form = this._fb.group({
 			actividad: ['', Validators.required],
 			TipoActividad: ['', Validators.required],
+			grupo: [null, Validators.required],
 		});
 	}
 	agregarFormulario(): void {
@@ -74,14 +78,13 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 			actividad: datosActividad,
 			tareas: this.datosTareas,
 		};
-
+		/* console.log(payload); */
 		if (this.datosTareas.length > 0 && this.ValidadorTareas[0]) {
-
 			this.actividadService.create(payload).subscribe({
 				next: (response) => {
 					this.ts.success('Guardado con éxito');
 					this.ref.close(payload);
-					console.log(response,'gaaaa');
+					window.location.reload();
 				},
 				error: (error) => {
 					console.error('Error al guardar actividad y tareas:', error);
@@ -92,9 +95,16 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 			const formulariosArray = this.formularios.toArray();
 			formulariosArray.forEach((f) => f.marcarCamposComoTocados());
 			this._form.markAllAsTouched();
+			this.ts.error('Error al guardar');
 		}
 	}
 	get formularioInvalido(): boolean {
 		return this._form.invalid || this.ValidadorTareas.some((v) => !v);
 	}
+	public Groups = toSignal(
+		this.GroupService.getAll(new UserParams().setShowAll(true).setSortField('name')).pipe(
+			map((res) => res?.items ?? []),
+			catchError(() => of([]))
+		)
+	);
 }

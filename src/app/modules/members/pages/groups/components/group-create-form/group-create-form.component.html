@@ -9,6 +9,20 @@
                     appendTo="body" inputId="periodo" [readonlyInput]="true" [showIcon]="true" selectionMode="range" />
                 <app-input-error [control]="controls['periodo']"></app-input-error>
             </div>
+            <div>
+				<label class="block font-medium mb-2" for="idRole">Participantes:</label>
+				<p-multiselect
+					formControlName="participantes"
+					[filter]="true"
+					optionLabel="name"
+					[options]="Users()"
+					placeholder="Seleccione integrantes"
+					class="w-full"
+					[appendTo]="'body'"
+				>
+				</p-multiselect>
+				<app-input-error [control]="controls['participantes']"></app-input-error>
+			</div>
         </div>
         <div class="flex pt-6 flex-row-reverse">
             @if (isViewMode()) {

@@ -42,9 +42,7 @@ export class FormTareasComponent {
 			tarea: ['', Validators.required],
 			fechas: [[], Validators.required],
 			resultado: ['', Validators.required],
-			grupo: [null, Validators.required],
 			responsable: [null, Validators.required],
-			participantes: [[]],
 		});
 	}
 	getDatos() {
