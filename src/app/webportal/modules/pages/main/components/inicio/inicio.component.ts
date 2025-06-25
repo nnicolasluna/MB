@@ -27,7 +27,7 @@ export class InicioComponent implements AfterViewInit {
 			color: '#A57200',
 		},
 		{
-			nombre: 'BOSQUES SECOS INTERANDINO',
+			nombre: 'BOSQUE SECO INTERANDINO',
 			descripcion:
 				'Este conjunto de ecosistemas áridos y semiáridos se encuentra entre las cordilleras Oriental y Occidental, abarcando valles, mesetas, colinas y montañas en los departamentos de La Paz, la región central y sur de Cochabamba, los valles de Chuquisaca, Potosí y Tarija, así como el occidente de Santa Cruz. Se desarrolla principalmente entre los 1500 y 3000 m s. n. m., aunque puede extenderse desde los 1000 hasta los 3300 m en ciertas áreas. El clima es seco a semiárido, con precipitaciones anuales entre 200 y 650 mm y una estación seca invernal muy marcada. Las temperaturas promedio oscilan entre 14 y 19 °C. Estas condiciones dan lugar a una vegetación xerófila, dominada por plantas espinosas, suculentas y de follaje caducifolio en época seca. En el paisaje predominan arbustos, cactáceas y árboles leguminosos que conforman matorrales espinosos. Entre los géneros más representativos están Schinus, Opuntia, Puya, Echinopsis, Rebutia, Cleistocactus y Trichocereus. A menor altitud (1000–2600 m s. n. m.), se encuentran bosques abiertos con estrato arbóreo de hasta 10 m, de composición florística similar al bosque chaqueño, con especies como Schinopsis haenkeana (soto), Aspidosperma quebrachoblanco (kacha kacha), Astronium urundeuva (cuchi), Loxopterygiun grisebachii (soto-mara) y Athyana weinmannifolia (sotillo).',
 			superficie_ha: 933163,
@@ -127,5 +127,15 @@ export class InicioComponent implements AfterViewInit {
 		} else {
 			console.log('no encotnrado');
 		}
+	}
+	parsearNumero(number: number) {
+		const formattedNumber = new Intl.NumberFormat('es-ES', {
+			minimumFractionDigits: 2, 
+			maximumFractionDigits: 2,
+		}).format(number);
+		return formattedNumber;
+	}
+	volver() {
+		this.mostrarTable = true;
 	}
 }

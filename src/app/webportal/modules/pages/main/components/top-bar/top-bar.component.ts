@@ -13,7 +13,7 @@ export class TopBarComponent {
 		{ label: 'INICIO', route: 'inicio' },
 		{ label: 'RESEÑA INSTITUCIONAL', route: 'resena' },
 		{ label: 'COORDINACIÓN Y MIEMBROS', route: 'coordinacion' },
-		{ label: 'REUNIONES Y AGENDA', route: '/reuniones' },
+		{ label: 'REUNIONES Y AGENDA', route: 'agenda' },
 		{ label: 'REPOSITORIO DOCUMENTAL', route: '/reuniones' },
 		{ label: 'LINEA DE TIEMPO', route: 'timeline' },
 		{ label: 'SISTEMAS DE INFORMACION', route: 'informacion' }

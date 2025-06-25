@@ -6,8 +6,8 @@
             <div>
                 <label class="block font-medium mb-2" for="idRole">Visualización:</label>
                 <p-select inputId="visualizacion" placeholder="Seleccione tipo de visualización"
-                    formControlName="visualizacion" [options]="" appendTo="body" styleClass="w-full" optionLabel="name"
-                    optionValue="id">
+                    formControlName="visualizacion" [options]="TypeActivity" appendTo="body" styleClass="w-full" optionLabel="name"
+                    optionValue="name">
                 </p-select>
                 <app-input-error [control]="controls['visualizacion']"></app-input-error>
             </div>

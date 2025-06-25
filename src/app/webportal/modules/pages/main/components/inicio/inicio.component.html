@@ -57,7 +57,7 @@
 				<td style="text-align: right;">1.553.367,80</td>
 			</tr>
 			<tr>
-				<td><i class="pi pi-eye" (click)="verDetalles('Bosque Secos Interandino')"
+				<td><i class="pi pi-eye" (click)="verDetalles('Bosque Seco Interandino')"
 						style="color: white; background-color: #738843; border-radius: 50%; padding: 5px;"></i> Bosque
 					Seco Interandino</td>
 				<td style="text-align: right;">933.162,13</td>
@@ -76,18 +76,21 @@
 
 
 	</div>
-	<div *ngIf="!mostrarTable" class="card-container">
-		<div class="card-content">
-			<div class="card-title" [ngStyle]="{'color': bosqueSeleccionado?.color}">
-				{{bosqueSeleccionado.nombre}}
-				<i class="pi pi-circle-on"></i>
+	<div *ngIf="!mostrarTable" class="card_button">
+		<button (click)="volver()"><i class="pi pi-arrow-left"></i></button>
+		<div class="card-container">
+			<div class="card-content">
+				<div class="card-title" [ngStyle]="{'color': bosqueSeleccionado?.color}">
+					{{bosqueSeleccionado.nombre}}
+					<i class="pi pi-circle-on"></i>
+				</div>
+				<p>
+					{{bosqueSeleccionado.descripcion}}
+				</p>
 			</div>
-			<p>
-				{{bosqueSeleccionado.descripcion}}
-			</p>
-		</div>
-		<div class="card-footer" [ngStyle]="{'background-color': bosqueSeleccionado?.color}">
-			<span>{{bosqueSeleccionado.superficie_ha| number:'1.2-2' }}</span>
+			<div class="card-footer" [ngStyle]="{'background-color': bosqueSeleccionado?.color}">
+				<span>{{parsearNumero(bosqueSeleccionado.superficie_ha)}}</span>
+			</div>
 		</div>
 	</div>
 </div>

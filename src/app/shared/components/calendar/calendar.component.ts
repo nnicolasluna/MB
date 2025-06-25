@@ -15,6 +15,10 @@ interface Reunion {
 })
 export class CalendarComponent {
 	@Input() data: Reunion[] = [];
+	@Input() colorDinamico: string = 'white';
+	@Input() ordinario: string = '#9747ff';
+	@Input() extraordinario: string = '#b3b3b3';
+	@Input() calendarioColor: string = '#eee';
 	processedData: any[] = [];
 
 	meses = [

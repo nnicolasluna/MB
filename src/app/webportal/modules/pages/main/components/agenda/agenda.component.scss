@@ -1,0 +1,45 @@
+.resena {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	background-image: url('../../../../../../../assets/webportal/linea/fondolinea.png');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;
+	overflow-y: auto;
+}
+.header {
+	max-height: 70px;
+	height: auto;
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	img {
+		height: 60px;
+		width: auto;
+		padding: 5px;
+	}
+	&__title {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		font-size: 2rem;
+		font-weight: bold;
+		i {
+			font-size: 2rem;
+			font-weight: bold;
+		}
+	}
+}
+.contenedor {
+	position: fixed;
+	top: 10%;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    gap: 10px;
+}

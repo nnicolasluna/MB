@@ -10,23 +10,21 @@
 	position: fixed;
 	top: 10%;
 	width: 80%;
-	max-height: 70px;
-	height: auto;
+	max-height: 100px;
 	background-color: white;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	img {
-		height: 60px;
-		width: auto;
-		padding: 5px;
-	}
+	padding: 15px;
+	height: 100%;
+
 	&__title {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		font-size: 2rem;
 		font-weight: bold;
+
 		i {
 			font-size: 2rem;
 			font-weight: bold;
@@ -88,7 +86,7 @@ li::before {
 	max-height: 500px; /* o la altura que desees */
 	overflow-y: auto;
 	background-color: red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

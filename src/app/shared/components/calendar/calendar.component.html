@@ -1,15 +1,15 @@
 <div class="main">
 	<div class="reuniones">
 		<div class="reuniones__head"></div>
-		<div class="reunion-label reunion-ordinaria">REUNIONES ORDINARIAS</div>
-		<div class="reunion-label reunion-extraordinaria">REUNIONES EXTRAORDINARIAS</div>
+		<div [ngStyle]="{'background-color': ordinario}"class="reunion-label reunion-ordinaria">REUNIONES ORDINARIAS</div>
+		<div [ngStyle]="{'background-color': extraordinario}"class="reunion-label reunion-extraordinaria">REUNIONES EXTRAORDINARIAS</div>
 	</div>
 
-	<div class="calendario">
+	<div [ngStyle]="{'background-color': calendarioColor}"class="calendario">
 		<div class="mes" *ngFor="let mes of meses; let mesIndex = index">
-			<div class="mes-titulo">{{ mes }}</div>
+			<div class="mes-titulo" [ngStyle]="{'background-color': colorDinamico}">{{ mes }}</div>
 			<div class="reunion-row">
-				<div class="reunion-cell" *ngFor="let semana of semanas; let semanaIndex = index">
+				<div  class="reunion-cell" *ngFor="let semana of semanas; let semanaIndex = index">
 					<div class="inner-container">
 						<ng-container *ngFor="let reunion of getReunionesPorMesYSemana(mesIndex, semanaIndex, false)">
 							<div class="reunion-box" [ngClass]="{
