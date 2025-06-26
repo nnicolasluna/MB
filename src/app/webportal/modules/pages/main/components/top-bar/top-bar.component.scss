@@ -14,3 +14,25 @@
 	color: black;
 	font-weight: bold;
 }
+
+@media (max-width: 1200px) {
+	.topBar_title {
+		display: none;
+	}
+
+	.topBar_logo {
+		display: none;
+	}
+
+	.topBar_contacto {
+		display: none;
+	}
+
+	.topBar__main {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: red;
+	}
+}

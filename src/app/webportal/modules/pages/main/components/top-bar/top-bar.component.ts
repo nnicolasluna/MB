@@ -18,4 +18,9 @@ export class TopBarComponent {
 		{ label: 'LINEA DE TIEMPO', route: 'timeline' },
 		{ label: 'SISTEMAS DE INFORMACION', route: 'informacion' }
 	];
+	sidebarOpen: boolean = false;
+
+	toggleSidebar() {
+		this.sidebarOpen = !this.sidebarOpen;
+	}
 }
