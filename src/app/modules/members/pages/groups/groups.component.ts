@@ -1,9 +1,8 @@
 import { Component, inject, Type } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
-import { OfficialCreateFormComponent } from '@modules/docs/pages/official/components/official-create-form/official-create-form.component';
-import { DocsService } from '@modules/docs/services/docs.service';
-import { ROLE_TABLE_COLUMNS } from '@modules/users/constants';
-import { Role, RoleParams } from '@modules/users/interfaces';
+import { RoleParams } from '@modules/users/interfaces';
 import { BaseListFiltersComponent, FilterBarComponent } from '@shared/components';
 import { ActionClickEvent, ColumnTableModel } from '@shared/interfaces';
 import { BaseCRUDHttpService } from '@shared/services';
@@ -18,10 +17,13 @@ import { GroupModel } from '@modules/members/interfaces/user.interface';
 import { GroupService } from '@modules/members/services/group.service';
 import { GROUP_TABLE_COLUMNS } from '@modules/members/constants/group';
 import { Router } from '@angular/router';
-
+import { GroupActionFormComponent } from './components/group-action-form/group-action-form.component';
+import { ActionType } from '@shared/constants';
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
 	selector: 'app-groups',
 	imports: [
+		CommonModule,
 		FormsModule,
 		FilterBarComponent,
 		TableModule,
@@ -30,6 +32,8 @@ import { Router } from '@angular/router';
 		ButtonModule,
 		SelectButtonModule,
 		CardModule,
+		GroupActionFormComponent,
+		TooltipModule,
 	],
 	templateUrl: './groups.component.html',
 	styleUrl: './groups.component.scss',
@@ -44,7 +48,31 @@ export class GroupsComponent extends BaseListFiltersComponent<GroupModel> {
 		this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
 		this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
 	}
-	override onActionClick({ data, action }: ActionClickEvent) {}
+	override onActionClick({ data, action }: ActionClickEvent) {
+		if (!data?.item?.id) return;
+		const { item } = data;
+		switch (action) {
+			case ActionType.VIEW:
+				console.log(data);
+				this.showDialogForm('Visualizar Grupo', { item, isViewMode: true });
+				break;
+
+			case ActionType.EDIT:
+				this.showDialogForm('Editar Grupo', { item });
+				break;
+			case ActionType.DELETE:
+				this.service.delete(item.id).subscribe({
+					next: () => {
+						this.ts.success('Permiso eliminado correctamente');
+						this.list();
+					},
+					error: () => {
+						this.ts.error('Error al eliminar el Permiso');
+					},
+				});
+				break;
+		}
+	}
 	agregarReunion(nombre: string, id: number) {
 		this.router.navigate(['members/work-meetings', nombre, id]);
 	}

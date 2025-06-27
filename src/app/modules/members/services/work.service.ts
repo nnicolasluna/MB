@@ -9,4 +9,8 @@ export class WorkService extends BaseExistsService<GroupModel> {
 	constructor() {
 		super('work');
 	}
+
+	getOne(id: number) {
+		return this.http.get<any>(`${this.namespace}/${id}`);
+	}
 }

@@ -18,7 +18,7 @@ export class WorkFormComponent extends BaseFormComponent<any> {
 	override _service = inject(WorkService);
 	id_group: any;
 	constructor(public config: DynamicDialogConfig) {
-		super()
+		super();
 		this.id_group = config.data?.id_group;
 	}
 	override buildForm(): void {
@@ -27,6 +27,25 @@ export class WorkFormComponent extends BaseFormComponent<any> {
 			fechaReunion: [, [Validators.required]],
 			fechaSegundaReunion: [, [Validators.required]],
 			grupoId: [Number(this.id_group)],
+		});
+	}
+	override ngOnInit(): void {
+		super.ngOnInit();
+
+		const data = this.config.data;
+
+		setTimeout(() => {
+			if (data?.item) {
+				const { fechaReunion, fechaSegundaReunion, ...resto } = data.item;
+
+				this._form.patchValue({
+					...resto,
+					fechaReunion: new Date(fechaReunion),
+					fechaSegundaReunion: new Date(fechaSegundaReunion),
+				});
+
+				console.log('Formulario en modo visualización:', this._form.value);
+			}
 		});
 	}
 }

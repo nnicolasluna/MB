@@ -6,6 +6,7 @@ import { UserService } from '@modules/users/services/user.service';
 import { InputErrorComponent, InputTextComponent } from '@shared/components';
 import { BaseFormComponent } from '@shared/components/abstracts/base-form.component';
 import { ButtonModule } from 'primeng/button';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { SelectModule } from 'primeng/select';
 
 @Component({
@@ -23,11 +24,30 @@ export class OfficialCreateFormComponent extends BaseFormComponent<UserModel> {
 			visualizacion: ['', [Validators.required]],
 		});
 	}
-	constructor() {
+	constructor(public config: DynamicDialogConfig) {
 		super();
 		this.TypeActivity = [
 			{ name: 'Documento Interno', visualizacion: 'interno' },
 			{ name: 'Documento Externo', visualizacion: 'externo' },
 		];
+	}
+	override ngOnInit(): void {
+		super.ngOnInit();
+
+		const data = this.config.data;
+
+		setTimeout(() => {
+			if (data?.item) {
+				const { fecha_crea, fecha_modifica, fecha_elimina, ...resto } = data.item;
+
+				this._form.patchValue({
+					...resto,
+					visualizacion: data.item.tipoVizualizacion,
+
+				});
+
+				console.log('Formulario en modo visualización:', this._form.value);
+			}
+		});
 	}
 }

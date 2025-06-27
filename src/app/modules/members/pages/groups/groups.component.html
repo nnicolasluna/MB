@@ -38,10 +38,11 @@
 		<ng-template pTemplate="body" let-data>
 			<tr>
 				<td>{{ data.nombre }}</td>
-				<td>{{ data.periodo_inicio }}</td>
-				<td>{{ data.periodo_fin }}</td>
+				<td>{{ data.periodo_inicio | date: 'dd/MM/yyyy' }}</td>
+				<td>{{ data.periodo_fin | date: 'dd/MM/yyyy'}}</td>
 				<td>
-					<p-button class="action" (onClick)="agregarReunion(data.nombre,data.id)" icon="pi pi-eye" />
+					<p-button pInputText pTooltip="Añadir Reunión" tooltipPosition="left"  class="action" (onClick)="agregarReunion(data.nombre,data.id)" icon="pi pi-users" />
+					<app-group-action-form  (onActionClick)="onActionClick($event)" [inline]="true" [item]="data"></app-group-action-form>
 				</td>
 			</tr>
 		</ng-template>

@@ -15,7 +15,7 @@ export const DOCS_MENU_ENTRIES: ExtendedMenuItem = {
 			class: 'text-sm ',
 			permission: 'canView',
 			icon: PrimeIcons.USERS,
-			routerLink: ['/meets/agenda'],
+			routerLink: ['/docs/workingGroup'],
 		},
 		{
 			label: 'Documentos Oficiales',

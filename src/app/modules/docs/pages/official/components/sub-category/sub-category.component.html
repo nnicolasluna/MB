@@ -7,8 +7,7 @@
         <div class="w-full flex justify-between items-center flex-col md:flex-row">
             <div class="text-lg font-bold">{{ title }}</div>
             <div class="min-w-max flex gap-1">
-                <p-button styleClass="h-full" label="Crear Reunion" icon="pi pi-plus"
-                    (click)="showDialogForm('Crear Reunión', { id_group: id_group })" />
+                <p-button styleClass="h-full" label="Crear Reunion" icon="pi pi-plus" />
 
                 <p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
                     (click)="onReload()" />
@@ -18,11 +17,10 @@
 
 
 
-    <p-table [value]="group" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
+    <p-table [value]="title" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
         [showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
         [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll">
         <ng-template pTemplate="caption" dataKey="id">
-            <div class="flex justify-content-between flex-column sm:flex-row">Lista de Reuniones</div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
@@ -42,8 +40,7 @@
                 <td>{{ data.nombreReunion }}</td>
                 <td>{{ data.fechaReunion | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td>{{ data.fechaSegundaReunion | date: 'dd/MM/yyyy HH:mm'}}</td>
-                <td>
-                    <app-work-action (onActionClick)="onActionClick($event)" [inline]="true" [item]="data"></app-work-action>
+                <td> 
                 </td>
             </tr>
         </ng-template>
