@@ -41,8 +41,7 @@
 				<td>{{ data.tipoVizualizacion }}</td>
 				<td>
 					<p-button pInputText pTooltip="Añadir Reunión" tooltipPosition="left" class="action"
-						(onClick)="agregar(data.titulo,data.id)" icon="pi pi-file
-" />
+						(onClick)="agregar(data.titulo,data.id)" icon="pi pi-file" />
 
 					<app-official-action (onActionClick)="onActionClick($event)" [inline]="true"
 						[item]="data"></app-official-action>

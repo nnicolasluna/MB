@@ -26,4 +26,12 @@ export const routes: Routes = [
 		},
 		loadComponent: () => import('./pages/official/components/sub-category/sub-category.component').then((m) => m.SubCategoryComponent),
 	},
+	{
+		path: 'working-group-docs',
+		data: {
+			moduleCode: ResourceTypes.SESSIONS,
+			permission: 'canView',
+		},
+		loadComponent: () => import('./pages/working-group/components/working-group-docs/working-group-docs.component').then((m) => m.WorkingGroupDocsComponent),
+	},
 ];

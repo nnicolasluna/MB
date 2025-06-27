@@ -7,7 +7,8 @@
         <div class="w-full flex justify-between items-center flex-col md:flex-row">
             <div class="text-lg font-bold">{{ title }}</div>
             <div class="min-w-max flex gap-1">
-                <p-button styleClass="h-full" label="Crear Reunion" icon="pi pi-plus" />
+                <p-button styleClass="h-full" label="Crear SubCategoria" icon="pi pi-plus"
+                    (click)="showDialogForm('Agregar SubCategoria', { id_acta: id })" />
 
                 <p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
                     (click)="onReload()" />
@@ -17,9 +18,10 @@
 
 
 
-    <p-table [value]="title" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
+    <p-table [value]="items()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
         [showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
-        [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll">
+        [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
+        (onLazyLoad)="onLazyLoad($event)" [lazyLoadOnInit]="true">
         <ng-template pTemplate="caption" dataKey="id">
         </ng-template>
         <ng-template pTemplate="header">
@@ -37,10 +39,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-data>
             <tr>
-                <td>{{ data.nombreReunion }}</td>
-                <td>{{ data.fechaReunion | date: 'dd/MM/yyyy HH:mm'}}</td>
-                <td>{{ data.fechaSegundaReunion | date: 'dd/MM/yyyy HH:mm'}}</td>
-                <td> 
+                <td>{{ data.tituloSub }}</td>
+                <td>
+                    <app-sub-category-action (onActionClick)="onActionClick($event)" [inline]="true"
+                        [item]="data"></app-sub-category-action>
                 </td>
             </tr>
         </ng-template>

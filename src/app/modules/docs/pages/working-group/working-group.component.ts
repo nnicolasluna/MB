@@ -14,12 +14,13 @@ import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { GroupService } from '@modules/members/services/group.service';
+import { WORKING_TABLE_COLUMNS } from '@modules/docs/constants/working';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-working-group',
 	imports: [
 		FormsModule,
-		FilterBarComponent,
 		TableModule,
 		BreadcrumbModule,
 		CheckboxModule,
@@ -31,14 +32,17 @@ import { GroupService } from '@modules/members/services/group.service';
 	styleUrl: './working-group.component.scss',
 })
 export class WorkingGroupComponent extends BaseListFiltersComponent<Role> {
-	override tableColumns: ColumnTableModel[] = ROLE_TABLE_COLUMNS;
+	override tableColumns: ColumnTableModel[] = WORKING_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(GroupService);
 	override formDialog: Type<any> = OfficialCreateFormComponent;
-	constructor() {
+	constructor(private router: Router) {
 		super();
 		this.addBreadcrub({ label: 'Repositorio de Información y Documentos', routerLink: '' });
 		this.addBreadcrub({ label: 'Documentos por Grupo de Trabajo', routerLink: '/docs/workingGroup' });
 	}
-	override onActionClick({ data, action }: ActionClickEvent) {}
+	override onActionClick({ data, action }: ActionClickEvent) { }
+	agregarReunion(nombre: string, id: number) {
+		this.router.navigate(['docs/working-group-docs']);
+	}
 }
