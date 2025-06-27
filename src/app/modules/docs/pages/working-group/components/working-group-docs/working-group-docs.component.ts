@@ -13,6 +13,8 @@ import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
+import { WorkingGroupDocsFormComponent } from '../working-group-docs-form/working-group-docs-form.component';
+import { WorkingDocsService } from '@modules/docs/services/workingDocs.service';
 
 @Component({
   selector: 'app-working-group-docs',
@@ -31,8 +33,8 @@ import { TableModule } from 'primeng/table';
 export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
   override tableColumns: ColumnTableModel[] = WORKING_TABLE_COLUMNS;
   override filters: RoleParams = new RoleParams();
-  override service: BaseCRUDHttpService<any> = inject(GroupService);
-  override formDialog: Type<any> = OfficialCreateFormComponent;
+  override service: BaseCRUDHttpService<any> = inject(WorkingDocsService);
+  override formDialog: Type<any> = WorkingGroupDocsFormComponent;
   constructor() {
     super();
     this.addBreadcrub({ label: 'Repositorio de Información y Documentos', routerLink: '' });

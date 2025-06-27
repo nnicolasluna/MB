@@ -1,0 +1,21 @@
+input[type="file"]::file-selector-button {
+    /* Estilos para el botón "Seleccionar archivo" */
+    background-color: #28a745;
+    /* Verde */
+    color: white;
+    /* Texto blanco */
+    padding: 8px 15px;
+    /* Espaciado interno */
+    border: none;
+    /* Quita el borde predeterminado */
+    border-radius: 5px;
+    /* Bordes ligeramente redondeados */
+    cursor: pointer;
+    /* Cambia el cursor a una mano */
+    font-family: Arial, sans-serif;
+    /* Fuente legible */
+    font-size: 14px;
+    /* Tamaño de fuente */
+    transition: background-color 0.3s ease;
+    /* Transición suave al pasar el ratón */
+}

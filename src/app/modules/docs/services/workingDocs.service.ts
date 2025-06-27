@@ -6,10 +6,10 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
 	providedIn: 'root',
 })
-export class SubDocsService extends BaseExistsService<any> {
+export class WorkingDocsService extends BaseExistsService<any> {
 
 	constructor() {
-		super('subdocs');
+		super('working-docs');
 	}
 	uploadFile(formData: FormData) {
 		return this.http.post(`${this.namespace}/update-file`, formData);
