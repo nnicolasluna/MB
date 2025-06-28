@@ -27,7 +27,7 @@ export const routes: Routes = [
 		loadComponent: () => import('./pages/official/components/sub-category/sub-category.component').then((m) => m.SubCategoryComponent),
 	},
 	{
-		path: 'working-group-docs',
+		path: 'working-group-docs/:name/:id',
 		data: {
 			moduleCode: ResourceTypes.SESSIONS,
 			permission: 'canView',

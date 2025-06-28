@@ -1,104 +1,3 @@
-<!-- <div class="main">
-	<div class="reuniones">
-		<div class="reuniones__head"></div>
-		<div [ngStyle]="{'background-color': ordinario}" class="reunion-label reunion-ordinaria">REUNIONES ORDINARIAS
-		</div>
-		<div [ngStyle]="{'background-color': extraordinario}" class="reunion-label reunion-extraordinaria">REUNIONES
-			EXTRAORDINARIAS</div>
-	</div>
-
-	<div [ngStyle]="{'background-color': calendarioColor}" class="calendario">
-		<div class="mes" *ngFor="let mes of meses; let mesIndex = index">
-			<div class="mes-titulo" [ngStyle]="{'background-color': colorDinamico}">{{ mes }}</div>
-			<div class="reunion-row">
-				<div class="reunion-cell">
-					<div class="inner-container">
-						<ng-container *ngFor="let reunion of getReunionesPorMes(mesIndex, semanaIndex, false)">
-							<div class="reunion-box" [ngClass]="{
-									'estado-realizado': reunion.ESTADO === 'REALIZADO',
-									'estado-sinrealizar': reunion.ESTADO === 'SIN REALIZAR',
-									'estado-progreso': reunion.ESTADO === 'POR REALIZAR',
-									'estado-otro': reunion.ESTADO === 'NO REALIZADO'
-								}">
-								<div class="miniCard">
-									<div class="miniCard__content">
-										<div class="miniCard__date">Fecha:{{ reunion.Fecha }}</div>
-										Objetivo:
-										<div class="miniCard__text">
-											{{ reunion.Objetivo }}
-										</div>
-										<div>Estado: {{ reunion.ESTADO }}</div>
-									</div>
-									<img src="" alt="" />
-								</div>
-								<div class="contenedor">
-									<button class="contenedor__btn"><i class="pi pi-file-plus"></i><span>LLenar
-											Acta</span></button>
-								</div>
-							</div>
-						</ng-container>
-						<ng-container *ngFor="let reunion of getReunionesPorMes(mesIndex, false)">
-							<div class="reunion-box" [ngClass]="{
-			'estado-realizado': reunion.ESTADO === 'REALIZADO',
-			'estado-sinrealizar': reunion.ESTADO === 'SIN REALIZAR',
-			'estado-progreso': reunion.ESTADO === 'POR REALIZAR',
-			'estado-otro': reunion.ESTADO === 'NO REALIZADO'
-		}">
-								<div class="miniCard">
-									<div class="miniCard__content">
-										<div class="miniCard__date">Fecha: {{ reunion.Fecha }}</div>
-										Objetivo:
-										<div class="miniCard__text">{{ reunion.Objetivo }}</div>
-										<div>Estado: {{ reunion.ESTADO }}</div>
-									</div>
-									<img src="" alt="" />
-								</div>
-								<div class="contenedor">
-									<button class="contenedor__btn">
-										<i class="pi pi-file-plus"></i><span>LLenar Acta</span>
-									</button>
-								</div>
-							</div>
-						</ng-container>
-
-					</div>
-				</div>
-			</div>
-			<div class="reunion-row">
-				<div class="reunion-cell" *ngFor="let semana of semanas; let semanaIndex = index">
-					<div class="inner-container">
-						<div *ngFor="let reunion of getReunionesPorMesYSemana(mesIndex, semanaIndex, true)">
-							<div class="reunion-box" [ngClass]="{
-									'estado-realizado': reunion.ESTADO === 'REALIZADO',
-									'estado-progreso': reunion.ESTADO === 'POR REALIZAR',
-									'estado-sinrealizar': reunion.ESTADO === 'SIN REALIZAR',
-									'estado-otro': reunion.ESTADO === 'NO REALIZADO'
-								}">
-								<div class="miniCard">
-									<div class="miniCard__content">
-										<div class="miniCard__date">Fecha:{{ reunion.Fecha }}</div>
-										Objetivo:
-										<div class="miniCard__text">
-											{{ reunion.Objetivo }}
-										</div>
-										<div>Estado: {{ reunion.ESTADO }}</div>
-									</div>
-									<img src="" alt="" />
-								</div>
-								<div class="contenedor">
-									<button *ngIf="reunion.ESTADO!=='REALIZADO'" class="contenedor__btn"><i
-											class="pi pi-file-plus"></i><span>LLenar
-											Acta</span></button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
-
 <div class="calendar">
 	<div class="calendar__header">
 		<div class="calendar__meses" *ngFor="let mes of meses  let i = index">
@@ -112,15 +11,17 @@
   }" class="task__TareaTipo"> {{ reunion.reunionExtraOrdinaria ? 'EXTRAORDINARIO'
 						: 'ORDINARIO' }}</div>
 					<div [ngClass]="getEstadoClase(reunion)" class="task__body">
+						<div class="task__h1"><strong>Grupo:</strong>{{ reunion.grupo }}</div>
 						<div class="task__h1"><strong>Fecha:</strong>{{ reunion.Fecha }}</div>
 						<div class="task__b"><strong> Objetivo:</strong> {{ reunion.Objetivo }}</div>
 						<div *ngIf="expandedKey === (i + '-' + j)" class="task__extra">
 							<div><strong>Estado:</strong> {{ reunion.ESTADO }}</div>
 							<input type="file" #fileInput style="display: none;" accept=".pdf"
 								(change)="onFileSelected($event)">
-							<button *ngIf="!reunion.acta" class="task__button" (click)="fileInput.click()">Subir
+							<button *ngIf="!reunion.acta" class="task__button"
+								(click)="selectReunion(reunion);fileInput.click()">Subir
 								Acta</button>
-							<button *ngIf="reunion.acta" class="task__button">Ver Acta</button>
+							<button *ngIf="reunion.acta" class="task__button" (click)="abrirModal()">Ver Acta</button>
 							<!-- <div><strong>Acta:</strong> {{ reunion.acta || 'Sin acta' }}</div> -->
 						</div>
 					</div>
@@ -131,3 +32,6 @@
 	</div>
 
 </div>
+<!-- <p-dialog [(visible)]="mostrarDialogo" [modal]="true" [style]="{width: '80vw'}">
+	<app-visor-pdf [pdfSrc]="'http://localhost:3000/api/v1/uploads/TareaByFecha/doc_20250628031456205.pdf'"></app-visor-pdf>
+</p-dialog> -->

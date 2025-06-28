@@ -15,31 +15,59 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { WorkingGroupDocsFormComponent } from '../working-group-docs-form/working-group-docs-form.component';
 import { WorkingDocsService } from '@modules/docs/services/workingDocs.service';
+import { ActivatedRoute } from '@angular/router';
+import { ActionType } from '@shared/constants';
+import { WorkingGroupActionComponent } from "../working-group-action/working-group-action.component";
 
 @Component({
-  selector: 'app-working-group-docs',
-  imports: [
-    FormsModule,
-    TableModule,
-    BreadcrumbModule,
-    CheckboxModule,
-    ButtonModule,
-    SelectButtonModule,
-    CardModule,
-  ],
-  templateUrl: './working-group-docs.component.html',
-  styleUrl: './working-group-docs.component.scss'
+	selector: 'app-working-group-docs',
+	imports: [FormsModule, TableModule, BreadcrumbModule, CheckboxModule, ButtonModule, SelectButtonModule, CardModule, WorkingGroupActionComponent],
+	templateUrl: './working-group-docs.component.html',
+	styleUrl: './working-group-docs.component.scss',
 })
 export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
-  override tableColumns: ColumnTableModel[] = WORKING_TABLE_COLUMNS;
-  override filters: RoleParams = new RoleParams();
-  override service: BaseCRUDHttpService<any> = inject(WorkingDocsService);
-  override formDialog: Type<any> = WorkingGroupDocsFormComponent;
-  constructor() {
-    super();
-    this.addBreadcrub({ label: 'Repositorio de Información y Documentos', routerLink: '' });
-    this.addBreadcrub({ label: 'Documentos por Grupo de Trabajo', routerLink: '/docs/workingGroup' });
-    this.addBreadcrub({ label: 'Documentos por Grupo de Trabajo', routerLink: '/docs/workingGroup' });
-  }
-  override onActionClick({ data, action }: ActionClickEvent) { }
+	id_group: any;
+	title: any;
+	override tableColumns: ColumnTableModel[] = WORKING_TABLE_COLUMNS;
+	override filters: RoleParams = new RoleParams();
+	override service: BaseCRUDHttpService<any> = inject(WorkingDocsService);
+	override formDialog: Type<any> = WorkingGroupDocsFormComponent;
+	constructor(private route: ActivatedRoute) {
+		super();
+		this.addBreadcrub({ label: 'Repositorio de Información y Documentos', routerLink: '' });
+		this.addBreadcrub({ label: 'Documentos por Grupo de Trabajo', routerLink: '/docs/workingGroup' });
+	}
+
+	ngOnInit() {
+		this.route.paramMap.subscribe((params) => {
+			this.id_group = params.get('id');
+			this.title = params.get('name');
+			/* this.addBreadcrub({ label: this.title, routerLink: '' }); */
+		});
+	}
+	override onActionClick({ data, action }: ActionClickEvent) {
+		if (!data?.item?.id) return;
+		const { item } = data;
+		switch (action) {
+			case ActionType.VIEW:
+				console.log(data);
+				this.showDialogForm('Visualizar Grupo', { item, isViewMode: true });
+				break;
+
+			case ActionType.EDIT:
+				this.showDialogForm('Editar Grupo', { item });
+				break;
+			case ActionType.DELETE:
+				this.service.delete(item.id).subscribe({
+					next: () => {
+						this.ts.success('Permiso eliminado correctamente');
+						this.list();
+					},
+					error: () => {
+						this.ts.error('Error al eliminar el Permiso');
+					},
+				});
+				break;
+		}
+	}
 }

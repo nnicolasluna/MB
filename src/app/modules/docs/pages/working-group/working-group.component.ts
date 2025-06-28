@@ -43,6 +43,6 @@ export class WorkingGroupComponent extends BaseListFiltersComponent<Role> {
 	}
 	override onActionClick({ data, action }: ActionClickEvent) { }
 	agregarReunion(nombre: string, id: number) {
-		this.router.navigate(['docs/working-group-docs']);
+		this.router.navigate(['docs/working-group-docs', nombre, id]);
 	}
 }

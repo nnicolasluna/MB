@@ -11,6 +11,7 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from '@modules/auth/services/auth.service';
 import { MEMBERS_MENU_ENTRIES } from '@modules/members/constants/modulo-menu-members';
+import { EVENTS_MENU_ENTRIES } from '@modules/monitoring/constants/modulo-menu-events';
 
 @Component({
 	selector: 'app-menu',
@@ -44,15 +45,21 @@ export class MenuComponent {
 				items: [MEETS_MENU_ENTRIES],
 			},
 			{
-				label: '',
+				label: 'hola',
 				isPublic: true,
-				items: [DOCS_MENU_ENTRIES],
+				items: [MEMBERS_MENU_ENTRIES],
+			},
+			{
+				label: 'hola mundi',
+				isPublic: true,
+				items: [EVENTS_MENU_ENTRIES],
 			},
 			{
 				label: '',
 				isPublic: true,
-				items: [MEMBERS_MENU_ENTRIES],
+				items: [DOCS_MENU_ENTRIES],
 			},
+			
 			{
 				isPublic: true,
 				separator: true,

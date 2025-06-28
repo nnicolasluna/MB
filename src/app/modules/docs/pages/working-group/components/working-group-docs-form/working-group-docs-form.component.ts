@@ -23,11 +23,12 @@ export class WorkingGroupDocsFormComponent extends BaseFormComponent<any> {
 		super();
 		this.id_group = config.data?.id_group;
 	}
+
 	override buildForm(): void {
 		this._form = this._fb.group({
 			nombre: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 			descripcion: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-
+			nombreArchivo: [],
 			grupoId: [Number(this.id_group)],
 		});
 	}
@@ -89,5 +90,20 @@ export class WorkingGroupDocsFormComponent extends BaseFormComponent<any> {
 			this.isLoading.set(false);
 			console.error(error);
 		}
+	}
+	override ngOnInit(): void {
+		super.ngOnInit();
+
+		const data = this.config.data;
+
+		setTimeout(() => {
+			if (data?.item) {
+				const { ...resto } = data.item;
+
+				this._form.patchValue({
+					...resto,
+				});
+			}
+		});
 	}
 }

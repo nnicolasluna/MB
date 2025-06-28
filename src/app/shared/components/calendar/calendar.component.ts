@@ -1,16 +1,26 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Nullable } from 'primeng/ts-helpers';
+import { ActivityService } from '@modules/meets/services/activity.service';
+import { firstValueFrom } from 'rxjs';
+import { ToastService } from '@shared/services';
+import { DialogModule } from 'primeng/dialog';
+
 interface Reunion {
+	id: number;
 	Fecha: string;
 	Objetivo: string;
 	ESTADO: string;
 	reunionExtraOrdinaria: boolean;
 	acta: string;
+	grupo: string;
+	responsableId: number;
+	actividadId: number;
+	resultado: string;
 }
 @Component({
 	selector: 'app-calendar',
-	imports: [CommonModule],
+	imports: [CommonModule, DialogModule],
 	templateUrl: './calendar.component.html',
 	styleUrl: './calendar.component.scss',
 })
@@ -21,7 +31,10 @@ export class CalendarComponent implements OnChanges {
 	@Input() extraordinario: string = '#b3b3b3';
 	@Input() calendarioColor: string = '#eee';
 	processedData: any[] = [];
+	selectedReunion: Reunion | null = null;
 
+	_service = inject(ActivityService);
+	_ts = inject(ToastService);
 	meses = [
 		'Enero',
 		'Febrero',
@@ -39,31 +52,6 @@ export class CalendarComponent implements OnChanges {
 
 	semanas = Array(4);
 
-	/* getReunionesPorMesYSemana(mesIndex: number, semanaIndex: number, esExtraordinaria: boolean) {
-		return this.data.filter((reunion: Reunion) => {
-			const partesFecha = reunion.Fecha.split('/');
-			const dia = parseInt(partesFecha[0], 10);
-			const mes = parseInt(partesFecha[1], 10) - 1;
-
-			const semanaRangos = [
-				[1, 7],
-				[8, 14],
-				[15, 21],
-				[22, 31],
-			];
-			const [inicio, fin] = semanaRangos[semanaIndex];
-
-			return mes === mesIndex && reunion.reunionExtraOrdinaria === esExtraordinaria && dia >= inicio && dia <= fin;
-		});
-	} */
-	/* getReunionesPorMes(mesIndex: number, esExtraordinaria: boolean) {
-		return this.data.filter((reunion: Reunion) => {
-			const partesFecha = reunion.Fecha.split('/');
-			const mes = parseInt(partesFecha[1], 10) - 1;
-			console.log(mes)
-			return mes === mesIndex && reunion.reunionExtraOrdinaria === esExtraordinaria;
-		});
-	} */
 	reunionesPorMes: Reunion[][] = Array.from({ length: 12 }, () => []);
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -90,7 +78,8 @@ export class CalendarComponent implements OnChanges {
 		const fechaActual = new Date();
 
 		// Calcular diferencia de meses
-		const diffMeses = (fechaReunion.getFullYear() - fechaActual.getFullYear()) * 12 +
+		const diffMeses =
+			(fechaReunion.getFullYear() - fechaActual.getFullYear()) * 12 +
 			(fechaReunion.getMonth() - fechaActual.getMonth());
 
 		if (!actaVacia) {
@@ -103,29 +92,52 @@ export class CalendarComponent implements OnChanges {
 			return 'estado-norealizado';
 		}
 	}
+
 	expandedKey: string | null = null;
+	file: File | null = null;
+	generatedFileName: string = '';
 
 	toggleExpand(key: string): void {
 		this.expandedKey = this.expandedKey === key ? null : key;
 	}
-	onFileSelected(event: any) {
-		const file: File = event.target.files[0]; // Obtiene el primer archivo seleccionado
-
-		if (file) {
-			if (file.type === 'application/pdf') {
-				console.log('Archivo PDF seleccionado:', file.name);
-				// Aquí puedes realizar las siguientes acciones:
-				// 1. Mostrar el nombre del archivo al usuario.
-				// 2. Subir el archivo a un servidor (usando HttpClient).
-				// 3. Leer el contenido del archivo si es necesario (FileReader).
-
-				// Ejemplo: Actualizar la propiedad 'acta' de 'reunion' (si es que la necesitas para algo visual)
-				// O podrías asignar el archivo directamente o su URL/nombre
+	async onFileSelected(event: any) {
+		this.file = event.target.files[0];
+		if (this.file) {
+			const ext = this.file.name.split('.').pop();
+			const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '');
+			this.generatedFileName = `doc_${timestamp}.${ext}`;
+		}
+		if (this.file) {
+			if (this.file.type === 'application/pdf') {
+				console.log('Archivo PDF seleccionado:', this.file.name);
+				await this.uploadFile();
 			} else {
 				alert('Por favor, selecciona un archivo PDF válido.');
-				// O limpia el input si quieres que el usuario intente de nuevo
-				// event.target.value = null;
 			}
 		}
+	}
+	async uploadFile(): Promise<void> {
+		if (!this.file || !this.generatedFileName) throw new Error('Archivo no válido');
+
+		const renamedFile = new File([this.file], this.generatedFileName, {
+			type: this.file.type,
+		});
+
+		const formData = new FormData();
+		formData.append('file', renamedFile);
+		try {
+			const response = await firstValueFrom(this._service.uploadFile(formData));
+			console.log('Archivo subido:', response);
+			await firstValueFrom(this._service.update(this.selectedReunion!.id, { acta: this.generatedFileName }));
+		} catch {}
+	}
+	selectReunion(reunion: Reunion): void {
+		this.selectedReunion = reunion;
+		console.log(this.selectedReunion);
+	}
+	mostrarDialogo = false;
+	abrirModal() {
+		console.log('abierto');
+		this.mostrarDialogo = true;
 	}
 }

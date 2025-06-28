@@ -26,7 +26,7 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(ActivityService);
 	override formDialog: Type<any> = FormActividadesComponent;
-	override onActionClick(): void { }
+	override onActionClick(): void {}
 	constructor(private route: ActivatedRoute) {
 		super();
 		this.addBreadcrub({ label: 'Reuniones y Convocatorias', routerLink: '' });
@@ -34,7 +34,6 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 		this.getActivities();
 	}
 	ngOnInit(): void {
-
 		this.route.paramMap.subscribe((params) => {
 			this.title = params.get('name');
 			this.addBreadcrub({ label: this.title, routerLink: '/meets/agenda/calendar' });
@@ -83,11 +82,11 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 			}
 		});
 	} */
-	getActivities(): void {
+	/* getActivities(): void {
 		this.service.getAll(this.filters).subscribe({
 			next: (response) => {
 				this.activities = response;
-
+				console.log(response)
 				const today = new Date();
 
 				const processedData = (response.items as any[]).flatMap((item: any) =>
@@ -116,6 +115,7 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 								Fecha: fechaDate.toLocaleDateString('es-BO'),
 								Objetivo: tarea.nombre,
 								ESTADO: estado,
+								grupo:grupo.nombre,
 								reunionExtraOrdinaria: item.tipo !== 'Ordinaria',
 							};
 						})
@@ -128,7 +128,58 @@ export class AgendaCalendarComponent extends BaseListFiltersComponent<any> {
 				console.error(error);
 			}
 		});
+	} */
+	getActivities(): void {
+		this.service.getAll(this.filters).subscribe({
+			next: (response) => {
+				this.activities = response;
+				console.log(response);
+				const today = new Date();
+
+				const processedData = (response.items as any[]).flatMap((item: any) =>
+					item.Tarea.flatMap((tarea: any) =>
+						tarea.FechaProgramada.map((fecha: any) => {
+							const fechaDate = new Date(fecha.fechaHora);
+
+							const diffMonths = today.getMonth() - fechaDate.getMonth();
+
+							let estado = '';
+							if (tarea.acta && tarea.acta.trim() !== '') {
+								estado = 'REALIZADO';
+							} else if ((!tarea.acta || tarea.acta.trim() === '') && fechaDate < today) {
+								estado = 'SIN REALIZAR';
+							} else if (diffMonths <= 3) {
+								estado = 'POR REALIZAR';
+							} else if (diffMonths > -3) {
+								estado = 'NO REALIZADO';
+							} else {
+								estado = 'NO REALIZADO';
+							}
+
+							return {
+								Fecha: fechaDate.toLocaleDateString('es-BO'),
+								Objetivo: tarea.nombre,
+								id: tarea.id,
+								ESTADO: estado,
+								acta:tarea.acta,
+								responsableId:tarea.responsableId,
+								actividadId:tarea.actividadId,
+								resultado:tarea.responsable,
+								grupo: item.grupo?.nombre ?? '', 
+								reunionExtraOrdinaria: item.tipo !== 'Ordinaria',
+							};
+						})
+					)
+				);
+
+				this.data$.next(processedData);
+			},
+			error: (error) => {
+				console.error(error);
+			},
+		});
 	}
+
 	reloadpage(): void {
 		window.location.reload();
 	}
