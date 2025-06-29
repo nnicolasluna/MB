@@ -45,12 +45,12 @@ export class MenuComponent {
 				items: [MEETS_MENU_ENTRIES],
 			},
 			{
-				label: 'hola',
+				label: '',
 				isPublic: true,
 				items: [MEMBERS_MENU_ENTRIES],
 			},
 			{
-				label: 'hola mundi',
+				label: '',
 				isPublic: true,
 				items: [EVENTS_MENU_ENTRIES],
 			},
