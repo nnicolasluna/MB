@@ -50,9 +50,9 @@ export class SessionComponent extends BaseListFiltersComponent<any> {
 		this.addBreadcrub({ label: 'Reuniones y Convocatorias', routerLink: '' });
 		this.addBreadcrub({ label: 'Administración de Sesiones', routerLink: '/meets/session' });
 	}
-	override onActionClick({ data, action }: ActionClickEvent) {}
-	agregarReunion(nombre: string, id: number) {
-		this.router.navigate(['meets/activitiesByGroup', nombre, id]);
+	override onActionClick({ data, action }: ActionClickEvent) { }
+	agregarReunion(nombre: string, id: number, mesa: Boolean) {
+		this.router.navigate(['meets/activitiesByGroup', nombre, id, mesa]);
 	}
-	
+
 }

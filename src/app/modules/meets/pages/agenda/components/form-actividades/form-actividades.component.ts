@@ -14,7 +14,7 @@ import { BaseCRUDHttpService, ToastService } from '@shared/services';
 import { GroupService } from '@modules/members/services/group.service';
 import { AgendaService } from '@modules/meets/services/agenda.service';
 import { ActivityService } from '@modules/meets/services/activity.service';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, catchError, of } from 'rxjs';
 
@@ -43,17 +43,22 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	ts = inject(ToastService);
 	ref = inject(DynamicDialogRef);
 	GroupService = inject(GroupService);
+	id_group: any
+	sessionMesa: any
 	//override _service = inject(UserService);
 	override _service: BaseCRUDHttpService<any> = inject(AgendaService);
-	constructor(private actividadService: ActivityService) {
+	constructor(private actividadService: ActivityService, public config: DynamicDialogConfig) {
 		super();
+		this.id_group = config.data?.id_group;
+		this.sessionMesa = config.data?.sesionesMBC;
+		console.log(this.sessionMesa)
 		this.TypeActivity = [{ name: 'Ordinaria' }, { name: 'Extraordinaria' }];
 	}
 	override buildForm(): void {
 		this._form = this._fb.group({
 			actividad: ['', Validators.required],
-			TipoActividad: ['', Validators.required],
-			grupo: [null, Validators.required],
+			TipoActividad: [''],
+			grupo: [Number(this.id_group)],
 		});
 	}
 	agregarFormulario(): void {
@@ -78,7 +83,6 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 			actividad: datosActividad,
 			tareas: this.datosTareas,
 		};
-		/* console.log(payload); */
 		if (this.datosTareas.length > 0 && this.ValidadorTareas[0]) {
 			this.actividadService.create(payload).subscribe({
 				next: (response) => {
@@ -107,4 +111,38 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 			catchError(() => of([]))
 		)
 	);
+	override ngOnInit(): void {
+		super.ngOnInit();
+
+		const data = this.config.data;
+
+		setTimeout(() => {
+			if (data?.item) {
+				const item = data.item;
+				const tipoActividadObj = this.TypeActivity.find(
+					(tipo: { name: string }) => tipo.name === item.tipo
+				);
+				this._form.patchValue({
+					id: item.id,
+					actividad: item.nombre,
+					TipoActividad: tipoActividadObj ?? null,
+					grupo: item.grupoId,
+				});
+				if (item.Tarea?.length) {
+					this.formulariosNombres = item.Tarea.map((tarea: any) => ({
+						...tarea // puedes incluir más lógica si necesitas
+					}));
+
+					// Espera un ciclo para asegurar que los componentes hijos existan
+					setTimeout(() => {
+						this.formularios.forEach((formTareaComponent, index) => {
+							const tarea = item.Tarea[index];
+							formTareaComponent.setDatos(tarea); // método que debes implementar en FormTareasComponent
+						});
+					});
+				}
+			}
+
+		});
+	}
 }

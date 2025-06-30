@@ -35,8 +35,9 @@
 			<tr>
 				<td>{{ data.nombre}}</td>
 				<td>
-					<p-button pInputText pTooltip="Ver Actividades" (onClick)="agregarReunion(data.nombre,data.id)" tooltipPosition="left" class="action"
-						icon="pi pi-eye" />
+					<p-button pInputText pTooltip="Ver Actividades"
+						(onClick)="agregarReunion(data.nombre,data.id,data.mesabosques)" tooltipPosition="left"
+						class="action" icon="pi pi-eye" />
 				</td>
 			</tr>
 		</ng-template>

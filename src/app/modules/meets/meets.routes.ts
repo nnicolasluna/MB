@@ -35,7 +35,7 @@ export const routes: Routes = [
 		loadComponent: () => import('./pages/agenda/components/form-actividades/form-actividades.component').then((m) => m.FormActividadesComponent),
 	},
 	{
-		path: 'activitiesByGroup/:name/:id',
+		path: 'activitiesByGroup/:name/:id/:mesa',
 		data: {
 			moduleCode: ResourceTypes.AGENDA,
 			permission: 'canView',

@@ -67,4 +67,39 @@ export class FormTareasComponent {
 	marcarCamposComoTocados(): void {
 		this._form.markAllAsTouched();
 	}
+	setDatos(tarea: any) {
+		const intervalo = setInterval(() => {
+			const usuarios = this.Users();
+			if (!usuarios || usuarios.length === 0) {
+				return;
+			}
+
+			const responsableObj = usuarios.find((u: any) => u.id === tarea.responsableId);
+
+			this._form.patchValue({
+				tarea: tarea.nombre,
+				responsable: responsableObj ?? null,
+				resultado: tarea.resultado,
+				fechas: this.convertirFechas(tarea),
+			});
+
+			clearInterval(intervalo); // detener el intervalo cuando ya se actualizó
+		}, 100); // revisa cada 100ms hasta que haya data
+	}
+
+
+	convertirFechas(tarea: any): Date[] {
+		if (!Array.isArray(tarea.FechaProgramada) || tarea.FechaProgramada.length === 0) {
+			return [];
+		}
+
+		// Ordena las fechas por fechaHora ascendente (opcional pero útil)
+		const fechasOrdenadas = tarea.FechaProgramada
+			.map((f: any) => new Date(f.fechaHora))
+			.sort((a: any, b: any) => a.getTime() - b.getTime());
+
+		return fechasOrdenadas;
+	}
+
+
 }

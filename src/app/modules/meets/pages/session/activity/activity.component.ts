@@ -20,6 +20,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { FormActividadesComponent } from '../../agenda/components/form-actividades/form-actividades.component';
+import { GroupActionFormComponent } from "../../../../members/pages/groups/components/group-action-form/group-action-form.component";
+import { ActionType } from '@shared/constants';
 
 @Component({
 	selector: 'app-activity',
@@ -33,6 +35,7 @@ import { FormActividadesComponent } from '../../agenda/components/form-actividad
 		SelectButtonModule,
 		CardModule,
 		TooltipModule,
+		GroupActionFormComponent
 	],
 	templateUrl: './activity.component.html',
 	styleUrl: './activity.component.scss',
@@ -44,17 +47,43 @@ export class ActivityComponent extends BaseListFiltersComponent<any> {
 	override service: BaseCRUDHttpService<any> = inject(ActivityService);
 	title: any;
 	id_group: any;
+	sesiones: any
 	override formDialog: Type<any> = FormActividadesComponent;
 	constructor(private route: ActivatedRoute) {
 		super();
 		this.addBreadcrub({ label: 'Reuniones y Convocatorias', routerLink: '' });
 		this.addBreadcrub({ label: 'Administración de Sesiones', routerLink: '/meets/session' });
 	}
-	override onActionClick({ data, action }: ActionClickEvent) {}
+	override onActionClick({ data, action }: ActionClickEvent) {
+		if (!data?.item?.id) return;
+		const { item } = data;
+		switch (action) {
+			case ActionType.VIEW:
+				console.log(data)
+				this.showDialogForm('Visualizar Actividad', { item, isViewMode: true, sesionesMBC: this.sesiones });
+				break;
+
+			case ActionType.EDIT:
+				this.showDialogForm('Editar Actividad', { item, sesionesMBC: this.sesiones });
+				break;
+			case ActionType.DELETE:
+				this.service.delete(item.id).subscribe({
+					next: () => {
+						this.ts.success('Permiso correctamente');
+						this.list();
+					},
+					error: () => {
+						this.ts.error('Error al eliminar');
+					},
+				});
+				break;
+		}
+	}
 	ngOnInit(): void {
 		this.route.paramMap.subscribe((params) => {
 			this.title = params.get('name');
-      this.id_group = params.get('id');
+			this.id_group = params.get('id');
+			this.sesiones = params.get('mesa');
 			this.addBreadcrub({ label: this.title, routerLink: '' });
 		});
 	}
@@ -63,7 +92,6 @@ export class ActivityComponent extends BaseListFiltersComponent<any> {
 
 		this.service.getById(this.id_group).subscribe({
 			next: (items) => {
-				console.log(items);
 				this.items.set([...items.items]);
 				this.totalRecords.set(items.total);
 				this.isLoading.set(false);

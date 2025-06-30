@@ -1,49 +1,27 @@
 <div class="h-full my-4 p-4 bg-white rounded-lg shadow-md">
 	<form [formGroup]="_form">
 		<div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-h-48">
-			<app-input-text
-				label="Tarea"
-				placeholder="Ingrese Tarea"
-				name="tarea"
-				[control]="controls['tarea']"
-			></app-input-text>
+			<app-input-text label="Tarea" placeholder="Ingrese Tarea" name="tarea"
+				[control]="controls['tarea']"></app-input-text>
 			<div>
 				<label class="block font-medium mb-2">Fechas:</label>
-				<p-datepicker
-					formControlName="fechas"
-					selectionMode="multiple"
-					appendTo="body"
-					[showIcon]="true"
-					styleClass="w-full"
-					placeholder="Seleccionar Fecha"
-				>
+				<p-datepicker formControlName="fechas" selectionMode="range" appendTo="body" [showIcon]="true"
+					styleClass="w-full" placeholder="Seleccionar Fecha">
 				</p-datepicker>
 				<app-input-error [control]="controls['fechas']"></app-input-error>
 			</div>
-			<app-input-text
-				label="Resultado Esperado"
-				placeholder="Ingrese resultado"
-				name="resultado"
-				[control]="controls['resultado']"
-			></app-input-text>
+			<app-input-text label="Resultado Esperado" placeholder="Ingrese resultado" name="resultado"
+				[control]="controls['resultado']"></app-input-text>
 			<!--  -->
 			<div>
 				<label class="block font-medium mb-2" for="idRole">Responsable:</label>
-				<p-select
-					formControlName="responsable"
-					[checkmark]="true"
-					optionLabel="name"
-					[filter]="true"
-					[showClear]="true"
-					[options]="Users()"
-					class="w-full"
-					[appendTo]="'body'"
-					placeholder="Seleccione respondable"
-				>
+				<p-select formControlName="responsable" [checkmark]="true" optionLabel="name" [filter]="true"
+					[showClear]="true" [options]="Users()" class="w-full" [appendTo]="'body'"
+					placeholder="Seleccione respondable">
 				</p-select>
 				<app-input-error [control]="controls['responsable']"></app-input-error>
 			</div>
-			
+
 		</div>
 	</form>
 </div>

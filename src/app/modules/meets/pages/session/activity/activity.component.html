@@ -5,7 +5,7 @@
         </div>
         <div class="min-w-max flex gap-1">
             <p-button styleClass="h-full" label="Crear Actividad" icon="pi pi-plus"
-                (click)="showDialogForm('Crear Actividad')" />
+                (click)="showDialogForm('Crear Actividad', { id_group: id_group, sesionesMBC:sesiones })" />
             <div class="min-w-max flex gap-1">
                 <p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
                     (click)="onReload()" />
@@ -39,8 +39,11 @@
                 <tr>
                     <td>{{ data.nombre}}</td>
                     <td>
-                        <p-button pInputText pTooltip="Ver Tareas" tooltipPosition="left" class="action"
-                            (click)="showDialogForm('Tareas')" icon="pi pi-eye" />
+                        <p-button pInputText pTooltip="Ver Calendario" tooltipPosition="left" class="action"
+                            (click)="showDialogForm('Tareas')" icon="pi pi-calendar-times" />
+                        <app-group-action-form (onActionClick)="onActionClick($event)" [inline]="true"
+                            [item]="data"></app-group-action-form>
+
                     </td>
                 </tr>
             </ng-template>
