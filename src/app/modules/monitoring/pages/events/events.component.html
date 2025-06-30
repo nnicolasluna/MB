@@ -34,13 +34,17 @@
         <ng-template pTemplate="body" let-data>
             <tr>
                 <td>{{ data.nombre}}</td>
-                <td>{{ data.tipo}}</td>
-                <td>{{ data.grupo.nombre}}</td>
+                <!-- <td>{{ data.tipo}}</td>
+                <td>{{ data.grupo.nombre}}</td> -->
                 <td>
-                    <p-button  pInputText pTooltip="Ver Acta" tooltipPosition="left" *ngIf="data.acta" class="action" icon="pi pi-eye" />
-                    <p-button  pInputText pTooltip="Borrar Acta" tooltipPosition="left"  *ngIf="data.acta" class="action" icon="pi pi-trash" />
-                    <p-button  pInputText pTooltip="Ver Lista Participantes" tooltipPosition="left" *ngIf="data.acta" class="action" icon="pi pi-eye" />
-                    <p-button  pInputText pTooltip="Borrar Lista Participantes" tooltipPosition="left" *ngIf="data.acta" class="action" icon="pi pi-trash" />
+                    <p-button pInputText pTooltip="Ver Acta" tooltipPosition="left" *ngIf="data.acta" class="action"
+                        icon="pi pi-eye" />
+                    <p-button pInputText pTooltip="Borrar Acta" tooltipPosition="left" *ngIf="data.acta" class="action"
+                        icon="pi pi-trash" />
+                    <p-button pInputText pTooltip="Ver Lista Participantes" tooltipPosition="left" *ngIf="data.acta"
+                        class="action" icon="pi pi-eye" />
+                    <p-button pInputText pTooltip="Borrar Lista Participantes" tooltipPosition="left" *ngIf="data.acta"
+                        class="action" icon="pi pi-trash" />
                 </td>
             </tr>
         </ng-template>

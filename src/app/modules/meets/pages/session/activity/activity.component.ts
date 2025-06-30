@@ -22,6 +22,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { FormActividadesComponent } from '../../agenda/components/form-actividades/form-actividades.component';
 import { GroupActionFormComponent } from "../../../../members/pages/groups/components/group-action-form/group-action-form.component";
 import { ActionType } from '@shared/constants';
+import { CalendarGanttComponent } from '@shared/components/calendar-gantt/calendar-gantt.component';
 
 @Component({
 	selector: 'app-activity',
@@ -49,6 +50,7 @@ export class ActivityComponent extends BaseListFiltersComponent<any> {
 	id_group: any;
 	sesiones: any
 	override formDialog: Type<any> = FormActividadesComponent;
+	CalendarDialog: Type<any> = CalendarGanttComponent;
 	constructor(private route: ActivatedRoute) {
 		super();
 		this.addBreadcrub({ label: 'Reuniones y Convocatorias', routerLink: '' });
@@ -59,7 +61,6 @@ export class ActivityComponent extends BaseListFiltersComponent<any> {
 		const { item } = data;
 		switch (action) {
 			case ActionType.VIEW:
-				console.log(data)
 				this.showDialogForm('Visualizar Actividad', { item, isViewMode: true, sesionesMBC: this.sesiones });
 				break;
 
@@ -102,6 +103,19 @@ export class ActivityComponent extends BaseListFiltersComponent<any> {
 				this.items.set([]);
 				this.ts.error('Error al cargar los registros');
 			},
+		});
+	}
+	showDialogFormCalendar(header: string, data?: any, dialog = this.CalendarDialog) {
+		if (!dialog) return;
+		this.modalConfig.data = data ?? {};
+		this.modalConfig.data.columns = this.requiredColumns;
+		this.modalConfig.data.service = this.service;
+		this.modalConfig.header = header;
+		this.formDialogRef = this.ds.open(dialog, this.modalConfig);
+		this.formDialogRef.onClose.subscribe((data) => {
+			if (data) this.list();
+			this.formDialogRef?.destroy();
+			this.cdr.detectChanges();
 		});
 	}
 }

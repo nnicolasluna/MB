@@ -1,0 +1,49 @@
+<!-- gantt-chart.component.html -->
+<div class="gantt-container">
+
+    <div class="gantt-wrapper">
+        <!-- Columna de tareas -->
+        <div class="tasks-column">
+            <div class="task-header">
+                <h5>Tareas</h5>
+            </div>
+            <div class="task-list">
+                <div *ngFor="let task of tasks" class="task-row" [style.border-left]="'4px solid ' + task.color">
+                    <div class="task-info">
+                        <div class="task-name">{{ task.name }}</div>
+                        <div class="task-dates">
+                            {{ formatDate(task.startDate) }} - {{ formatDate(task.endDate) }}
+                        </div>
+                        <div class="task-progress-text">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área del timeline -->
+        <div class="timeline-area">
+            <div class="timeline-header">
+                <div class="time-scale">
+                    <div *ngFor="let date of meses" class="time-cell">
+                        <div class="date-day">{{date}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="gantt-bars">
+                <div *ngFor="let task of tasks; let i = index" class="task-bar-row" [class.even]="i % 2 === 0">
+
+                    <div class="task-bar" [style.left.%]="getTaskPosition(task).left"
+                        [style.width.%]="getTaskPosition(task).width" [style.background-color]="task.color"
+                        [title]="task.name + ' (' + task.progress + '%'">
+
+                        <div class="task-label">
+                            {{ task.name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
