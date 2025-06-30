@@ -17,11 +17,23 @@ import { WorkingGroupDocsFormComponent } from '../working-group-docs-form/workin
 import { WorkingDocsService } from '@modules/docs/services/workingDocs.service';
 import { ActivatedRoute } from '@angular/router';
 import { ActionType } from '@shared/constants';
-import { WorkingGroupActionComponent } from "../working-group-action/working-group-action.component";
+import { WorkingGroupActionComponent } from '../working-group-action/working-group-action.component';
+import { firstValueFrom } from 'rxjs';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
 	selector: 'app-working-group-docs',
-	imports: [FormsModule, TableModule, BreadcrumbModule, CheckboxModule, ButtonModule, SelectButtonModule, CardModule, WorkingGroupActionComponent],
+	imports: [
+		FormsModule,
+		TableModule,
+		BreadcrumbModule,
+		CheckboxModule,
+		ButtonModule,
+		SelectButtonModule,
+		CardModule,
+		WorkingGroupActionComponent,
+		TooltipModule,
+	],
 	templateUrl: './working-group-docs.component.html',
 	styleUrl: './working-group-docs.component.scss',
 })
@@ -31,6 +43,7 @@ export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
 	override tableColumns: ColumnTableModel[] = WORKING_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(WorkingDocsService);
+	_service = inject(WorkingDocsService);
 	override formDialog: Type<any> = WorkingGroupDocsFormComponent;
 	constructor(private route: ActivatedRoute) {
 		super();
@@ -42,7 +55,7 @@ export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
 		this.route.paramMap.subscribe((params) => {
 			this.id_group = params.get('id');
 			this.title = params.get('name');
-			/* this.addBreadcrub({ label: this.title, routerLink: '' }); */
+			this.addBreadcrub({ label: this.title, routerLink: '' });
 		});
 	}
 	override onActionClick({ data, action }: ActionClickEvent) {
@@ -70,4 +83,18 @@ export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
 				break;
 		}
 	}
+	downloadFile = async (filename: string) => {
+		try {
+			const token = localStorage.getItem('token')!;
+			const response = await firstValueFrom(this._service.downloadFile(filename, token));
+			const url = window.URL.createObjectURL(response);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = filename;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		} catch (error) {
+			console.error('Error al descargar:', error);
+		}
+	};
 }

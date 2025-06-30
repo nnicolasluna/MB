@@ -19,8 +19,10 @@ import { TableModule } from 'primeng/table';
 import { SubCategoryCreateFormComponent } from '../sub-category-create-form/sub-category-create-form.component';
 import { SubDocsService } from '@modules/docs/services/Subdocs.service';
 import { SUB_TABLE_COLUMNS } from '@modules/docs/constants/sub';
-import { SubCategoryActionComponent } from "../sub-category-action/sub-category-action.component";
+import { SubCategoryActionComponent } from '../sub-category-action/sub-category-action.component';
 import { ActionType } from '@shared/constants';
+import { firstValueFrom } from 'rxjs';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
 	selector: 'app-sub-category',
@@ -33,17 +35,19 @@ import { ActionType } from '@shared/constants';
 		SelectButtonModule,
 		CardModule,
 		CommonModule,
-		SubCategoryActionComponent
+		SubCategoryActionComponent,
+		TooltipModule
 	],
 	templateUrl: './sub-category.component.html',
 	styleUrl: './sub-category.component.scss',
 })
 export class SubCategoryComponent extends BaseListFiltersComponent<any> {
 	title: any;
-	id: any
+	id: any;
 	override tableColumns: ColumnTableModel[] = SUB_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(SubDocsService);
+	_service = inject(SubDocsService);
 	override formDialog: Type<any> = SubCategoryCreateFormComponent;
 	override onActionClick({ data, action }: ActionClickEvent) {
 		if (!data?.item?.id) return;
@@ -104,10 +108,22 @@ export class SubCategoryComponent extends BaseListFiltersComponent<any> {
 
 		const formData = new FormData();
 		formData.append('pdf', this.selectedFile);
-
-
 	}
 	triggerFileInput(fileInput: HTMLInputElement) {
 		fileInput.click();
 	}
+	downloadFile = async (filename: string) => {
+		try {
+			const token = localStorage.getItem('token')!;
+			const response = await firstValueFrom(this._service.downloadFile(filename, token));
+			const url = window.URL.createObjectURL(response);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = filename;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		} catch (error) {
+			console.error('Error al descargar:', error);
+		}
+	};
 }

@@ -20,6 +20,8 @@ import { OfficialCreateFormComponent } from './components/official-create-form/o
 import { DocsService } from '@modules/docs/services/docs.service';
 import { OfficialActionComponent } from './components/official-action/official-action.component';
 import { Router } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
+
 @Component({
 	selector: 'app-official',
 	imports: [
@@ -32,6 +34,7 @@ import { Router } from '@angular/router';
 		SelectButtonModule,
 		CardModule,
 		OfficialActionComponent,
+		TooltipModule
 	],
 	templateUrl: './official.component.html',
 	styleUrl: './official.component.scss',

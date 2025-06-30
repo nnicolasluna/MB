@@ -31,15 +31,22 @@ export class GroupCreateFormComponent extends BaseFormComponent<GroupModel> {
 	override _service = inject(GroupService);
 	private _userService = inject(UserService);
 	private config = inject(DynamicDialogConfig);
-
+	TypeActivity: any;
 	override buildForm(): void {
 		this._form = this._fb.group({
 			nombre: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 			periodo: [, [Validators.required]],
 			participantes: [[]],
+			mesabosques: [null, [Validators.required]],
 		});
 	}
-
+	constructor() {
+		super();
+		this.TypeActivity = [
+			{ name: 'Grupo de trabajo', value: false },
+			{ name: 'Sesiones de la MBC', value: true },
+		];
+	}
 	public Users = toSignal(
 		this._userService.getAll(new UserParams().setShowAll(true).setSortField('name')).pipe(
 			map((res) => res?.items ?? []),
@@ -84,5 +91,4 @@ export class GroupCreateFormComponent extends BaseFormComponent<GroupModel> {
 			this.isViewMode = data?.isViewMode ?? false; */
 		});
 	}
-
 }

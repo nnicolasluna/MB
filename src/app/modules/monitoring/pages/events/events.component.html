@@ -5,15 +5,12 @@
         </div>
 
         <div class="min-w-max flex gap-1">
-            <!--             <p-button styleClass="h-full" label="Crear Grupo" icon="pi pi-plus"
-                (click)="showDialogForm('Crear Grupo de Trabajo')" /> -->
-
             <p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
                 (click)="onReload()" />
         </div>
     </div>
 
-    <p-table [value]="items1()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
+    <p-table [value]="items()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
         [showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
         [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
         (onLazyLoad)="onLazyLoad($event)" [lazyLoadOnInit]="true">
@@ -36,12 +33,14 @@
         </ng-template>
         <ng-template pTemplate="body" let-data>
             <tr>
-                <td>{{ data.fechaHora | date: 'dd/MM/yyyy' }}</td>
-                <td>{{ data.Tarea.Actividad.grupo.nombre}}</td>
-                <td>{{ data.Tarea.nombre}}</td>
+                <td>{{ data.nombre}}</td>
+                <td>{{ data.tipo}}</td>
+                <td>{{ data.grupo.nombre}}</td>
                 <td>
-                    <p-button class="action" icon="pi pi-eye" />
-
+                    <p-button  pInputText pTooltip="Ver Acta" tooltipPosition="left" *ngIf="data.acta" class="action" icon="pi pi-eye" />
+                    <p-button  pInputText pTooltip="Borrar Acta" tooltipPosition="left"  *ngIf="data.acta" class="action" icon="pi pi-trash" />
+                    <p-button  pInputText pTooltip="Ver Lista Participantes" tooltipPosition="left" *ngIf="data.acta" class="action" icon="pi pi-eye" />
+                    <p-button  pInputText pTooltip="Borrar Lista Participantes" tooltipPosition="left" *ngIf="data.acta" class="action" icon="pi pi-trash" />
                 </td>
             </tr>
         </ng-template>

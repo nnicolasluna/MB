@@ -11,17 +11,17 @@
                     (click)="showDialogForm('Crear Reunión', { id_group: id_group })" />
 
                 <p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
-                    (click)="onReload()" />
+                    (click)="onReloadPage()" />
             </div>
         </div>
     </div>
 
 
 
-    <p-table [value]="group" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
+    <p-table [value]="group()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
         [showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
         [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
-        (onLazyLoad)="onLazyLoad($event)" [lazyLoadOnInit]="true">
+        (onLazyLoad)="onLazyLoadWork($event)" [lazyLoadOnInit]="true">
         <ng-template pTemplate="caption" dataKey="id">
             <div class="flex justify-content-between flex-column sm:flex-row">Lista de Reuniones</div>
         </ng-template>
@@ -42,7 +42,7 @@
             <tr>
                 <td>{{ data.nombreReunion }}</td>
                 <td>{{ data.fechaReunion | date: 'dd/MM/yyyy HH:mm'}}</td>
-                <td>{{ data.fechaSegundaReunion | date: 'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{ data.modalidad}}</td>
                 <td>
                     <app-work-action (onActionClick)="onActionClick($event)" [inline]="true"
                         [item]="data"></app-work-action>

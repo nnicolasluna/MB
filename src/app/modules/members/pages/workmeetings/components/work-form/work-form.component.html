@@ -17,6 +17,17 @@
                     [showTime]="true" [hourFormat]="'12'" />
                 <app-input-error [control]="controls['fechaSegundaReunion']"></app-input-error>
             </div>
+            <div class="col-span-1 md:col-span-1">
+                <div>
+                    <label class="block font-medium mb-2" for="idRole">Modalidad</label>
+                    <p-select [checkmark]="true" optionLabel="name" optionValue="name"
+                        placeholder="Seleccione Modalidad" [appendTo]="'body'" [options]="TypeActivity" class="w-full"
+                        formControlName="modalidad"></p-select>
+                    <app-input-error [control]="controls['modalidad']"></app-input-error>
+                </div>
+            </div>
+            <app-input-text *ngIf="controls['modalidad']?.value === 'Virtual'" label="Link Reunión:"
+                placeholder="Ingrese Link" name="link" [control]="controls['link']"></app-input-text>
         </div>
         <div class="flex pt-6 flex-row-reverse">
             @if (isViewMode()) {

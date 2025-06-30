@@ -1,4 +1,4 @@
-import { Component, effect, inject, Type } from '@angular/core';
+import { Component, effect, inject, signal, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GROUP_TABLE_COLUMNS } from '@modules/members/constants/group';
 import { GroupModel } from '@modules/members/interfaces/user.interface';
@@ -24,6 +24,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { WorkActionComponent } from './components/work-action/work-action.component';
 import { ActionType } from '@shared/constants';
+import { TableLazyLoadEvent } from 'primeng/table';
 
 @Component({
 	selector: 'app-workmeetings',
@@ -44,7 +45,8 @@ import { ActionType } from '@shared/constants';
 export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> {
 	title: any;
 	id_group: any;
-	group: any;
+	group = signal<any[]>([]);
+	totalRecordswork = signal<number>(0);
 	override tableColumns: ColumnTableModel[] = WORK_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
 	override service: BaseCRUDHttpService<any> = inject(WorkService);
@@ -52,33 +54,28 @@ export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> 
 	constructor(private router: Router, private route: ActivatedRoute) {
 		super();
 
-		/* this.group = toSignal(
-			this.service.getById(this.id_group).pipe(
-				map((res) => res?.items ?? []),
-				catchError(() => of([]))
-			)
-		);) */
+		this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
+		this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
+		this.addBreadcrub({ label: this.title, routerLink: '' });
 	}
 	override onActionClick({ data, action }: ActionClickEvent) {
 		if (!data?.item?.id) return;
 		const { item } = data;
 		switch (action) {
 			case ActionType.VIEW:
-				console.log(data);
-				this.showDialogForm('Visualizar Grupo', { item, isViewMode: true });
+				this.showDialogForm('Visualizar', { item, isViewMode: true });
 				break;
-
 			case ActionType.EDIT:
-				this.showDialogForm('Editar Grupo', { item });
+				this.showDialogForm('Editar', { item });
 				break;
 			case ActionType.DELETE:
 				this.service.delete(item.id).subscribe({
 					next: () => {
-						this.ts.success('Permiso eliminado correctamente');
-						this.list();
+						this.ts.success('Eliminado correctamente');
+						this.loadGroup(this.id_group);
 					},
 					error: () => {
-						this.ts.error('Error al eliminar el Permiso');
+						this.ts.error('Error al eliminar');
 					},
 				});
 				break;
@@ -88,12 +85,13 @@ export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> 
 	loadGroup(id: any) {
 		this.service.getById(id).subscribe({
 			next: (res) => {
-				this.group = res;
-				console.log('Group cargado:', this.group);
+				console.log(res);
+				this.group.set(res.items);
+				this.totalRecords.set(res.total);
 			},
 			error: (err) => {
-				console.error('Error al cargar el grupo:', err);
-				this.group = [];
+				this.group.set([]);
+				this.totalRecords.set(0);
 			},
 		});
 	}
@@ -101,10 +99,30 @@ export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> 
 		this.route.paramMap.subscribe((params) => {
 			this.title = params.get('name');
 			this.id_group = params.get('id');
-			this.loadGroup(params.get('id'));
-			this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
-			this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
-			this.addBreadcrub({ label: this.title, routerLink: '' });
+		});
+		this.loadGroup(this.id_group);
+	}
+	onReloadPage() {
+		this.loadGroup(this.id_group);
+	}
+	onLazyLoadWork(event: TableLazyLoadEvent) {
+		this.filters.defineFromDataViewLazyLoadEvent(event);
+		this.loadGroup(this.id_group);
+
+		/* this.list(); */
+	}
+	override showDialogForm(header: string, data?: any, dialog = this.formDialog) {
+		if (!dialog) return;
+		this.modalConfig.data = data ?? {};
+		this.modalConfig.data.columns = this.requiredColumns;
+		this.modalConfig.data.service = this.service;
+		this.modalConfig.header = header;
+		this.formDialogRef = this.ds.open(dialog, this.modalConfig);
+
+		this.formDialogRef.onClose.subscribe((data) => {
+			if (data) this.loadGroup(this.id_group); // Reemplazas list() por tu método
+			this.formDialogRef?.destroy();
+			this.cdr.detectChanges();
 		});
 	}
 }

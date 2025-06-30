@@ -1,13 +1,44 @@
 <div class="h-full w-full">
-	<div class="flex justify-between gap-1 flex-col py-5">
+	<div class="flex justify-between gap-1 flex-col">
 		<div class="overflow-x-auto">
 			<p-breadcrumb class="max-w-full" [model]="breadCrumbs" />
 		</div>
-		<div class="min-w-max flex gap-1">
-			<p-button styleClass="h-full" label="Agregar" icon="pi pi-plus" (click)="showDialogForm('Crear Reunion')" />
 
-			<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh" />
+		<div class="min-w-max flex gap-1">
+			<p-button styleClass="h-full" label="Actualizar" severity="secondary" icon="pi pi-refresh"
+				(click)="onReload()" />
 		</div>
 	</div>
-	<app-calendar></app-calendar>
+
+	<p-table [value]="items()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
+		[showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
+		[rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
+		(onLazyLoad)="onLazyLoad($event)" [lazyLoadOnInit]="true">
+		<ng-template pTemplate="caption" dataKey="id">
+			<div class="flex justify-content-between flex-column sm:flex-row">Lista de reuniones y sesiones por grupo
+			</div>
+		</ng-template>
+		<ng-template pTemplate="header">
+			<tr>
+				@for (item of tableColumns; track item.header) {
+				<th class="bg-primary text-white" [pSortableColumn]="item.sortField ?? item.field">
+					{{ item.header }}
+					@if (item.sort) {
+					<p-sortIcon [field]="item.sortField ?? item.field"></p-sortIcon>
+					}
+				</th>
+				}
+				<th class="bg-primary text-white">Acción</th>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="body" let-data>
+			<tr>
+				<td>{{ data.nombre}}</td>
+				<td>
+					<p-button pInputText pTooltip="Ver Actividades" (onClick)="agregarReunion(data.nombre,data.id)" tooltipPosition="left" class="action"
+						icon="pi pi-eye" />
+				</td>
+			</tr>
+		</ng-template>
+	</p-table>
 </div>

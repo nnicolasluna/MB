@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { WorkService } from '@modules/members/services/work.service';
@@ -10,15 +11,17 @@ import { SelectModule } from 'primeng/select';
 
 @Component({
 	selector: 'app-work-form',
-	imports: [InputTextComponent, ReactiveFormsModule, SelectModule, InputErrorComponent, ButtonModule, DatePickerModule],
+	imports: [InputTextComponent, ReactiveFormsModule, SelectModule, InputErrorComponent, ButtonModule, DatePickerModule,CommonModule],
 	templateUrl: './work-form.component.html',
 	styleUrl: './work-form.component.scss',
 })
 export class WorkFormComponent extends BaseFormComponent<any> {
+	TypeActivity: any;
 	override _service = inject(WorkService);
 	id_group: any;
 	constructor(public config: DynamicDialogConfig) {
 		super();
+		this.TypeActivity = [{ name: 'Virtual' }, { name: 'Presencial' }];
 		this.id_group = config.data?.id_group;
 	}
 	override buildForm(): void {
@@ -27,6 +30,8 @@ export class WorkFormComponent extends BaseFormComponent<any> {
 			fechaReunion: [, [Validators.required]],
 			fechaSegundaReunion: [, [Validators.required]],
 			grupoId: [Number(this.id_group)],
+			link: [],
+			modalidad: [null, [Validators.required]],
 		});
 	}
 	override ngOnInit(): void {
@@ -43,8 +48,6 @@ export class WorkFormComponent extends BaseFormComponent<any> {
 					fechaReunion: new Date(fechaReunion),
 					fechaSegundaReunion: new Date(fechaSegundaReunion),
 				});
-
-				console.log('Formulario en modo visualización:', this._form.value);
 			}
 		});
 	}

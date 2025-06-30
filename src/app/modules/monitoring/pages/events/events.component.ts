@@ -39,28 +39,13 @@ export class EventsComponent extends BaseListFiltersComponent<any> {
 	items1 = signal<any[]>([]);
 	override tableColumns: ColumnTableModel[] = EVENTS_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
-	/* 	override service: BaseCRUDHttpService<any> = inject(EventService);
-	 */ override service: EventService = inject(EventService);
+	override service: BaseCRUDHttpService<any> = inject(GroupService);
 
 	override formDialog: Type<any> = GroupCreateFormComponent;
 	constructor() {
 		super();
-		this.reuniones();
 		this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
 		this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
 	}
 	override onActionClick({ data, action }: ActionClickEvent) {}
-	reuniones() {
-		this.service.fechas().subscribe({
-			next: (items) => {
-
-			},
-			error: () => {
-				this.isLoading.set(false);
-				this.totalRecords.set(0);
-				this.items1.set([]);
-				this.ts.error('Error al cargar los registros');
-			},
-		});
-	}
 }

@@ -3,7 +3,7 @@
         <div class="overflow-x-auto">
             <p-breadcrumb class="max-w-full" [model]="breadCrumbs" />
         </div>
-            <div class="text-lg font-bold">{{ title }}</div>
+        <div class="text-lg font-bold">{{ title }}</div>
         <div class="min-w-max flex gap-1">
 
             <p-button styleClass="h-full" label="Agregar" icon="pi pi-plus"
@@ -38,7 +38,10 @@
             <tr>
                 <td>{{ data.nombre }}</td>
                 <td>
-                    <app-working-group-action (onActionClick)="onActionClick($event)" [inline]="true" [item]="data"></app-working-group-action>
+                    <app-working-group-action (onActionClick)="onActionClick($event)" [inline]="true"
+                        [item]="data"></app-working-group-action>
+                    <button (click)="downloadFile(data.nombreArchivo)"><i pInputText pTooltip="Descargar"
+                            tooltipPosition="left" class="pi pi-download"></i></button>
                 </td>
             </tr>
         </ng-template>
