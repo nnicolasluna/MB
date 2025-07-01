@@ -21,4 +21,20 @@ export class ActivityService extends BaseExistsService<any> {
 	updateActa(id: number, data: any) {
 		return this.http.put(`${this.namespace}/acta/${id}`, data);
 	}
+	downloadFile(filename: string, token: string) {
+		return this.http.get(`${this.namespace}/download/${filename}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			responseType: 'blob',
+		});
+	}
+	downloadFileList(filename: string, token: string) {
+		return this.http.get(`${this.namespace}/download-list/${filename}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			responseType: 'blob',
+		});
+	}
 }
