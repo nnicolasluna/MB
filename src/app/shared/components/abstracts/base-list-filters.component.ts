@@ -59,7 +59,6 @@ export abstract class BaseListFiltersComponent<T> implements OnDestroy {
 
 		this.service.getAll(this.filters).subscribe({
 			next: (items) => {
-				console.log(items)
 				this.items.set([...items.items]);
 				this.totalRecords.set(items.total);
 				this.isLoading.set(false);

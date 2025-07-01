@@ -20,7 +20,7 @@
 		[rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
 		(onLazyLoad)="onLazyLoad($event)" [lazyLoadOnInit]="true">
 		<ng-template pTemplate="caption" dataKey="id">
-			<div class="flex justify-content-between flex-column sm:flex-row">Lista de documentos</div>
+			<div class="flex justify-content-between flex-column sm:flex-row">Lista de Grupos</div>
 		</ng-template>
 		<ng-template pTemplate="header">
 			<tr>
@@ -41,8 +41,10 @@
 				<td>{{ data.periodo_inicio | date: 'dd/MM/yyyy' }}</td>
 				<td>{{ data.periodo_fin | date: 'dd/MM/yyyy'}}</td>
 				<td>
-					<p-button pInputText pTooltip="Añadir Reunión" tooltipPosition="left"  class="action" (onClick)="agregarReunion(data.nombre,data.id)" icon="pi pi-users" />
-					<app-group-action-form  (onActionClick)="onActionClick($event)" [inline]="true" [item]="data"></app-group-action-form>
+					<p-button pInputText pTooltip="Añadir Reunión" tooltipPosition="left" class="action"
+						(onClick)="agregarReunion(data.nombre,data.id)" icon="pi pi-users" />
+					<app-group-action-form (onActionClick)="onActionClick($event)" [inline]="true"
+						[item]="data"></app-group-action-form>
 				</td>
 			</tr>
 		</ng-template>

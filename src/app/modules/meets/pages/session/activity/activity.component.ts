@@ -61,9 +61,9 @@ export class ActivityComponent extends BaseListFiltersComponent<any> {
 		const { item } = data;
 		switch (action) {
 			case ActionType.VIEW:
+				console.log(data);
 				this.showDialogForm('Visualizar Actividad', { item, isViewMode: true, sesionesMBC: this.sesiones });
 				break;
-
 			case ActionType.EDIT:
 				this.showDialogForm('Editar Actividad', { item, sesionesMBC: this.sesiones });
 				break;

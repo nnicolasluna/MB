@@ -51,11 +51,11 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 		super();
 		this.id_group = config.data?.id_group;
 		this.sessionMesa = config.data?.sesionesMBC;
-		console.log(this.sessionMesa)
 		this.TypeActivity = [{ name: 'Ordinaria' }, { name: 'Extraordinaria' }];
 	}
 	override buildForm(): void {
 		this._form = this._fb.group({
+			id: [null],
 			actividad: ['', Validators.required],
 			TipoActividad: [''],
 			grupo: [Number(this.id_group)],
@@ -83,10 +83,15 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 			actividad: datosActividad,
 			tareas: this.datosTareas,
 		};
+		const esEdicion = datosActividad.id != null;
 		if (this.datosTareas.length > 0 && this.ValidadorTareas[0]) {
-			this.actividadService.create(payload).subscribe({
+			const observable = esEdicion
+				? this.actividadService.update(datosActividad.id, payload)
+				: this.actividadService.create(payload);
+
+			observable.subscribe({
 				next: (response) => {
-					this.ts.success('Guardado con éxito');
+					this.ts.success(esEdicion ? 'Actualizado con éxito' : 'Guardado con éxito');
 					this.ref.close(payload);
 					window.location.reload();
 				},
@@ -113,9 +118,7 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	);
 	override ngOnInit(): void {
 		super.ngOnInit();
-
 		const data = this.config.data;
-
 		setTimeout(() => {
 			if (data?.item) {
 				const item = data.item;
@@ -130,14 +133,13 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 				});
 				if (item.Tarea?.length) {
 					this.formulariosNombres = item.Tarea.map((tarea: any) => ({
-						...tarea // puedes incluir más lógica si necesitas
+						...tarea
 					}));
-
-					// Espera un ciclo para asegurar que los componentes hijos existan
 					setTimeout(() => {
 						this.formularios.forEach((formTareaComponent, index) => {
 							const tarea = item.Tarea[index];
-							formTareaComponent.setDatos(tarea); // método que debes implementar en FormTareasComponent
+							console.log(tarea)
+							formTareaComponent.setDatos(tarea);
 						});
 					});
 				}

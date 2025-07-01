@@ -23,7 +23,6 @@ export class ActivityActionComponent extends BaseActionsComponent<any> {
       },
       this._permissions.canView.bind(this._permissions)
     );
-
     this.pushAction(
       {
         label: 'Editar',

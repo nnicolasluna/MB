@@ -12,4 +12,13 @@ export class ActivityService extends BaseExistsService<any> {
 	uploadFile(formData: FormData) {
 		return this.http.post(`${this.namespace}/update-file`, formData);
 	}
+	uploadFileList(formData: FormData) {
+		return this.http.post(`${this.namespace}/update-file-list`, formData);
+	}
+	updateList(id: number, data: any) {
+		return this.http.put(`${this.namespace}/list/${id}`, data);
+	}
+	updateActa(id: number, data: any) {
+		return this.http.put(`${this.namespace}/acta/${id}`, data);
+	}
 }

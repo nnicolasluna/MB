@@ -40,7 +40,7 @@
                     <td>{{ data.nombre}}</td>
                     <td>
                         <p-button pInputText pTooltip="Ver Calendario" tooltipPosition="left" class="action"
-                            (click)="showDialogFormCalendar('Calendario')" icon="pi pi-calendar-times" />
+                            (click)="showDialogFormCalendar('Calendario', { data })" icon="pi pi-calendar-times" />
                         <app-group-action-form (onActionClick)="onActionClick($event)" [inline]="true"
                             [item]="data"></app-group-action-form>
 
