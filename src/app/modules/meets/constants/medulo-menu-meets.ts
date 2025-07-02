@@ -10,20 +10,20 @@ export const MEETS_MENU_ENTRIES: ExtendedMenuItem = {
 	icon: PrimeIcons.SITEMAP,
 	items: [
 		{
-			label: 'Administración de Sesiones',
+			label: 'Administración de Agenda',
 			resource: ResourceTypes.SESSIONS,
 			class: 'text-sm',
 			permission: 'canView',
 			icon: PrimeIcons.USERS,
 			routerLink: ['/meets/session'],
 		},
-		{
-			label: 'Administración de Agenda',
-			resource: ResourceTypes.AGENDA,
-			class: 'text-sm',
-			permission: 'canView',
-			icon: PrimeIcons.USERS,
-			routerLink: ['/meets/agenda'],
-		},
+		/* 		{
+					label: 'Administración de Agenda',
+					resource: ResourceTypes.AGENDA,
+					class: 'text-sm',
+					permission: 'canView',
+					icon: PrimeIcons.USERS,
+					routerLink: ['/meets/agenda'],
+				}, */
 	],
 };

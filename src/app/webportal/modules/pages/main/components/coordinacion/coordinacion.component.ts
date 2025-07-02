@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
+import { GroupService } from '@modules/members/services/group.service';
+import { BaseCRUDHttpService } from '@shared/services';
+import { UserParams } from '@modules/users/interfaces';
 @Component({
   selector: 'app-coordinacion',
   imports: [StepperModule, ButtonModule, CardModule, CommonModule],
@@ -10,6 +13,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './coordinacion.component.scss'
 })
 export class CoordinacionComponent {
+  service: BaseCRUDHttpService<any> = inject(GroupService);
+
   autoridades = [
     {
       "nombre": "Fondo Nacional de Desarrollo Forestal",
@@ -54,6 +59,18 @@ export class CoordinacionComponent {
       "persona": "Hugo Aranibar Rojas"
     }
   ]
+  groups: any;
 
+  ngOnInit(): void {
+    const filters = new UserParams();
+    this.service.getAll(filters).subscribe({
+      next: (data) => {
+        this.groups = data.items;
+        console.log('Grupos cargados:', this.groups);
+      },
+      error: (err) => {
+      },
+    });
+  }
 
 }

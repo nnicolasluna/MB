@@ -15,8 +15,8 @@
         <p-table [value]="items()" [resizableColumns]="true" [paginator]="true" [rows]="6"
             [totalRecords]="totalRecords()" [showCurrentPageReport]="true"
             currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
-            [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
-            (onLazyLoad)="onLazyLoad($event)" [lazyLoadOnInit]="true">
+            [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" (onLazyLoad)="onLazyLoad($event)"
+            [lazyLoadOnInit]="true">
             <ng-template pTemplate="caption" dataKey="id">
                 <div class="flex justify-content-between flex-column sm:flex-row">Lista de reuniones y sesiones por
                     grupo

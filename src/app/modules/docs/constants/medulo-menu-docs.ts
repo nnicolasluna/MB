@@ -7,7 +7,7 @@ export const DOCS_MENU_ENTRIES: ExtendedMenuItem = {
 	resource: ResourceTypes.MENU_MEETS,
 	permission: 'canView',
 	class: 'text-sm text-black! font-bold',
-	icon: PrimeIcons.SITEMAP,
+	icon: PrimeIcons.BOOK,
 	items: [
 		{
 			label: 'Documentos por Grupo de Trabajo',

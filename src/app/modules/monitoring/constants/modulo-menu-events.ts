@@ -7,7 +7,7 @@ export const EVENTS_MENU_ENTRIES: ExtendedMenuItem = {
 	resource: ResourceTypes.MENU_MEETS,
 	permission: 'canView',
 	class: 'text-sm text-black! font-bold',
-	icon: PrimeIcons.SITEMAP,
+	icon: PrimeIcons.FILE,
 	items: [
 		{
 			label: 'Reuniones y Sesiones por Grupo',

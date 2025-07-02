@@ -16,8 +16,9 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { TableModule } from 'primeng/table';
+import { TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
 	selector: 'app-events',
@@ -39,7 +40,8 @@ export class EventsComponent extends BaseListFiltersComponent<any> {
 	items1 = signal<any[]>([]);
 	override tableColumns: ColumnTableModel[] = EVENTS_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
-	override service: BaseCRUDHttpService<any> = inject(GroupService);
+	override service: BaseCRUDHttpService<any> = inject(EventService);
+	_service = inject(EventService)
 
 	override formDialog: Type<any> = GroupCreateFormComponent;
 	constructor() {
@@ -47,5 +49,61 @@ export class EventsComponent extends BaseListFiltersComponent<any> {
 		this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
 		this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
 	}
-	override onActionClick({ data, action }: ActionClickEvent) {}
+	override onActionClick({ data, action }: ActionClickEvent) { }
+	override list() {
+		this.isLoading.set(true);
+
+		this._service.fechas().subscribe({
+			next: (items) => {
+				console.log(items)
+				this.items.set([...items.items]);
+				this.totalRecords.set(items.total);
+				this.isLoading.set(false);
+			},
+			error: () => {
+				this.isLoading.set(false);
+				this.totalRecords.set(0);
+				this.items.set([]);
+				this.ts.error('Error al cargar los registros');
+			},
+		});
+	}
+	override onLazyLoad(event: TableLazyLoadEvent) {
+		this.filters.defineFromDataViewLazyLoadEvent(event);
+
+		this.list();
+	}
+	downloadFile = async (filename: string, tipo: string) => {
+		try {
+			if (tipo == 'acta') {
+				const token = localStorage.getItem('token')!;
+				const response = await firstValueFrom(this._service.downloadFile(filename, token));
+				const url = window.URL.createObjectURL(response);
+				const a = document.createElement('a');
+				a.href = url;
+				a.download = filename;
+				a.click();
+				window.URL.revokeObjectURL(url);
+			} else {
+				const token = localStorage.getItem('token')!;
+				const response = await firstValueFrom(this._service.downloadFileList(filename, token));
+				const url = window.URL.createObjectURL(response);
+				const a = document.createElement('a');
+				a.href = url;
+				a.download = filename;
+				a.click();
+				window.URL.revokeObjectURL(url);
+			}
+		} catch (error) {
+			console.error('Error al descargar:', error);
+		}
+	};
+	deleteFile(data: any, type: string) {
+		if (type == 'acta') {
+			this._service.updateActa(data.id, { acta: '' });
+		} else {
+			this._service.updateList(data.id, { acta: '' });
+		}
+
+	}
 }

@@ -58,7 +58,7 @@
                 <p-step-panel [value]="2">
                     <ng-template #content let-activateCallback="activateCallback">
                         <div class="flex flex-col h-30">
-                               <strong class="title">GRUPOS INTERNOS</strong>
+                            <strong class="title">GRUPOS INTERNOS</strong>
                             <div class="diagrama_participantes">
                                 <img alt="Imagen Institución" class="diagrama"
                                     src='assets/webportal/coordinacion/img.png' />
@@ -78,17 +78,38 @@
                                         <strong>Autoridades</strong>
                                     </div>
                                 </div>
+                                <div class="card-container" *ngFor="let group of groups">
+                                    <div class="card_group">
+                                        <div class="card_group__header">
+                                            GRUPO DE TRABAJO
+                                            <!-- <p>Inicio: {{ group.periodo_inicio | date: 'shortDate' }}</p>
+                                            <p>Fin: {{ group.periodo_fin | date: 'shortDate' }}</p> -->
+                                        </div>
+
+                                        <div class="card_group__body">
+
+                                            <strong>Nombre:</strong>
+                                            {{ group.nombre }}
+                                            <strong>Fecha Creacion:</strong>
+                                            {{ group.fecha_crea| date: 'dd/MM/yyyy' }}
+                                            <button class="card_group__button">Ver Grupo</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div class="flex pt-6 justify-between">
                             <button class="button" severity="secondary" icon="pi pi-arrow-left"
                                 (click)="activateCallback(1)"><i class="pi pi-arrow-left"></i></button>
+                            <!-- <button class="button" severity="secondary" icon="pi pi-arrow-left"
+                                (click)="activateCallback(3)"><i class="pi pi-arrow-right"></i></button> -->
                             <!-- <p-button icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" /> -->
                         </div>
                     </ng-template>
                 </p-step-panel>
 
-                <!--  <p-step-panel [value]="3">
+                <p-step-panel [value]="3">
                     <ng-template #content let-activateCallback="activateCallback">
                         <div class="flex flex-col h-48">
                             <div
@@ -100,7 +121,7 @@
                             <p-button icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(2)" />
                         </div>
                     </ng-template>
-                </p-step-panel> -->
+                </p-step-panel>
             </p-step-panels>
         </p-stepper>
     </div>

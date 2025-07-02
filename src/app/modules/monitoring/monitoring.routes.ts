@@ -10,12 +10,12 @@ export const routes: Routes = [
 		},
 		loadComponent: () => import('./pages/events/events.component').then((m) => m.EventsComponent),
 	},
-	{
+	/* {
 		path: 'monitoring',
 		data: {
 			moduleCode: ResourceTypes.SESSIONS,
 			permission: 'canView',
 		},
 		loadComponent: () => import('./pages/monitoring/monitoring.component').then((m) => m.MonitoringComponent),
-	},
+	}, */
 ];
