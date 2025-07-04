@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { StepperModule } from 'primeng/stepper';
+import { Component, inject, ViewChild } from '@angular/core';
+import { Stepper, StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,10 @@ import { UserParams } from '@modules/users/interfaces';
 })
 export class CoordinacionComponent {
   service: BaseCRUDHttpService<any> = inject(GroupService);
+  grupoSeleccionado: any
+  @ViewChild('stepper') stepper!: Stepper;
 
+  currentStep = 1;
   autoridades = [
     {
       "nombre": "Fondo Nacional de Desarrollo Forestal",
@@ -72,5 +75,9 @@ export class CoordinacionComponent {
       },
     });
   }
-
+  vergrupodetrabajo(item: any) {
+    this.grupoSeleccionado = item
+    this.currentStep = 3;
+    console.log(item)
+  }
 }

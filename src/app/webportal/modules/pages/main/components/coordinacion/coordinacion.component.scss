@@ -159,18 +159,15 @@ p-card:hover {
 }
 
 .diagrama {
-	width: 60%;
+	width: 50%;
 	height: auto;
 }
 
 .diagrama_participantes {
-	position: fixed;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	width: 100%;
-	top: 18%;
+	gap: 5px;
 }
 
 .card_group {
@@ -208,11 +205,51 @@ p-card:hover {
 		color: white;
 		padding: 5px;
 		margin-bottom: 2px;
+		z-index: 100;
 	}
 }
 
-.card-container {
+
+
+.card-grupos {
 	display: flex;
 	flex-direction: row;
-	gap: 5;
+	gap: 5px;
+
+}
+
+.contenedor_grupos {
+	position: fixed;
+	top: 15%;
+	width: 100%;
+}
+
+.contenedor_step3 {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+}
+
+.participantes_actividades {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
+
+	&__part {
+		background-color: white;
+	}
+}
+
+.tabla-usuarios {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: left;
 }

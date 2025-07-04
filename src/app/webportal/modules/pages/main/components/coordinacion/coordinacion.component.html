@@ -1,6 +1,6 @@
 <div class="resena">
     <div class="content">
-        <p-stepper [value]="1">
+        <p-stepper [(value)]="currentStep">
             <p-step-panels>
                 <p-step-panel [value]="1">
                     <ng-template #content let-activateCallback="activateCallback">
@@ -57,7 +57,7 @@
 
                 <p-step-panel [value]="2">
                     <ng-template #content let-activateCallback="activateCallback">
-                        <div class="flex flex-col h-30">
+                        <div class="contenedor_grupos">
                             <strong class="title">GRUPOS INTERNOS</strong>
                             <div class="diagrama_participantes">
                                 <img alt="Imagen Institución" class="diagrama"
@@ -78,48 +78,68 @@
                                         <strong>Autoridades</strong>
                                     </div>
                                 </div>
-                                <div class="card-container" *ngFor="let group of groups">
-                                    <div class="card_group">
-                                        <div class="card_group__header">
-                                            GRUPO DE TRABAJO
-                                            <!-- <p>Inicio: {{ group.periodo_inicio | date: 'shortDate' }}</p>
-                                            <p>Fin: {{ group.periodo_fin | date: 'shortDate' }}</p> -->
-                                        </div>
+                                <div class="card-grupos">
+                                    <div class="card-container" *ngFor="let group of groups">
+                                        <div class="card_group">
+                                            <div class="card_group__header">
+                                                GRUPO DE TRABAJO
+                                            </div>
 
-                                        <div class="card_group__body">
+                                            <div class="card_group__body">
 
-                                            <strong>Nombre:</strong>
-                                            {{ group.nombre }}
-                                            <strong>Fecha Creacion:</strong>
-                                            {{ group.fecha_crea| date: 'dd/MM/yyyy' }}
-                                            <button class="card_group__button">Ver Grupo</button>
+                                                <strong>Nombre:</strong>
+                                                {{ group.nombre }}
+                                                <strong>Fecha Creacion:</strong>
+                                                {{ group.fecha_crea| date: 'dd/MM/yyyy' }}
+                                                <button (click)="vergrupodetrabajo(group)"
+                                                    class="card_group__button">Ver Grupo</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="w-full flex pt-6 justify-between">
+                                    <button class="button" severity="secondary" icon="pi pi-arrow-left"
+                                        (click)="activateCallback(1)"><i class="pi pi-arrow-left"></i></button>
+                                    <!-- <button class="button" severity="secondary" icon="pi pi-arrow-left"
+                                        (click)="activateCallback(3)"><i class="pi pi-arrow-right"></i></button> -->
+                                    <!-- <p-button icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" /> -->
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex pt-6 justify-between">
-                            <button class="button" severity="secondary" icon="pi pi-arrow-left"
-                                (click)="activateCallback(1)"><i class="pi pi-arrow-left"></i></button>
-                            <!-- <button class="button" severity="secondary" icon="pi pi-arrow-left"
-                                (click)="activateCallback(3)"><i class="pi pi-arrow-right"></i></button> -->
-                            <!-- <p-button icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" /> -->
                         </div>
                     </ng-template>
                 </p-step-panel>
 
                 <p-step-panel [value]="3">
                     <ng-template #content let-activateCallback="activateCallback">
-                        <div class="flex flex-col h-48">
-                            <div
-                                class="dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
-                                Content III
+                        <div class="contenedor_step3">
+                            <div class="participantes_actividades">
+                                <div class="participantes_actividades__act"></div>
+                                <div class="participantes_actividades__part">
+                                    <table class="tabla-usuarios">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nombre Completo</th>
+                                                <th>ID Usuario</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let tarea of grupoSeleccionado.TareaUsuario; let i = index">
+                                                <td>{{ i + 1 }}</td>
+                                                <td>{{ tarea.usuario.name }} {{ tarea.usuario.firstSurname }} {{
+                                                    tarea.usuario.secondSurname }}</td>
+                                                <td>{{ tarea.usuario.id }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="flex pt-6 justify-start">
+                                <button class="button" severity="secondary" (click)="activateCallback(2)"><i
+                                        class="pi pi-arrow-left"></i></button>
                             </div>
                         </div>
-                        <div class="flex pt-6 justify-start">
-                            <p-button icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(2)" />
-                        </div>
+
                     </ng-template>
                 </p-step-panel>
             </p-step-panels>
