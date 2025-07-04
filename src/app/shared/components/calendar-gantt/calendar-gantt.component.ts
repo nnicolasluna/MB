@@ -239,12 +239,12 @@ export class CalendarGanttComponent implements OnInit {
 				const response = await firstValueFrom(this._service.uploadFile(formData));
 				await firstValueFrom(this._service.updateActa(this.selectedReunion!.id, { acta: this.generatedFileName }));
 				this.closeForm();
-				window.location.reload();
+				/* window.location.reload(); */
 			} else {
 				const response = await firstValueFrom(this._service.uploadFile(formData));
 				await firstValueFrom(this._service.updateList(this.selectedReunion!.id, { acta: this.generatedFileName }));
 				this.closeForm();
-				window.location.reload();
+				/* window.location.reload(); */
 			}
 		} catch {}
 	}
@@ -275,7 +275,7 @@ export class CalendarGanttComponent implements OnInit {
 				a.href = url;
 				a.download = filename;
 				a.click();
-				window.URL.revokeObjectURL(url);
+/* 				window.URL.revokeObjectURL(url); */
 			}
 		} catch (error) {
 			console.error('Error al descargar:', error);

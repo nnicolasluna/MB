@@ -31,6 +31,7 @@ export class WorkFormComponent extends BaseFormComponent<any> {
 			fechaSegundaReunion: [, [Validators.required]],
 			grupoId: [Number(this.id_group)],
 			link: [],
+			direccion:[],
 			modalidad: [null, [Validators.required]],
 		});
 	}

@@ -28,6 +28,8 @@
             </div>
             <app-input-text *ngIf="controls['modalidad']?.value === 'Virtual'" label="Link Reunión:"
                 placeholder="Ingrese Link" name="link" [control]="controls['link']"></app-input-text>
+            <app-input-text *ngIf="controls['modalidad']?.value === 'Presencial'" label="Dirección"
+                placeholder="Ingrese Dirección" name="direccion" [control]="controls['direccion']"></app-input-text>
         </div>
         <div class="flex pt-6 flex-row-reverse">
             @if (isViewMode()) {
