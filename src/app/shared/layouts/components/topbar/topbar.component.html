@@ -1,7 +1,7 @@
 <div class="topbar">
-	<!-- 	<div class="layout-topbar-logo-container">
+	<div class="layout-topbar-logo-container">
 		<a class="layout-topbar-logo w-[300px] flex justify-center" routerLink="/">
-			<img width="110" src="assets/webportal/topbar-img/logo_mesadebosques.png" alt="Logo" />
+			<!-- <img width="110" src="assets/webportal/topbar-img/logo_mesadebosques.png" alt="Logo" /> -->
 		</a>
 		<button class="layout-menu-button layout-topbar-action" (click)="layoutService.onMenuToggle()">
 			<i class="pi pi-bars"></i>
@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="layout-topbar-actions">
-		<button class="layout-topbar-menu-button layout-topbar-action" pStyleClass="@next" enterFromClass="hidden"
+		<!-- <button class="layout-topbar-menu-button layout-topbar-action" pStyleClass="@next" enterFromClass="hidden"
 			enterActiveClass="animate-scalein" leaveToClass="hidden" leaveActiveClass="animate-fadeout"
 			[hideOnOutsideClick]="true">
 			<i class="pi pi-ellipsis-v"></i>
@@ -27,10 +27,10 @@
 					<span>Cerrar Sesión</span>
 				</button>
 			</div>
-		</div>
-	</div> -->
+		</div> -->
+	</div>
 
-	<!-- <div class="topbar"> -->
+
 	<div class="logos">
 		<img src="assets/sistema/mmya.png" alt="Logo 1" />
 		<img src="assets/sistema/abt.png" alt="Logo 2" />
@@ -38,13 +38,43 @@
 		<img src="assets/sistema/sernav.png" alt="Logo 4" />
 		<img src="assets/sistema/mnhn.png" alt="Logo 5" />
 		<img src="assets/sistema/fonab.png" alt="Logo 5" />
-		<img src="assets/sistema/madretierra.png" alt="Logo 5" />
+		<img src="assets/sistema/madre.png" alt="Logo 5" />
 	</div>
 	<div
 		class="contenedor_verde w-full text-white flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-green-900 to-white">
 		<span>MESA DE BOSQUES, SISTEMAS DE VIDA Y CRISIS CLIMÁTICA</span>
 		<img src="assets/webportal/topbar-img/logo_mesadebosques.png" alt="Logo Bosques" class="h-8 md:h-12 w-auto" />
 	</div>
-	<!-- </div> -->
+
 
 </div>
+
+<!-- <div class="topbar">
+	<div class="layout-topbar-logo-container">
+		<a class="layout-topbar-logo w-[300px] flex justify-center" routerLink="/">
+			<img width="50" src="/img/wcs_logo.webp" alt="Logo" />
+		</a>
+		<button class="layout-menu-button layout-topbar-action" (click)="layoutService.onMenuToggle()">
+			<i class="pi pi-bars"></i>
+		</button>
+	</div>
+	<div class="layout-topbar-actions">
+		<button class="layout-topbar-menu-button layout-topbar-action" pStyleClass="@next" enterFromClass="hidden"
+			enterActiveClass="animate-scalein" leaveToClass="hidden" leaveActiveClass="animate-fadeout"
+			[hideOnOutsideClick]="true">
+			<i class="pi pi-ellipsis-v"></i>
+		</button>
+		<div class="layout-topbar-menu hidden lg:block">
+			<div class="layout-topbar-menu-content">
+				<button (click)="showProfile()" class="layout-topbar-action">
+					<i class="pi pi-user"></i>
+					<span>Perfil</span>
+				</button>
+				<button class="layout-topbar-action" (click)="logout()">
+					<i class="pi pi-sign-out"></i>
+					<span>Cerrar Sesión</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div> -->

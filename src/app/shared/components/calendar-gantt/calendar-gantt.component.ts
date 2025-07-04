@@ -51,7 +51,7 @@ export class CalendarGanttComponent implements OnInit {
 	projectStartDate: Date = new Date();
 	projectEndDate: Date = new Date();
 	_ref = inject(DynamicDialogRef);
-	constructor(public config: DynamicDialogConfig) {
+	constructor(public config: DynamicDialogConfig, public ref: DynamicDialogRef) {
 		this.datoGrupo = this.config.data;
 		this.tasks = this.mapToGanttTasks(this.datoGrupo.data);
 		console.log(this.tasks);
@@ -154,8 +154,8 @@ export class CalendarGanttComponent implements OnInit {
 		const tresMesesEnMs = 3 * 30 * 24 * 60 * 60 * 1000;
 
 		/* if (!task.acta || task.acta.trim() === '') {
-      return 'estado-realizado';
-    } */
+	  return 'estado-realizado';
+	} */
 		const isEmpty = !task.acta || task.acta.trim() === '';
 		const endTime = task.endDate.getTime();
 		const nowTime = hoy.getTime();
@@ -231,22 +231,25 @@ export class CalendarGanttComponent implements OnInit {
 		const renamedFile = new File([this.file], this.generatedFileName, {
 			type: this.file.type,
 		});
-
+		console.log(tipo)
 		const formData = new FormData();
 		formData.append('file', renamedFile);
 		try {
 			if (tipo == 'acta') {
 				const response = await firstValueFrom(this._service.uploadFile(formData));
 				await firstValueFrom(this._service.updateActa(this.selectedReunion!.id, { acta: this.generatedFileName }));
-				this.closeForm();
+				/* this.closeForm(); */
+				this.ref?.close(true);
+
 				/* window.location.reload(); */
 			} else {
 				const response = await firstValueFrom(this._service.uploadFile(formData));
 				await firstValueFrom(this._service.updateList(this.selectedReunion!.id, { acta: this.generatedFileName }));
-				this.closeForm();
+				/* this.closeForm(); */
+				this.ref?.close(true);
 				/* window.location.reload(); */
 			}
-		} catch {}
+		} catch { }
 	}
 	selectedReunion: any | null = null;
 
@@ -275,7 +278,7 @@ export class CalendarGanttComponent implements OnInit {
 				a.href = url;
 				a.download = filename;
 				a.click();
-/* 				window.URL.revokeObjectURL(url); */
+				/* 				window.URL.revokeObjectURL(url); */
 			}
 		} catch (error) {
 			console.error('Error al descargar:', error);

@@ -13,7 +13,7 @@
     <p-table [value]="items()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
         [showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
         [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" (onLazyLoad)="onLazyLoad($event)"
-        [lazyLoadOnInit]="true">
+        [lazy]="true" [lazyLoadOnInit]="true">
         <ng-template pTemplate="caption" dataKey="id">
             <div class="flex justify-content-between flex-column sm:flex-row">Lista de reuniones y sesiones por grupo
             </div>
@@ -40,12 +40,12 @@
                     <p-button (click)="downloadFile(data.acta,'acta')" pInputText pTooltip="Descargar Acta"
                         tooltipPosition="left" *ngIf="data.acta" class="action" icon="pi pi-file-pdf" />
                     <p-button (click)="deleteFile(data,'acta')" pInputText pTooltip="Borrar Acta" tooltipPosition="left"
-                        *ngIf="data.acta" class="action" icon="pi pi-trash" />
+                        *ngIf="data.acta" class=" action" icon="pi pi-trash" />
                     <p-button (click)="downloadFile(data.acta,'list')" pInputText
-                        pTooltip="Descargar Lista Participantes" tooltipPosition="left" *ngIf="data.acta" class="action"
+                        pTooltip="Descargar Lista Participantes" tooltipPosition="left" *ngIf="data.list" class="action"
                         icon="pi pi-users" />
                     <p-button severity="danger" (click)="deleteFile(data,'list')" pInputText
-                        pTooltip="Borrar Lista Participantes" tooltipPosition="left" *ngIf="data.acta"
+                        pTooltip="Borrar Lista Participantes" tooltipPosition="left" *ngIf="data.list"
                         class="action red" icon="pi pi-trash" />
                 </td>
             </tr>

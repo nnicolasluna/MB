@@ -98,12 +98,37 @@ export class EventsComponent extends BaseListFiltersComponent<any> {
 			console.error('Error al descargar:', error);
 		}
 	};
-	deleteFile(data: any, type: string) {
+	/* deleteFile(data: any, type: string) {
+		console.log(data, type)
 		if (type == 'acta') {
 			this._service.updateActa(data.id, { acta: '' });
 		} else {
 			this._service.updateList(data.id, { acta: '' });
 		}
 
+	} */
+	deleteFile(data: any, type: string) {
+		console.log(data, type);
+
+		if (type == 'acta') {
+			// Asegúrate de que esto es lo que se ejecuta
+			this._service.updateActa(data.id, { acta: '' }).subscribe({
+				next: () => {
+					console.log('Acta eliminada'),
+						this.list()
+				},
+				error: err => console.error('Error al eliminar acta', err),
+
+			});
+		} else {
+			this._service.updateList(data.id, { acta: '' }).subscribe({
+				next: () => {
+					console.log('Acta eliminada'),
+						this.list()
+				},
+				error: err => console.error('Error en lista', err),
+			});
+		}
+		this.list()
 	}
 }

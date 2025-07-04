@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: fixed;
     height: 4rem;
     z-index: 997;
@@ -29,5 +30,46 @@
 
     span {
         margin-left: 100px;
+    }
+}
+
+.layout-topbar-logo-container {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .logos {
+        display: none;
+    }
+
+    .contenedor_verde {
+        display: none;
+    }
+
+    .layout-topbar-logo-container {
+        display: block;
+    }
+
+    .topbar {
+        justify-content: center;
+        padding: 0 2rem;
+        background-color: var(--surface-ground);
+    }
+}
+
+@media (max-width:1000px) {
+    .logos {
+        display: none;
+    }
+
+    .layout-topbar-logo-container {
+        display: block;
+    }
+
+    .topbar {
+        justify-content: space-around;
+        padding: 0 2rem;
+        background-color: var(--surface-ground);
+
     }
 }

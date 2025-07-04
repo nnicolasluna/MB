@@ -14,7 +14,7 @@
                     </div>
                     <div class="task-details" [class.show]="selectedTaskId === task.id"
                         [hidden]="selectedTaskId !== task.id">
-                        <div class="task-details--Descargartical"><strong>Responsable:</strong>{{task.nameResposable}}
+                        <div class="task-details--vertical"><strong>Responsable:</strong>{{task.nameResposable}}
                         </div>
                         <div class="task-details--vertical"><strong>Inicio:</strong> {{ task.startDate |
                             date:'dd/MM/yyyy' }}</div>
@@ -28,22 +28,24 @@
                         </div>
                         <!-- Botones -->
                         <div class="task-buttons">
-                            <input type="file" #fileInput style="display: none;" accept=".pdf"
-                                (change)="onFileSelected($event,'list')">
-                            <input type="file" #fileInput style="display: none;" accept=".pdf"
-                                (change)="onFileSelected($event,'acta')">
+                            <input type="file" #fileInputList style="display: none;" accept=".pdf"
+                                (change)="onFileSelected($event, 'list')" />
+                            <input type="file" #fileInputActa style="display: none;" accept=".pdf"
+                                (change)="onFileSelected($event, 'acta')" />
+
                             <button *ngIf="!task.acta" class="task-buttons--acta"
-                                (click)="selectReunion(task);fileInput.click()"><i pInputText pTooltip="Subir Acta"
+                                (click)="selectReunion(task);fileInputActa.click()"><i pInputText pTooltip="Subir Acta"
                                     tooltipPosition="left" class="pi pi-file-check"></i></button>
                             <button *ngIf="!task.listParty" class="task-buttons--users"
-                                (click)="selectReunion(task);fileInput.click()"><i pInputText
+                                (click)="selectReunion(task);fileInputList.click()"><i pInputText
                                     pTooltip="Subir Lista Participantes" tooltipPosition="left"
                                     class="pi pi-users"></i></button>
-                            <button (click)="downloadFile(task.acta,'acta')" *ngIf="task.acta" class="task-buttons--acta"><i pInputText pTooltip="Descargar Acta"
+                            <button (click)="downloadFile(task.acta,'acta')" *ngIf="task.acta"
+                                class="task-buttons--acta"><i pInputText pTooltip="Descargar Acta"
                                     tooltipPosition="left" class="pi pi-file-check"></i></button>
-                            <button (click)="downloadFile(task.listParty,'list')" *ngIf="task.listParty" class="task-buttons--users"><i pInputText
-                                    pTooltip="Descargar Lista Participantes" tooltipPosition="left"
-                                    class="pi pi-users"></i></button>
+                            <button (click)="downloadFile(task.listParty,'list')" *ngIf="task.listParty"
+                                class="task-buttons--users"><i pInputText pTooltip="Descargar Lista Participantes"
+                                    tooltipPosition="left" class="pi pi-users"></i></button>
                         </div>
                     </div>
                 </div>
@@ -63,7 +65,8 @@
             <div class="gantt-bars">
                 <div *ngFor="let task of tasks; let i = index" class="task-bar-row" [class.even]="i % 2 === 0">
                     <div class="task-bar" [style.left.%]="getTaskPosition(task).left"
-                        [style.width.%]="getTaskPosition(task).width" [ngClass]="getEstadoClase(task)">
+                        (click)="toggleTaskDetails(task.id)" [style.width.%]="getTaskPosition(task).width"
+                        [ngClass]="getEstadoClase(task)">
                         <div class="task-label">
                             {{ task.name }}
                         </div>

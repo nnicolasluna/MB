@@ -51,6 +51,7 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 		super();
 		this.id_group = config.data?.id_group;
 		this.sessionMesa = config.data?.sesionesMBC;
+		console.log(this.sessionMesa)
 		this.TypeActivity = [{ name: 'Ordinaria' }, { name: 'Extraordinaria' }];
 	}
 	override buildForm(): void {
@@ -138,7 +139,6 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 					setTimeout(() => {
 						this.formularios.forEach((formTareaComponent, index) => {
 							const tarea = item.Tarea[index];
-							console.log(tarea)
 							formTareaComponent.setDatos(tarea);
 						});
 					});
