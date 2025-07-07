@@ -25,23 +25,28 @@
 	width: 80%;
 	justify-content: center;
 	align-items: center;
-	max-height: 500px;
+	/* max-height: 800px; */
 	height: 100%;
+
 	cursor: pointer;
 }
 
 .conteiner_body {
-	position: fixed;
-	top: 18%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 10px;
 	width: 100%;
+	max-height: 700px;
+	overflow-y: auto;
 }
 
 .steper_content {
 	width: 100%;
+	max-height: 600px;
+	overflow-y: auto;
+	position: fixed;
+	top: 18%;
 }
 
 p-stepper {
@@ -55,7 +60,10 @@ p-stepper {
 		flex-direction: column;
 		align-items: center;
 		height: 100%;
-		max-height: 250px;
+
+		/* 		background-image: url('/assets/webportal/coordinacion/fondocardCordina.jpg'); */
+		/* 		background-repeat: no-repeat;
+		color: white; */
 	}
 
 	&__header {
@@ -100,7 +108,7 @@ p-card {
 }
 
 p-card:hover {
-	transform: scale(1.1);
+	transform: scale(1.09);
 	/* Escala la card al 105% de su tamaño original */
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 	/* Sombra más pronunciada al hacer hover */
@@ -177,12 +185,12 @@ p-card:hover {
 	justify-content: center;
 	align-items: center;
 	max-width: 300px;
-	background-color: white;
+	background-color: rgba(39, 35, 35, 0.5);
 	border-radius: 10px 10px 5px 5px;
 	font-size: 0.7rem;
 
 	&__header {
-		background-color: #06561A;
+		background-color: #06561a;
 		color: white;
 		padding: 5px 10px;
 		border-radius: 10px 10px 0 0;
@@ -195,12 +203,12 @@ p-card:hover {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		color: black;
+		color: white;
 		gap: 2px;
 	}
 
 	&__button {
-		background-color: #06561A;
+		background-color: #06561a;
 		border-radius: 5px;
 		color: white;
 		padding: 5px;
@@ -209,13 +217,10 @@ p-card:hover {
 	}
 }
 
-
-
 .card-grupos {
 	display: flex;
 	flex-direction: row;
 	gap: 5px;
-
 }
 
 .contenedor_grupos {
@@ -228,23 +233,37 @@ p-card:hover {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-
 }
 
 .participantes_actividades {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: center;
+	gap: 15px;
 	width: 100%;
 
 	&__part {
-		background-color: white;
+		width: 30%;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	&__act {
+		width: 30%;
+	}
+	&__presentation {
+		text-align: center;
+		background-color: rgba(6, 86, 26, 0.5);
+		padding: 10px;
+		color: white;
 	}
 }
 
 .tabla-usuarios {
 	width: 100%;
 	border-collapse: collapse;
+	background-color: rgba(39, 35, 35, 0.5);
+	color: white;
 }
 
 .tabla-usuarios th,
@@ -252,4 +271,86 @@ p-card:hover {
 	border: 1px solid #ccc;
 	padding: 8px;
 	text-align: left;
+}
+.actividad-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.actividad-card:hover {
+	background-color: rgba(6, 86, 26, 0.5);
+}
+.actividad-card {
+	/* background-color: #06561a; */
+	background-color: rgba(39, 35, 35, 0.5);
+	color: white;
+	padding: 2rem;
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	position: relative;
+}
+
+.card-title {
+	font-size: 1.8rem;
+	font-weight: bold;
+	/* margin-bottom: 0.8rem; */
+	text-transform: uppercase;
+	color: white;
+}
+.tarea-list {
+	margin-top: 1rem;
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 1rem;
+	border-radius: 6px;
+}
+
+.tarea-item {
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+	padding-top: 0.5rem;
+	margin-top: 0.5rem;
+	font-size: 0.95rem;
+}
+
+.tarea-title {
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 0.5rem;
+	font-size: 1.1rem;
+	color: #f1f1f1;
+}
+
+.card-subtitle {
+	font-size: 1rem;
+	font-weight: 400;
+	color: #ccc;
+}
+
+@media (max-width: 900px) {
+	.participantes_actividades {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		font-size: 0.9rem;
+		gap: 10px;
+
+		&__part {
+			width: 90%;
+		}
+		&__act {
+			width: 90%;
+		}
+	}
+	.card-title {
+		font-size: 1rem;
+		text-align: center;
+	}
+	.conteiner_cards {
+		height: 1000px;
+		flex-direction: column;
+		gap: 5px;
+	}
 }

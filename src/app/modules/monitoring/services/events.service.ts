@@ -33,4 +33,9 @@ export class EventService extends BaseExistsService<any> {
 	updateActa(id: number, data: any) {
 		return this.http.put(`${this.namespace}/acta/${id}`, data);
 	}
+	downloadexterno(filename: string) {
+		return this.http.get(`${this.namespace}/download-externo/${filename}`, {
+			responseType: 'blob',
+		});
+	}
 }

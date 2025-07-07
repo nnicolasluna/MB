@@ -97,7 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="w-full flex pt-6 justify-between">
+                                <div class="w-full flex pt-6 justify-center">
                                     <button class="button" severity="secondary" icon="pi pi-arrow-left"
                                         (click)="activateCallback(1)"><i class="pi pi-arrow-left"></i></button>
                                     <!-- <button class="button" severity="secondary" icon="pi pi-arrow-left"
@@ -112,29 +112,49 @@
                 <p-step-panel [value]="3">
                     <ng-template #content let-activateCallback="activateCallback">
                         <div class="contenedor_step3">
+                            <strong class="title">MIEMBROS GRUPOS DE TRABAJO</strong>
                             <div class="participantes_actividades">
-                                <div class="participantes_actividades__act"></div>
+                                <div class="participantes_actividades__act"
+                                    *ngIf="grupoSeleccionado?.Actividad?.length > 0">
+                                    <div class="actividad-container">
+                                        <div class="actividad-card"
+                                            *ngFor="let actividad of grupoSeleccionado.Actividad"
+                                            (click)="toggleActividad(actividad.id)">
+                                            <h2 class="card-title">{{ actividad.nombre }}</h2>
+                                            <div class="tarea-list" *ngIf="expandedActividadId === actividad.id">
+                                                <h4 class="tarea-title">Tareas:</h4>
+                                                <div class="tarea-item" *ngFor="let tarea of actividad.Tarea">
+                                                    <p><strong>{{ tarea.nombre }}</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div class="participantes_actividades__part">
+                                    <div class="participantes_actividades__presentation">
+                                        Los grupos de trabajo estarán conformados por los miembros de la mesa y/o sus
+                                        delegados técnicos, en función de las temáticas priorizadas. Su propósito será
+                                        operativizar las acciones correspondientes.
+                                    </div>
                                     <table class="tabla-usuarios">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Nombre Completo</th>
-                                                <th>ID Usuario</th>
+                                                <th><strong>Nombre</strong></th>
+                                                <th><strong>Apellidos</strong></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let tarea of grupoSeleccionado.TareaUsuario; let i = index">
-                                                <td>{{ i + 1 }}</td>
-                                                <td>{{ tarea.usuario.name }} {{ tarea.usuario.firstSurname }} {{
+                                                <td>{{ tarea.usuario.name }} </td>
+                                                <td>{{ tarea.usuario.firstSurname }} {{
                                                     tarea.usuario.secondSurname }}</td>
-                                                <td>{{ tarea.usuario.id }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="flex pt-6 justify-start">
+                            <div class="flex pt-6 justify-center">
                                 <button class="button" severity="secondary" (click)="activateCallback(2)"><i
                                         class="pi pi-arrow-left"></i></button>
                             </div>

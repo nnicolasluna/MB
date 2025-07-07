@@ -36,7 +36,7 @@ import { TooltipModule } from 'primeng/tooltip';
 		CardModule,
 		CommonModule,
 		SubCategoryActionComponent,
-		TooltipModule
+		TooltipModule,
 	],
 	templateUrl: './sub-category.component.html',
 	styleUrl: './sub-category.component.scss',
@@ -83,6 +83,7 @@ export class SubCategoryComponent extends BaseListFiltersComponent<any> {
 		this.route.paramMap.subscribe((params) => {
 			this.title = params.get('name');
 			this.id = params.get('id');
+			this.addBreadcrub({ label: this.title, routerLink: '' });
 		});
 	}
 	selectedFile: File | null = null;
@@ -126,4 +127,21 @@ export class SubCategoryComponent extends BaseListFiltersComponent<any> {
 			console.error('Error al descargar:', error);
 		}
 	};
+	override list() {
+		this.isLoading.set(true);
+
+		this.service.getById(this.id).subscribe({
+			next: (items) => {
+				this.items.set([...items.items]);
+				this.totalRecords.set(items.total);
+				this.isLoading.set(false);
+			},
+			error: () => {
+				this.isLoading.set(false);
+				this.totalRecords.set(0);
+				this.items.set([]);
+				this.ts.error('Error al cargar los registros');
+			},
+		});
+	}
 }

@@ -21,4 +21,9 @@ export class SubDocsService extends BaseExistsService<any> {
 			responseType: 'blob',
 		});
 	}
+	downloadFileExterno(filename: string) {
+		return this.http.get(`${this.namespace}/download-externo/${filename}`, {
+			responseType: 'blob',
+		});
+	}
 }

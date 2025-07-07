@@ -41,6 +41,11 @@ export const routes: Routes = [
 				loadComponent: () =>
 					import('./modules/pages/main/components/agenda/agenda.component').then((m) => m.AgendaComponent),
 			},
+			{
+				path: 'repositorio',
+				loadComponent: () =>
+					import('./modules/pages/main/components/respositorio/respositorio.component').then((m) => m.RespositorioComponent),
+			},
 		],
 	},
 ];

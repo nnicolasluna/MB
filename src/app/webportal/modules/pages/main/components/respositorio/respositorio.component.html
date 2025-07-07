@@ -1,0 +1,50 @@
+<div class="resena">
+    <strong class="title">REPOSITORIO DOCUMENTAL</strong>
+    <div class="content_repositorio">
+        <div class="content_repositorio__descript">
+            <strong>Bienvenidos a la Biblioteca Digital de la Mesa de Bosques, Sistemas de Vida y Crisis
+                Climática</strong>
+            <p>La Biblioteca Digital de la Mesa de Bosques, Sistemas de Vida y Crisis Climática ofrece acceso a
+                documentos técnicos, normativos e investigaciones entre otros, sobre gestión integral y sustentable de
+                bosques, y cambio climático en Bolivia. Explora nuestras categorías y accede a la información. </p>
+            <div class="btns">
+                <button class="btns__btn" [ngClass]="{ 'activo': tipoSeleccionado === 'oficiales' }"
+                    (click)="seleccionarTipo('oficiales')">Documentos oficiales</button>
+                <button class="btns__btn" [ngClass]="{ 'activo': tipoSeleccionado === 'grupo' }"
+                    (click)="seleccionarTipo('grupo')">Documentos por grupo</button>
+            </div>
+        </div>
+        <div class="content_repositorio__table">
+            <p-table [value]="documentosOficiales()" [paginator]="!docs()" [rows]="5"
+                [tableStyle]="{ 'min-width': '22rem' }" [rowsPerPageOptions]="[5, 10, 20]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Título</th>
+                        <th>Tipo Documento</th>
+                        <th *ngIf="docs()">Fecha</th>
+                        <th>Archivos</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-doc>
+                    <tr
+                        *ngIf="docs() ? (doc.tituloSub && doc.documentos?.titulo && doc.fecha_crea) : (doc.nombre && doc.Actividad?.nombre)">
+
+                        <td>{{ docs() ? doc.tituloSub : doc.nombre }}</td>
+                        <td>{{ docs() ? doc.documentos?.titulo : doc.Actividad?.nombre }}</td>
+                        <td *ngIf="docs()">{{ doc.fecha_crea }}</td>
+                        <td>
+                            <button (click)="showDialog(doc)">Ver</button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+</div>
+<p-dialog header="Documento" [(visible)]="visible" [modal]="true" [style]="{ width: '70vw', height: '90vh' }"
+    [contentStyle]="{ overflow: 'hidden' }">
+    <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+        style="width: 100%; height: 100%; display: block;"></pdf-viewer>
+</p-dialog>

@@ -36,10 +36,9 @@
 	border-radius: 10px;
 	margin: auto;
 	box-sizing: border-box;
-
 }
 
-.bosques-card h1 {
+/* .bosques-card h1 {
 	color: #675b17;
 	text-align: center;
 	font-family: 'Impact', 'Arial Black', sans-serif;
@@ -52,7 +51,23 @@
 	text-transform: uppercase;
 	line-height: 1.1;
 }
+ */
+.bosques-card h1 {
+	font-size: 2.5rem;
+	font-weight: bold;
+	text-transform: uppercase;
 
+	background: url('/assets/webportal/coordinacion/fondocardCordina.jpg') no-repeat center center;
+	background-size: cover;
+
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text; /* Para compatibilidad futura */
+	text-align: center;
+	color: transparent; /* Asegura que no se pinte ningún color de texto */
+	/* 
+	display: inline-block; */
+}
 table {
 	font-weight: bold;
 	font-size: 1.01rem;
@@ -102,7 +117,6 @@ i {
 	padding: 10px;
 	font-size: 1.3rem;
 	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-
 }
 
 .card-container p {

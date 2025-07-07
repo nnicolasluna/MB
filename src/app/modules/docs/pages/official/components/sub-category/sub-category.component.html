@@ -41,10 +41,11 @@
             <tr>
                 <td>{{ data.tituloSub }}</td>
                 <td>
-                    <app-sub-category-action (onActionClick)="onActionClick($event)" [inline]="true"
-                        [item]="data"></app-sub-category-action>
                     <button (click)="downloadFile(data.nombreArchivo)"><i pInputText pTooltip="Descargar"
                             tooltipPosition="left" class="pi pi-download"></i></button>
+                    <app-sub-category-action (onActionClick)="onActionClick($event)" [inline]="true"
+                        [item]="data"></app-sub-category-action>
+
                 </td>
             </tr>
         </ng-template>

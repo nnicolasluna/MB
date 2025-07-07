@@ -1,0 +1,120 @@
+.resena {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	background-image: url('../../../../../../../assets/webportal/repositorio/repositorioFondo.jpg');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;
+	overflow-y: auto;
+}
+.title {
+	position: fixed;
+	top: 10%;
+	text-align: center;
+	width: 100%;
+	background-color: #15403dc4;
+	color: white;
+	font-size: 2rem;
+	padding: 10px;
+}
+.content_repositorio {
+	position: fixed;
+	top: 18%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 35px;
+
+	&__descript {
+		background-color: rgba(39, 35, 35, 0.9);
+		width: 30%;
+		color: white;
+		padding: 25px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		border-radius: 10px;
+
+		strong {
+			font-size: 2.1rem;
+			font-weight: bold;
+		}
+		p {
+			text-align: justify;
+		}
+		.btns {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			justify-content: center;
+			gap: 30px;
+			&__btn {
+				background-color: rgba(6, 86, 26, 0.5);
+				padding: 10px 15px;
+				border-radius: 5px;
+			}
+			&__btn:hover {
+				background-color: white;
+				color: black;
+			}
+			&__btn.activo {
+				background-color: white;
+				color: black;
+				font-weight: bold;
+			}
+		}
+	}
+	&__table {
+		/* background-color: rgba(39, 35, 35, 0.5); */
+		/* 		width: 30%; */
+		table {
+			width: 100%;
+			border-collapse: collapse; /* Merges borders between cells */
+			margin-bottom: 1em; /* Adds space below the table */
+			font-family: Arial, sans-serif; /* Sets a common font */
+			color: white;
+		}
+
+		th {
+			text-align: center;
+			padding: 8px;
+		}
+		td {
+			border: 1px solid #ddd; /* Light grey border for cells */
+			padding: 8px; /* Spacing inside cells */
+			text-align: left; /* Aligns text to the left */
+		}
+
+		th {
+			background-color: #f2f2f2; /* Light grey background for table headers */
+			color: #333; /* Darker text color for headers */
+		}
+	}
+}
+
+@media (max-width: 991px) {
+	.title {
+		top: 5%;
+		font-size: 1.2rem;
+	}
+	.content_repositorio {
+		top: 10%;
+		flex-direction: column;
+		width: 100%;
+		justify-content: center;
+		align-items: center;
+		&__descript {
+			width: 95%;
+
+			strong {
+				font-size: 1.1rem;
+			}
+			p {
+				font-size: 1rem;
+			}
+		}
+	}
+}
