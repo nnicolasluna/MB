@@ -12,10 +12,11 @@ import { IAttachment } from '@shared/interfaces';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'app-sub-category-create-form',
-	imports: [InputTextComponent, ReactiveFormsModule, SelectModule, ButtonModule, FileUploadModule],
+	imports: [InputTextComponent, ReactiveFormsModule, SelectModule, ButtonModule, FileUploadModule, CommonModule],
 	templateUrl: './sub-category-create-form.component.html',
 	styleUrl: './sub-category-create-form.component.scss',
 })
@@ -37,7 +38,6 @@ export class SubCategoryCreateFormComponent extends BaseFormComponent<any> {
 		super.ngOnInit();
 
 		const data = this.config.data;
-
 		setTimeout(() => {
 			if (data?.item) {
 				const { ...resto } = data.item;
@@ -45,6 +45,7 @@ export class SubCategoryCreateFormComponent extends BaseFormComponent<any> {
 				this._form.patchValue({
 					...resto,
 				});
+				this.getExistingFileUrl()
 			}
 		});
 	}
@@ -108,4 +109,17 @@ export class SubCategoryCreateFormComponent extends BaseFormComponent<any> {
 			console.error(error);
 		}
 	}
+	/* getExistingFileUrl(): any {
+		const token = localStorage.getItem('token')!;
+		const response = this._service.downloadFile(this._form.get('nombreArchivo')?.value, token);
+		const nombre = this._form.get('nombreArchivo')?.value;
+		console.log(this._form.get('nombreArchivo')?.value)
+		return response; // Ajusta esta URL según tu backend
+	} */
+	getExistingFileUrl(): string {
+		const nombre = this._form.get('nombreArchivo')?.value;
+		return ' http://localhost:3000/api/v1/subdocs/download-externo/doc_20250704151631629.pdf '; // Ajusta esta URL según tu backend
+	}
 }
+
+/* http://localhost:3000/api/v1/subdocs/download-externo/doc_20250704151631629.pdf */

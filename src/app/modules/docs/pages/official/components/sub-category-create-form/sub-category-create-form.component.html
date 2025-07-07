@@ -3,11 +3,14 @@
         <div class="grid grid-cols-1 gap-2 md:grid-cols-2 min-h-48">
             <app-input-text label="Titulo:" placeholder="Ingrese Titulo" name="tituloSub"
                 [control]="controls['tituloSub']"></app-input-text>
-            <div>
-                <label class="block font-medium mb-2" for="idRole">Subir Acta:</label>
+            <div *ngIf="!isViewMode()">
+                <label class="block font-medium mb-2" for="idRole">Subir Documento:</label>
                 <input type="file" accept=".pdf" (change)="onFileSelected($event)">
             </div>
-
+            <div *ngIf="isViewMode()">
+                <p class="text-sm text-gray-500">Archivo:</p>
+                <p>{{ form.get('nombreArchivo')?.value }}</p>
+            </div>
         </div>
         <div class="flex pt-6 flex-row-reverse">
             @if (isViewMode()) {
