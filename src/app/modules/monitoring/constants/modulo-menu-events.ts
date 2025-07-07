@@ -4,17 +4,17 @@ import { PrimeIcons } from 'primeng/api';
 
 export const EVENTS_MENU_ENTRIES: ExtendedMenuItem = {
 	label: 'Seguimiento de Actas',
-	resource: ResourceTypes.MENU_MEETS,
+	resource: ResourceTypes.MENU_PROCEEDINGS,
 	permission: 'canView',
 	class: 'text-sm text-black! font-bold',
 	icon: PrimeIcons.FILE,
 	items: [
 		{
 			label: 'Reuniones y Sesiones por Grupo',
-			resource: ResourceTypes.AGENDA,
+			resource: ResourceTypes.EVENTS,
 			class: 'text-sm ',
 			permission: 'canView',
-			icon: PrimeIcons.USERS,
+			icon: PrimeIcons.FILE_PDF,
 			routerLink: ['/monitoring/events'],
 		},
 	],

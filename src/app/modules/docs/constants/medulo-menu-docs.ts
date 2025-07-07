@@ -4,14 +4,14 @@ import { PrimeIcons } from 'primeng/api';
 
 export const DOCS_MENU_ENTRIES: ExtendedMenuItem = {
 	label: 'Repositorio de Información y Documentos',
-	resource: ResourceTypes.MENU_MEETS,
+	resource: ResourceTypes.MENU_DOCS,
 	permission: 'canView',
 	class: 'text-sm text-black! font-bold',
 	icon: PrimeIcons.BOOK,
 	items: [
 		{
 			label: 'Documentos por Grupo de Trabajo',
-			resource: ResourceTypes.AGENDA,
+			resource: ResourceTypes.WORKING,
 			class: 'text-sm ',
 			permission: 'canView',
 			icon: PrimeIcons.USERS,
@@ -19,10 +19,10 @@ export const DOCS_MENU_ENTRIES: ExtendedMenuItem = {
 		},
 		{
 			label: 'Documentos Oficiales',
-			resource: ResourceTypes.AGENDA,
+			resource: ResourceTypes.OFFICIAL,
 			class: 'text-sm',
 			permission: 'canView',
-			icon: PrimeIcons.USERS,
+			icon: PrimeIcons.PEN_TO_SQUARE,
 			routerLink: ['/docs/official'],
 		},
 	],
