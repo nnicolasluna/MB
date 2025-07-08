@@ -46,8 +46,8 @@ export class EventsComponent extends BaseListFiltersComponent<any> {
 	override formDialog: Type<any> = GroupCreateFormComponent;
 	constructor() {
 		super();
-		this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
-		this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
+		this.addBreadcrub({ label: 'Seguimiento de Actas', routerLink: '' });
+		this.addBreadcrub({ label: 'Reuniones y Sesiones por Grupo', routerLink: '/monitoring/events' });
 	}
 	override onActionClick({ data, action }: ActionClickEvent) { }
 	override list() {

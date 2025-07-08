@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { RoleParams } from '@modules/users/interfaces';
-import { BaseListFiltersComponent, FilterBarComponent } from '@shared/components';
+import { BaseListFiltersComponent } from '@shared/components';
 import { ActionClickEvent, ColumnTableModel } from '@shared/interfaces';
 import { BaseCRUDHttpService } from '@shared/services';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -25,7 +25,6 @@ import { TooltipModule } from 'primeng/tooltip';
 	imports: [
 		CommonModule,
 		FormsModule,
-		FilterBarComponent,
 		TableModule,
 		BreadcrumbModule,
 		CheckboxModule,

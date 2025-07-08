@@ -9,7 +9,7 @@
             </div>
             <div *ngIf="isViewMode()">
                 <p class="text-sm text-gray-500">Archivo:</p>
-                <p>{{ form.get('nombreArchivo')?.value }}</p>
+                <p>{{ form.get('nombreArchivo')?.value ?? 'Documento no subido' }}</p>
             </div>
         </div>
         <div class="flex pt-6 flex-row-reverse">

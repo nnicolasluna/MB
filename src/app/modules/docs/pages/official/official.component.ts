@@ -3,7 +3,7 @@ import { ROLE_TABLE_COLUMNS } from '@modules/users/constants';
 import { Role } from '@modules/users/interfaces';
 import { RoleParams } from '@modules/users/interfaces/roles/role.params';
 import { RoleService } from '@modules/users/services/role.service';
-import { BaseListFiltersComponent, FilterBarComponent } from '@shared/components';
+import { BaseListFiltersComponent } from '@shared/components';
 import { ActionClickEvent, ColumnTableModel } from '@shared/interfaces';
 import { BaseCRUDHttpService } from '@shared/services/base-crud-http.service';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -26,7 +26,6 @@ import { TooltipModule } from 'primeng/tooltip';
 	selector: 'app-official',
 	imports: [
 		FormsModule,
-		FilterBarComponent,
 		TableModule,
 		BreadcrumbModule,
 		CheckboxModule,
@@ -74,7 +73,7 @@ export class OfficialComponent extends BaseListFiltersComponent<Role> {
 				break;
 		}
 	}
-	  agregar(nombre: string, id: number) {
+	agregar(nombre: string, id: number) {
 		this.router.navigate(['docs/sub-category', nombre, id]);
 	}
 }

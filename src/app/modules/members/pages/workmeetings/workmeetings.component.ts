@@ -56,7 +56,6 @@ export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> 
 
 		this.addBreadcrub({ label: 'Miembros y Comite', routerLink: '' });
 		this.addBreadcrub({ label: 'Grupos de Trabajo', routerLink: '/members/group' });
-		this.addBreadcrub({ label: this.title, routerLink: '' });
 	}
 	override onActionClick({ data, action }: ActionClickEvent) {
 		if (!data?.item?.id) return;
@@ -83,9 +82,8 @@ export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> 
 	}
 
 	loadGroup(id: any) {
-		this.service.getById(id).subscribe({
+		this.service.getByIdPaginate(id, this.filters).subscribe({
 			next: (res) => {
-				console.log(res);
 				this.group.set(res.items);
 				this.totalRecords.set(res.total);
 			},
@@ -99,6 +97,7 @@ export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> 
 		this.route.paramMap.subscribe((params) => {
 			this.title = params.get('name');
 			this.id_group = params.get('id');
+			this.addBreadcrub({ label: this.title, routerLink: '' });
 		});
 		this.loadGroup(this.id_group);
 	}
@@ -120,7 +119,7 @@ export class WorkmeetingsComponent extends BaseListFiltersComponent<GroupModel> 
 		this.formDialogRef = this.ds.open(dialog, this.modalConfig);
 
 		this.formDialogRef.onClose.subscribe((data) => {
-			if (data) this.loadGroup(this.id_group); // Reemplazas list() por tu método
+			if (data) this.loadGroup(this.id_group);
 			this.formDialogRef?.destroy();
 			this.cdr.detectChanges();
 		});

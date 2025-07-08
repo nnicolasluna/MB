@@ -55,12 +55,6 @@ export class FormTareasComponent {
 			catchError(() => of([]))
 		)
 	);
-	public Groups = toSignal(
-		this.GroupService.getAll(new UserParams().setShowAll(true).setSortField('name')).pipe(
-			map((res) => res?.items ?? []),
-			catchError(() => of([]))
-		)
-	);
 	get controls() {
 		return this._form.controls;
 	}

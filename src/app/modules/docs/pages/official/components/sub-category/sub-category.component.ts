@@ -130,7 +130,7 @@ export class SubCategoryComponent extends BaseListFiltersComponent<any> {
 	override list() {
 		this.isLoading.set(true);
 
-		this.service.getById(this.id).subscribe({
+		this.service.getByIdPaginate(this.id, this.filters).subscribe({
 			next: (items) => {
 				this.items.set([...items.items]);
 				this.totalRecords.set(items.total);

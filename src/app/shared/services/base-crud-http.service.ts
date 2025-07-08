@@ -17,6 +17,9 @@ export abstract class BaseCRUDHttpService<T> extends BaseHttpService {
 	getById(id: number | string) {
 		return this.http.get<T>(`${this.namespace}/${id}`);
 	}
+	getByIdPaginate(id: number | string, filters: BaseParams) {
+		return this.http.get<ListResponse<T>>(`${this.namespace}/${id}`, { params: filters.toHttpParams() });
+	}
 
 	getByCode(code: string) {
 		return this.http.get<T>(`${this.namespace}/code/${code}`);

@@ -69,7 +69,7 @@ export class ActivityComponent extends BaseListFiltersComponent<any> {
 			case ActionType.DELETE:
 				this.service.delete(item.id).subscribe({
 					next: () => {
-						this.ts.success('Permiso correctamente');
+						this.ts.success('Eliminado correctamente');
 						this.list();
 					},
 					error: () => {
@@ -90,7 +90,7 @@ export class ActivityComponent extends BaseListFiltersComponent<any> {
 	override list() {
 		this.isLoading.set(true);
 
-		this.service.getById(this.id_group).subscribe({
+		this.service.getByIdPaginate(this.id_group, this.filters).subscribe({
 			next: (items) => {
 				this.items.set([...items.items]);
 				this.totalRecords.set(items.total);

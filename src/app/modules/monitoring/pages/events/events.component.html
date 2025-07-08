@@ -32,7 +32,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-data>
-            <tr>
+            <tr *ngIf="data.acta">
                 <td>{{ data.nombre}}</td>
                 <td>{{ data.Actividad.nombre}}</td>
                 <td>{{ data.Actividad.grupo.nombre}}</td>

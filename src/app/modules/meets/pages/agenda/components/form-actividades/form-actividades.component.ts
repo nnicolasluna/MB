@@ -111,12 +111,6 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	get formularioInvalido(): boolean {
 		return this._form.invalid || this.ValidadorTareas.some((v) => !v);
 	}
-	public Groups = toSignal(
-		this.GroupService.getAll(new UserParams().setShowAll(true).setSortField('name')).pipe(
-			map((res) => res?.items ?? []),
-			catchError(() => of([]))
-		)
-	);
 	override ngOnInit(): void {
 		super.ngOnInit();
 		const data = this.config.data;

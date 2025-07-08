@@ -13,8 +13,8 @@
 		</div>
 	</div>
 
-	<app-filter-bar (onSearch)="onSearch($event)"> </app-filter-bar>
-
+	<!-- 	<app-filter-bar (onSearch)="onSearch($event)"> </app-filter-bar>
+ -->
 	<p-table [value]="items()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
 		[showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
 		[rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" [lazy]="true"
