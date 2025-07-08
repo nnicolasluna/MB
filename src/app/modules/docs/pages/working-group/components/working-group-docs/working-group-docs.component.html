@@ -18,7 +18,7 @@
     <p-table [value]="items()" [resizableColumns]="true" [paginator]="true" [rows]="6" [totalRecords]="totalRecords()"
         [showCurrentPageReport]="true" currentPageReportTemplate="{first} al {last} de {totalRecords} registros"
         [rowsPerPageOptions]="rowsPerPageOptions" responsiveLayout="scroll" (onLazyLoad)="onLazyLoad($event)"
-        [lazyLoadOnInit]="true">
+        [lazyLoadOnInit]="true" [lazy]="true">
         <ng-template pTemplate="caption" dataKey="id">
         </ng-template>
         <ng-template pTemplate="header">

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { WorkingDocsService } from '@modules/docs/services/workingDocs.service';
@@ -12,7 +13,7 @@ import { firstValueFrom } from 'rxjs';
 
 @Component({
 	selector: 'app-working-group-docs-form',
-	imports: [InputTextComponent, ReactiveFormsModule, SelectModule, ButtonModule, DatePickerModule],
+	imports: [InputTextComponent, ReactiveFormsModule, SelectModule, ButtonModule, DatePickerModule, CommonModule],
 	templateUrl: './working-group-docs-form.component.html',
 	styleUrl: './working-group-docs-form.component.scss',
 })
