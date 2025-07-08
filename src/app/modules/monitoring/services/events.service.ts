@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BaseParams } from '@shared/interfaces';
 import { BaseExistsService } from '@shared/services';
 
 @Injectable({
@@ -8,8 +9,8 @@ export class EventService extends BaseExistsService<any> {
 	constructor() {
 		super('activity');
 	}
-	fechas() {
-		return this.http.get<any>(`${this.namespace}/fechas`);
+	fechas(filters: BaseParams) {
+		return this.http.get<any>(`${this.namespace}/fechas`, { params: filters.toHttpParams() });
 	}
 	downloadFile(filename: string, token: string) {
 		return this.http.get(`${this.namespace}/download/${filename}`, {

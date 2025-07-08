@@ -53,7 +53,7 @@ export class EventsComponent extends BaseListFiltersComponent<any> {
 	override list() {
 		this.isLoading.set(true);
 
-		this._service.fechas().subscribe({
+		this._service.fechas(this.filters).subscribe({
 			next: (items) => {
 				console.log(items)
 				this.items.set([...items.items]);

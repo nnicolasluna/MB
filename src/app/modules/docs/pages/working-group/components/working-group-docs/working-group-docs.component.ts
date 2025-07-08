@@ -63,7 +63,6 @@ export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
 		const { item } = data;
 		switch (action) {
 			case ActionType.VIEW:
-				console.log(data);
 				this.showDialogForm('Visualizar Grupo', { item, isViewMode: true });
 				break;
 
@@ -73,11 +72,11 @@ export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
 			case ActionType.DELETE:
 				this.service.delete(item.id).subscribe({
 					next: () => {
-						this.ts.success('Permiso eliminado correctamente');
+						this.ts.success('Eliminado correctamente');
 						this.list();
 					},
 					error: () => {
-						this.ts.error('Error al eliminar el Permiso');
+						this.ts.error('Error al eliminar');
 					},
 				});
 				break;
@@ -97,4 +96,21 @@ export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
 			console.error('Error al descargar:', error);
 		}
 	};
+	override list() {
+		this.isLoading.set(true);
+
+		this.service.getByIdPaginate(this.id_group, this.filters).subscribe({
+			next: (items) => {
+				this.items.set([...items.items]);
+				this.totalRecords.set(items.total);
+				this.isLoading.set(false);
+			},
+			error: () => {
+				this.isLoading.set(false);
+				this.totalRecords.set(0);
+				this.items.set([]);
+				this.ts.error('Error al cargar los registros');
+			},
+		});
+	}
 }

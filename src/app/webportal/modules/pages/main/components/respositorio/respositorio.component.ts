@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { DocsService } from '@modules/docs/services/docs.service';
-import { UserParams } from '@modules/users/interfaces';
+import { RoleParams, UserParams } from '@modules/users/interfaces';
 import { BaseCRUDHttpService } from '@shared/services';
 import { CommonModule } from '@angular/common';
 import { SubDocsService } from '@modules/docs/services/Subdocs.service';
@@ -9,6 +9,7 @@ import { DialogModule } from 'primeng/dialog';
 import { firstValueFrom } from 'rxjs';
 import { EventService } from '@modules/monitoring/services/events.service';
 import { TableModule } from 'primeng/table';
+import { BaseParams } from '@shared/interfaces';
 
 @Component({
 	selector: 'app-respositorio',
@@ -24,6 +25,7 @@ export class RespositorioComponent implements OnInit {
 	pdfSrc: string = '';
 	_service = inject(SubDocsService);
 	_serviceGrupos = inject(EventService);
+	filters: BaseParams = new RoleParams();
 	docs = signal<boolean>(true);
 	ngOnInit(): void {
 		this.seleccionarTipo('oficiales');
@@ -40,7 +42,7 @@ export class RespositorioComponent implements OnInit {
 				next: (data) => {
 					this.documentosOficiales.set(
 						(data.items || []).filter(
-							(doc) => doc?.tituloSub && doc?.documentos?.titulo && doc?.fecha_crea && !!doc?.nombreArchivo 
+							(doc) => doc?.tituloSub && doc?.documentos?.titulo && doc?.fecha_crea && !!doc?.nombreArchivo
 						)
 					);
 				},
@@ -50,12 +52,10 @@ export class RespositorioComponent implements OnInit {
 
 		if (tipo === 'grupo') {
 			this.docs.set(false);
-			this._serviceGrupos.fechas().subscribe({
+			this._serviceGrupos.fechas(this.filters).subscribe({
 				next: (data) => {
 					this.documentosOficiales.set(
-						(data.items || []).filter(
-							(doc:any) => doc?.nombre && doc?.Actividad?.nombre && !!doc?.acta 
-						)
+						(data.items || []).filter((doc: any) => doc?.nombre && doc?.Actividad?.nombre && !!doc?.acta)
 					);
 				},
 				error: (err) => console.error('Error:', err),

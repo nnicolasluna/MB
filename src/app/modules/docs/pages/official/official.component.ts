@@ -63,11 +63,11 @@ export class OfficialComponent extends BaseListFiltersComponent<Role> {
 			case ActionType.DELETE:
 				this.service.delete(item.id).subscribe({
 					next: () => {
-						this.ts.success('Permiso eliminado correctamente');
+						this.ts.success('Eliminado correctamente');
 						this.list();
 					},
 					error: () => {
-						this.ts.error('Error al eliminar el Permiso');
+						this.ts.error('Error al eliminar');
 					},
 				});
 				break;
