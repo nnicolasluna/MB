@@ -11,7 +11,6 @@ import { UserModel, UserParams } from '@modules/users/interfaces';
 import { UserService } from '@modules/users/services/user.service';
 import { InputErrorComponent, InputTextComponent } from '@shared/components';
 import { BaseCRUDHttpService, ToastService } from '@shared/services';
-import { GroupService } from '@modules/members/services/group.service';
 import { AgendaService } from '@modules/meets/services/agenda.service';
 import { ActivityService } from '@modules/meets/services/activity.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -42,10 +41,8 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	formulariosNombres: any[] = [];
 	ts = inject(ToastService);
 	ref = inject(DynamicDialogRef);
-	GroupService = inject(GroupService);
 	id_group: any
 	sessionMesa: any
-	//override _service = inject(UserService);
 	override _service: BaseCRUDHttpService<any> = inject(AgendaService);
 	constructor(private actividadService: ActivityService, public config: DynamicDialogConfig) {
 		super();
@@ -69,13 +66,6 @@ export class FormActividadesComponent extends BaseFormComponent<UserModel> {
 	eliminarFormulario(index: number): void {
 		this.formulariosNombres.splice(index, 1);
 	}
-	/* agregarFormulario(): void {
-		this.formulariosNombres.push({ hidden: false });
-	}
-
-	ocultarFormulario(i: number): void {
-		this.formulariosNombres[i].hidden = true;
-	} */
 	enviarDatos() {
 		const datosActividad = this.form.value;
 		this.ValidadorTareas = this.formularios.map((f) => f.getDatos().valid);

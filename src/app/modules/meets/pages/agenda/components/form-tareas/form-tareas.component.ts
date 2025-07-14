@@ -11,7 +11,6 @@ import { map, catchError, of, pipe } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { BaseFormComponent } from '@shared/components/abstracts/base-form.component';
 import { InputErrorComponent, InputTextComponent } from '@shared/components';
-import { GroupService } from '@modules/members/services/group.service';
 
 @Component({
 	selector: 'app-form-tareas',
@@ -31,7 +30,6 @@ import { GroupService } from '@modules/members/services/group.service';
 })
 export class FormTareasComponent {
 	_service = inject(UserService);
-	GroupService = inject(GroupService)
 	_form!: FormGroup;
 	_fb = inject(FormBuilder);
 	constructor() {
@@ -77,8 +75,8 @@ export class FormTareasComponent {
 				fechas: this.convertirFechas(tarea),
 			});
 
-			clearInterval(intervalo); // detener el intervalo cuando ya se actualizó
-		}, 100); // revisa cada 100ms hasta que haya data
+			clearInterval(intervalo);
+		}, 100);
 	}
 
 
@@ -87,7 +85,6 @@ export class FormTareasComponent {
 			return [];
 		}
 
-		// Ordena las fechas por fechaHora ascendente (opcional pero útil)
 		const fechasOrdenadas = tarea.FechaProgramada
 			.map((f: any) => new Date(f.fechaHora))
 			.sort((a: any, b: any) => a.getTime() - b.getTime());
