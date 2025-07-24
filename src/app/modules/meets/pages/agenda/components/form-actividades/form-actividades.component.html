@@ -23,7 +23,7 @@
 			<p-button type="button" (click)="eliminarFormulario(i)" severity="danger">
 				<i class="pi pi-trash"></i>
 			</p-button>
-			<app-form-tareas class="w-full"></app-form-tareas>
+			<app-form-tareas [readonly]="isViewMode()" class="w-full"></app-form-tareas>
 		</div>
 		<div class="flex pt-6 flex-row-reverse">
 			@if (isViewMode()) {

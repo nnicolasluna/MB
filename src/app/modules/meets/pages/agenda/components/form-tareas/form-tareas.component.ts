@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { DatePickerModule } from 'primeng/datepicker';
 import { InputTextModule } from 'primeng/inputtext';
@@ -28,7 +28,8 @@ import { InputErrorComponent, InputTextComponent } from '@shared/components';
 	templateUrl: './form-tareas.component.html',
 	styleUrl: './form-tareas.component.scss',
 })
-export class FormTareasComponent {
+export class FormTareasComponent implements OnChanges {
+	@Input() readonly: boolean = false;
 	_service = inject(UserService);
 	_form!: FormGroup;
 	_fb = inject(FormBuilder);
@@ -91,6 +92,14 @@ export class FormTareasComponent {
 
 		return fechasOrdenadas;
 	}
-
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes['readonly']) {
+			if (this.readonly) {
+				this._form.disable({ emitEvent: false }); // importante para que no emita eventos innecesarios
+			} else {
+				this._form.enable({ emitEvent: false });
+			}
+		}
+	}
 
 }
