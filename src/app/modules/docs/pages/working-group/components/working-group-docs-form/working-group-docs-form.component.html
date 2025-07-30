@@ -7,7 +7,7 @@
                 [control]="controls['descripcion']"></app-input-text>
             <div *ngIf="!isViewMode()">
                 <label class="block font-medium mb-2" for="idRole">Subir Documento:</label>
-                <input type="file" accept=".pdf" (change)="onFileSelected($event)">
+                <input type="file" (change)="onFileSelected($event)">
             </div>
             <div *ngIf="isViewMode()">
                 <p class="text-sm text-gray-500">Archivo:</p>
