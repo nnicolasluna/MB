@@ -30,7 +30,7 @@ export class WorkingGroupDocsFormComponent extends BaseFormComponent<any> {
 			nombre: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 			descripcion: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
 			nombreArchivo: [],
-			grupoId: [Number(this.id_group)],
+			folderId: [Number(this.id_group)],
 		});
 	}
 	selectedFile: File | null = null;

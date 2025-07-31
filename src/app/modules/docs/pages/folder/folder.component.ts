@@ -13,7 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FolderActionsComponent } from './components/folder-actions/folder-actions.component';
 import { FolderFormComponent } from './components/folder-form/folder-form.component';
 import { ActionType } from '@shared/constants';
@@ -41,7 +41,7 @@ export class FolderComponent extends BaseListFiltersComponent<any> {
   override formDialog: Type<any> = FolderFormComponent;
   id_group: any;
   title: any;
-  constructor(private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute) {
     super();
     this.addBreadcrub({ label: 'Repositorio de Información y Documentos', routerLink: '' });
     this.addBreadcrub({ label: 'Documentos por Grupo de Trabajo', routerLink: '/docs/workingGroup' });
@@ -63,6 +63,10 @@ export class FolderComponent extends BaseListFiltersComponent<any> {
         break;
       case ActionType.EDIT:
         this.showDialogForm('Editar', { item });
+        break;
+      case ActionType.NEXT:
+        console.log(item)
+        this.router.navigate(['docs/working-group-docs', item.nombre, item.id]);
         break;
       case ActionType.DELETE:
         this.service.delete(item.id).subscribe({
@@ -94,4 +98,7 @@ export class FolderComponent extends BaseListFiltersComponent<any> {
       },
     });
   }
+  agregarFolderbyGroup(nombre: string, id: number) {
+		this.router.navigate(['docs/working-group-docs', nombre, id]);
+	}
 }

@@ -17,7 +17,7 @@ export class FolderActionsComponent extends BaseActionsComponent<any> {
         icon: 'pi pi-folder-open',
         styleClass: 'text-blue-600',
         command: () => {
-          this.onActionClick.emit({ data: { item: this.item() }, action: ActionType.VIEW });
+          this.onActionClick.emit({ data: { item: this.item() }, action: ActionType.NEXT });
         },
       },
       this._permissions.canView.bind(this._permissions)

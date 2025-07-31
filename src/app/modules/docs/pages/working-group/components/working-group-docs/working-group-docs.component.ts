@@ -38,7 +38,7 @@ import { TooltipModule } from 'primeng/tooltip';
 	styleUrl: './working-group-docs.component.scss',
 })
 export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
-	id_group: any;
+	id_folder: any;
 	title: any;
 	override tableColumns: ColumnTableModel[] = WORKING_TABLE_COLUMNS;
 	override filters: RoleParams = new RoleParams();
@@ -53,7 +53,7 @@ export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
 
 	ngOnInit() {
 		this.route.paramMap.subscribe((params) => {
-			this.id_group = params.get('id');
+			this.id_folder = params.get('id');
 			this.title = params.get('name');
 			this.addBreadcrub({ label: this.title, routerLink: '' });
 		});
@@ -99,7 +99,7 @@ export class WorkingGroupDocsComponent extends BaseListFiltersComponent<any> {
 	override list() {
 		this.isLoading.set(true);
 
-		this.service.getByIdPaginate(this.id_group, this.filters).subscribe({
+		this.service.getByIdPaginate(this.id_folder, this.filters).subscribe({
 			next: (items) => {
 				this.items.set([...items.items]);
 				this.totalRecords.set(items.total);

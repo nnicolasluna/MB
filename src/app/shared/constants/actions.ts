@@ -10,4 +10,5 @@ export const enum ActionType {
 	DOWNLOAD,
 	PERMISSION,
 	PREVIEW,
+	NEXT
 }
