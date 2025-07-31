@@ -42,7 +42,8 @@ export class WorkingGroupComponent extends BaseListFiltersComponent<Role> {
 		this.addBreadcrub({ label: 'Documentos por Grupo de Trabajo', routerLink: '/docs/workingGroup' });
 	}
 	override onActionClick({ data, action }: ActionClickEvent) { }
-	agregarReunion(nombre: string, id: number) {
-		this.router.navigate(['docs/working-group-docs', nombre, id]);
+	agregarFolderbyGroup(nombre: string, id: number) {
+		/* this.router.navigate(['docs/working-group-docs', nombre, id]); */
+		this.router.navigate(['docs/folder', nombre, id]);
 	}
 }

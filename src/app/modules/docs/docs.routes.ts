@@ -34,4 +34,12 @@ export const routes: Routes = [
 		},
 		loadComponent: () => import('./pages/working-group/components/working-group-docs/working-group-docs.component').then((m) => m.WorkingGroupDocsComponent),
 	},
+	{
+		path: 'folder/:name/:id',
+		data: {
+			moduleCode: ResourceTypes.SESSIONS,
+			permission: 'canView',
+		},
+		loadComponent: () => import('./pages/folder/folder.component').then((m) => m.FolderComponent),
+	},
 ];
